@@ -6,10 +6,12 @@
     <link href="CSS/index.css" rel="stylesheet" >
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="CSS/presentation.css">
+
     <script src="JS/jquery-3.3.1.min.js"></script>
-    <script src="JS/noframework.waypoints.js"></script>
-    <script src="JS/jquery.waypoints.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.5/waypoints.min.js"></script>-->
     <script src="JS/index.js"></script>
+    <script src="JS/jquery.waypoints.min.js"></script>
+
     <link rel="stylesheet" href="CSS/intro.css">
     <link rel="stylesheet" href="CSS/team.css">
 </head>
@@ -22,11 +24,11 @@
             </div>
             <nav id="menu">
                 <ul>
-                    <li><a class="target-section1 current" href="#intro" onclick="goToByScroll('intro')">Home</a></li>
-                    <li><a class="target-section2" href="#presentation" onclick="goToByScroll('presentation')">Présentation</a></li>
-                    <li><a class="target-section3" href="#team" onclick="goToByScroll('team')">Notre équipe</a></li>
-                    <li><a class="target-section4" href="#section4" onclick="goToByScroll('presentation')">Section</a></li>
-                    <li><a class="target-section5" href="#section5" onclick="goToByScroll('presentation')">Contact</a></li>
+                    <li><a class="target-div1 current" href="#intro" onclick="goToByScroll('intro');">Home</a></li>
+                    <li><a class="target-div2" href="#presentation" onclick="goToByScroll('presentation');">Présentation</a></li>
+                    <li><a class="target-div3" href="#team" onclick="goToByScroll('team');">Notre équipe</a></li>
+                    <li><a class="target-div4" href="#section4" onclick="goToByScroll('presentation');">Section</a></li>
+                    <li><a class="target-div5" href="#section5" onclick="goToByScroll('presentation');">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,12 +36,14 @@
 
     <div id="startPageHeader"></div>
 
-    <div id="intro">
+    <main>
+
+    <div id="intro" class="div1">
         <h1>Le premier potager entièrement connecté. A portée de tous.</h1>
         <a href="#presentation" onclick="goToByScroll('presentation')">Découvrir Sensory Garden</a>
     </div>
     <hr>
-    <div id="presentation">
+    <div id="presentation" class="div2">
         <div id="flexBox">
 
             <div class="flexColum">
@@ -82,7 +86,7 @@
     </div>
     <hr>
 
-    <div id="team">
+    <div id="team" class="div3">
         <h1>Notre équipe : </h1>
         <div id="flexBoxTeam">
         <div class="flexColumTeam">
@@ -128,6 +132,8 @@
 
     </div>
     </div>
+
+    </main>
 
     <footer>
         <p>EPHEC Projet Enovatech : SensoryGarden</p>
