@@ -1,0 +1,29 @@
+#presentation {
+    font-family: "Roboto";
+}
+
+#flexBox img {
+    width: 8em;
+    height: auto;
+}
+
+#flexBox {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+    text-align: center;
+}
+
+
+.flexColum {
+    -ms-flex: 31%; /* IE10 */
+    flex: 31%;
+    max-width: 31%;
+    padding: 2em 4px;
+}
+
+#textIntro p {
+    margin: auto;
+}

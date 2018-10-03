@@ -1,0 +1,31 @@
+#team {
+    font-family: "Roboto";
+    text-align: center;
+}
+
+#team h1 {
+    font-family: "fall_is_comingregular";
+    font-size: 5em;
+    letter-spacing: 4px;
+}
+
+#flexBoxTeam {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+    text-align: center;
+}
+
+
+.flexColumTeam {
+    -ms-flex: 32.5%; /* IE10 */
+    flex: 32.5%;
+    max-width: 32.5%;
+    padding: 2em 4px;
+}
+
+.flexColumTeam img {
+    border-radius: 50%;
+}
