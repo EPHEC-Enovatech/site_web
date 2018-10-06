@@ -35,90 +35,6 @@ hr {
 
 /*----------------------------------------------------------------------------------------------------------------*/
 
-header h1 {
-    font-size: 5em;
-    font-family: "fall_is_comingregular";
-    display: inline-block;
-    letter-spacing: 4px;
-    color: floralwhite;
-
-    position: relative;
-    margin: auto;
-}
-
-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    overflow: hidden;
-    background-color: limegreen;
-    margin: 0em;
-    padding: 0em;
-}
-
-#logo {
-    height: 3.5em;
-    width: auto;
-    display: inline-block;
-    background-color: white;
-    border-radius: 50%;
-    margin: auto 1em;
-
-    position: relative;
-}
-
-#headers_menu {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    float: left;
-}
-
-#menu {
-    display: inline-block;
-    font-family: "Roboto", sans-serif;
-    font-size: 1.2em;
-    margin: auto 1em auto auto;
-    right: 0;
-
-    position: relative;
-    float: right;
-}
-
-#menu ul {
-    text-align: center;
-    list-style: none;
-}
-
-#menu ul li {
-    display: inline-block;
-    margin: 0;
-}
-
-#menu a {
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    padding: 0.5em 0.5em;
-    border-radius: 5px;
-    color: floralwhite;
-}
-
-#menu_left {
-    display: inline-block;
-}
-
-#menu a.current, #menu a:hover {
-    background-color: floralwhite;
-    color: limegreen;
-}
-
-/*----------------------------------------------------------------------------------------------------------------*/
 
 footer {
     background-color: limegreen;
@@ -127,7 +43,7 @@ footer {
     width: 100%;
     margin: 0;
 
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     text-align: center;
 }
 

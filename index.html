@@ -2,33 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
+
     <title>SensoryGarden</title>
     <link href="CSS/index.css" rel="stylesheet" >
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="CSS/presentation.css">
-
-    <script src="JS/jquery-3.3.1.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.5/waypoints.min.js"></script>-->
-    <script src="JS/index.js"></script>
-    <script src="JS/jquery.waypoints.min.js"></script>
-
     <link rel="stylesheet" href="CSS/intro.css">
     <link rel="stylesheet" href="CSS/team.css">
+    <link rel="stylesheet" href="CSS/navBar.css">
+    <link rel="stylesheet" href="CSS/navBar_mobile.css">
+
+    <script src="JS/jquery-3.3.1.min.js"></script>
+    <script src="JS/index.js"></script>
+    <script src="JS/jquery.waypoints.min.js"></script>
 </head>
 <body>
     <header>
         <div id="headers_menu">
             <div id="menu_left">
-                <img id="logo" src="IMG/leaf.svg" alt="logo_temp">
-                <h1>Sensory Garden</h1>
+                <a href="#intro" onclick="goToByScroll('intro');">
+                    <img id="logo" src="IMG/leaf.svg" alt="logo_temp">
+                    <h1 id="logo_title">Sensory Garden</h1>
+                </a>
+                <img id="mobile_menu_button" src="IMG/menu.svg">
             </div>
             <nav id="menu">
                 <ul>
                     <li><a class="target-div1 current" href="#intro" onclick="goToByScroll('intro');">Home</a></li>
                     <li><a class="target-div2" href="#presentation" onclick="goToByScroll('presentation');">Présentation</a></li>
                     <li><a class="target-div3" href="#team" onclick="goToByScroll('team');">Notre équipe</a></li>
-                    <li><a class="target-div4" href="#section4" onclick="goToByScroll('presentation');">Section</a></li>
-                    <li><a class="target-div5" href="#section5" onclick="goToByScroll('presentation');">Contact</a></li>
+                    <li><a class="target-div4" href="#presentation" onclick="goToByScroll('presentation');">Section</a></li>
+                    <li><a class="target-div5" href="#presentation" onclick="goToByScroll('presentation');">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -50,12 +55,12 @@
                 <div id="sensory">
                     <img src="IMG/icon/soil.svg">
                     <h3>Sensory Garden</h3>
-                    <p>ayez toujours un oeil sur votre potager</p>
+                    <p>Ayez toujours un oeil sur votre potager</p>
                 </div>
                 <div id="solarPanl" class="flexIntro">
                     <img src="IMG/icon/solar-energy.svg">
                     <h3>Panneau solaire</h3>
-                    <p>bla bla bla</p>
+                    <p>Energie Solaire pour alimenter la batterie</p>
                 </div>
             </div>
 
@@ -63,21 +68,20 @@
                 <div id="water" class="flexIntro">
                     <img src="IMG/icon/raindrops.svg">
                     <h3>Humidité</h3>
-                    <p>bla bla bla</p>
+                    <p>Détecteur d'humidité dans la terre</p>
                 </div>
                 <div id="forum" class="flexIntro">
                     <img src="IMG/icon/globe-grid.svg">
                     <h3>Forum</h3>
-                    <p>connect people</p>
+                    <p>Partage de connaissance</p>
                 </div>
             </div>
 
             <div class="flexColum">
-                <div id="textIntro "class="flexIntro">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div id="textIntro" class="flexIntro">
+                    <p>Sensory Garden est une serre connectée diretement à votre smartphone. Cette serre miniature vous permettra de faire vos potagers d'intérieur en toute facilité.
+                        Toutes les données importantes à la culture de légumes seront collectés grâce à nos capteurs choisi judicieusement par nos jardiniers en herbe !
+                        Vous avez des expériences à partager ou bien simplement besoin de conseils ? Nous y avons pensé ! Un forum participatif sera disponible pour tout les membres.
                     </p>
                 </div>
             </div>

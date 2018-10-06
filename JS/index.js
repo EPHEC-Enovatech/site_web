@@ -1,6 +1,6 @@
 //Copie la hauteur de la barre de navigation et l'injecte dans #startPageHeader
 function copyHeightNavBar(){
-    var taille = $('#headers_menu').css('height');
+    var taille = $('#menu_left').css('height');
     $('#startPageHeader').css('height', taille);
     console.log("taille : " + taille);
     return taille;
@@ -8,23 +8,15 @@ function copyHeightNavBar(){
 
 //Scroll automatique
 function goToByScroll(id){
-    var size_bar = $('#headers_menu').css('height');
+    var size_bar = $('#menu_left').css('height');
     var size_bar_split = size_bar.split("px");
 
-    if (window.innerWidth>600){
-        $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow');
-    }
-    else {
-        $('html,body').animate({scrollTop:$("#"+id).offset().top},'slow');
-    }
+    $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow');
 }
 
-var currentSection = "section1";
-
+//Gère la subrillance de la barre de navigation
 function change($div){
     $('#menu ul li a').removeClass('current');
-    //currentSection = $div.attr('class');
-    //$('.target-'+currentSection).addClass('current');
     $('.target-div'+$div).addClass('current');
     console.log("event + " + $div);
 }
@@ -45,7 +37,7 @@ function createWaypointScroll() {
             }
         },
         offset: '20%'
-    })
+    });
 
     var waypoint_team = new Waypoint({
         element: document.getElementById('team'),
@@ -55,7 +47,7 @@ function createWaypointScroll() {
             }
         },
         offset: '20%'
-    })
+    });
 
     var waypoint_intro = new Waypoint({
         element: document.getElementById('intro'),
@@ -65,7 +57,7 @@ function createWaypointScroll() {
             }
         },
         offset: '20%'
-    })
+    });
 
     var waypoint_presentation_up = new Waypoint({
         element: document.getElementById('presentation'),
@@ -75,7 +67,7 @@ function createWaypointScroll() {
             }
         },
         offset: '-20%'
-    })
+    });
 
     var waypoint_team_up = new Waypoint({
         element: document.getElementById('team'),
@@ -85,7 +77,7 @@ function createWaypointScroll() {
             }
         },
         offset: '-20%'
-    })
+    });
 
     var waypoint_intro_up = new Waypoint({
         element: document.getElementById('intro'),
@@ -99,15 +91,47 @@ function createWaypointScroll() {
 }
 
 $(document).ready(function(){
-    copyHeightNavBar();
 
     //Ajoute la fonction pour toggle la class "current"
     $("#menu ul li a").on("click", function(){
         deleteCurrent();
         $(this).addClass("current");
-    })
+
+        if(window.innerWidth <= 600) {
+            $('#menu').toggle()
+        }
+    });
+
+    $('#mobile_menu_button').on("click", function(){
+        if($('#menu').css('display') === "none"){
+            $('#menu').slideDown();
+        } else {
+            //$('#menu').toggle();
+            $('#menu').slideUp();
+        }
+    });
+
+    $('main, footer').on("click", function() {
+        if(window.innerWidth <= 600){
+            if($('#menu:visible')){
+                $('#menu').hide();
+            }
+        }
+    });
 
     createWaypointScroll();
 
+    copyHeightNavBar();
+
 });
-$(window).resize(copyHeightNavBar);
+
+$(window).resize(function() {
+
+    if(window.innerWidth > 600){
+        $('#menu').show();
+    } else {
+        $('#menu').hide();
+    }
+
+    copyHeightNavBar();
+});

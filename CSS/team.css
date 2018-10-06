@@ -1,12 +1,13 @@
 #team {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     text-align: center;
 }
 
 #team h1 {
-    font-family: "fall_is_comingregular";
+    font-family: "fall_is_comingregular", sans-serif;
     font-size: 5em;
     letter-spacing: 4px;
+    margin: 0 auto auto auto;
 }
 
 #flexBoxTeam {
