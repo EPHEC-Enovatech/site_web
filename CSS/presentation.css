@@ -2,28 +2,48 @@
     font-family: "Roboto";
 }
 
-#flexBox img {
-    width: 8em;
+#gridBox img {
+    width: 50%;
     height: auto;
 }
 
-#flexBox {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-    padding: 0 4px;
+#gridBox {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto auto;
+    justify-content: space-evenly;
+    align-content: space-evenly;
     text-align: center;
 }
 
+#gridBox div {
+    padding: 0.5em;
+}
 
-.flexColum {
-    -ms-flex: 31%; /* IE10 */
-    flex: 31%;
-    max-width: 31%;
-    padding: 2em 4px;
+#sensory {
+    grid-column: 1;
+}
+
+#solarPanl {
+    grid-column: 2;
+}
+
+#water {
+    grid-column: 1;
+}
+
+#forum {
+    grid-column: 2;
+}
+
+#textIntro {
+    grid-column: 3;
+    grid-row: 1 / span 2;
 }
 
 #textIntro p {
+    text-align: justify;
+    width: 80%;
+    height: auto;
     margin: auto;
 }

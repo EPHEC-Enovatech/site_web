@@ -28,66 +28,17 @@ function deleteCurrent(){
     })
 }
 
-function createWaypointScroll() {
+//Création des waypoints de scroll pour animation
+function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
     var waypoint_presentation = new Waypoint({
-        element: document.getElementById('presentation'),
+        element: document.getElementById(id),
         handler: function(direction) {
-            if (direction === "down") {
-                change(2)
+            if (direction === directionScroll) {
+                change(changeCall)
             }
         },
-        offset: '20%'
+        offset: offsetScroll
     });
-
-    var waypoint_team = new Waypoint({
-        element: document.getElementById('team'),
-        handler: function(direction) {
-            if (direction === "down") {
-                change(3)
-            }
-        },
-        offset: '20%'
-    });
-
-    var waypoint_intro = new Waypoint({
-        element: document.getElementById('intro'),
-        handler: function(direction) {
-            if (direction === "down") {
-                change(1)
-            }
-        },
-        offset: '20%'
-    });
-
-    var waypoint_presentation_up = new Waypoint({
-        element: document.getElementById('presentation'),
-        handler: function(direction) {
-            if (direction === "up") {
-                change(2)
-            }
-        },
-        offset: '-20%'
-    });
-
-    var waypoint_team_up = new Waypoint({
-        element: document.getElementById('team'),
-        handler: function(direction) {
-            if (direction === "up") {
-                change(3)
-            }
-        },
-        offset: '-20%'
-    });
-
-    var waypoint_intro_up = new Waypoint({
-        element: document.getElementById('intro'),
-        handler: function(direction) {
-            if (direction === "up") {
-                change(1)
-            }
-        },
-        offset: '-20%'
-    })
 }
 
 $(document).ready(function(){
@@ -119,7 +70,14 @@ $(document).ready(function(){
         }
     });
 
-    createWaypointScroll();
+    createWaypointScroll('presentation', 'up', '-20%', 2);
+    createWaypointScroll('presentation', 'down', '20%', 2);
+
+    createWaypointScroll('intro', 'up', '-20%', 1);
+    createWaypointScroll('intro', 'down', '20%', 1);
+
+    createWaypointScroll('team', 'up', '-20%', 3);
+    createWaypointScroll('team', 'down', '20%', 3);
 
     copyHeightNavBar();
 
