@@ -44,7 +44,8 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
 $(document).ready(function(){
 
     //Ajoute la fonction pour toggle la class "current"
-    $("#menu ul li a").on("click", function(){
+    $("#menu ul li a").on("click", function(e){
+        e.preventDefault();
         deleteCurrent();
         $(this).addClass("current");
 

@@ -32,6 +32,7 @@
     #menu {
         display: none;
         margin: 0;
+        border-bottom: 0.5px solid forestgreen;
     }
 
     #menu ul {

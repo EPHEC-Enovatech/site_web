@@ -1,9 +1,8 @@
 #intro {
     font-family: "Roboto";
     text-align: center;
-    top: 0;
-    margin: 0;
-    padding: 10% 0 10% 0;
+
+    display: table-row;
 
     background-image: url("../IMG/kelli-tungay-363192-unsplash.png");
     background-repeat: no-repeat;
@@ -14,7 +13,7 @@
 #intro h1 {
     color: limegreen;
     font-size: 5em;
-    margin: 0 0 100px 0;
+    margin: 10vh 2vw 20vh 2vw;
 }
 
 #intro a {
@@ -32,4 +31,14 @@
     background-color: forestgreen;
     padding: 1em;
     border-radius: 5px;
+}
+
+#allIntroElement {
+    height: 100vh;
+    width: 100%;
+    display: table;
+}
+
+#startPageHeader {
+    display: table-row;
 }
