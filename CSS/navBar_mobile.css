@@ -1,4 +1,14 @@
 /* = balise meta viewport mais pour opéra et IE*/
+@-ms-viewport {
+    width: device-width;
+    height: device-height;
+    zoom: 1;
+}
+@-o-viewport {
+    width: device-width;
+    height: device-height;
+    zoom: 1;
+}
 @viewport {
     width: device-width;
     height: device-height;
@@ -80,8 +90,14 @@
     }
 
     #menu_left {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
     }
 }
