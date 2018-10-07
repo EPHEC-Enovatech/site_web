@@ -84,12 +84,6 @@
         align-items: center;
         justify-content: center;
     }
-
-    /*------------------------------------------------------------------*/
-    /*Section intro*/
-    #intro h1 {
-        font-size: 3em;
-    }
 }
 
 @media screen and (orientation:landscape) and (max-height: 350px) {

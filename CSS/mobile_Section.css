@@ -1,9 +1,23 @@
 @media only screen and (max-width: 600px) {
 
+    /*------------------------------------------------------------------*/
+    /*Section intro*/
+    #intro h1 {
+        font-size: 13vw;
+    }
+
+    #intro {
+        height: 80vh;
+    }
+
+    #intro a {
+        bottom: 20vh;
+    }
+
     /*-------------------------------------------------------------------*/
     /*Section presentation*/
     #gridBox {
-        grid-template-columns: 40% 40% ;
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto auto auto;
     }
 

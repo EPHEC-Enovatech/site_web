@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-#gridBox div {
+.gridPresentation {
     padding: 0.5em;
 }
 
