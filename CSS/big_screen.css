@@ -1,0 +1,5 @@
+@media screen and (min-width: 1500px) {
+    #intro h1 {
+        font-size: 7vw;
+    }
+}

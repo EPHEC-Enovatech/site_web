@@ -4,6 +4,7 @@
 
     display: table-row;
 
+    background-origin: border-box;
     background-image: url("../IMG/kelli-tungay-363192-unsplash.png");
     background-repeat: no-repeat;
     background-attachment: fixed;

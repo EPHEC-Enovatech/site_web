@@ -39,17 +39,54 @@ hr {
 
 footer {
     background-color: limegreen;
-    bottom: 0;
-    left: 0;
     width: 100%;
     margin: 0;
     font-size: 1em;
     font-family: "Roboto", sans-serif;
     text-align: center;
+
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
 }
 
 footer p {
-    margin: 0;
-    padding: 1.5em;
+    margin: auto;
     color: white;
+
+    grid-column: 2;
+    grid-row: 1;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer ul {
+    list-style: none;
+    text-align: left;
+}
+
+#linkGitHub, #linkTrello {
+    text-indent: -1em;
+    padding: 0;
+    margin: 0;
+
+    grid-column: 1;
+    grid-row: 1;
+}
+
+footer #linkGitHub::before {
+    content:url('../IMG/icon/github.svg');
+}
+
+footer #linkTrello::before {
+    content:url('../IMG/icon/trello.svg');
+}
+
+#linkGitHub::before, #linkTrello::before {
+    vertical-align: middle;
+    width: 1em;
+    height: auto;
+    display: inline-block;
 }

@@ -54,6 +54,10 @@ $(document).ready(function(){
         }
     });
 
+    $('#intro a').on("click", function (e) {
+        e.preventDefault();
+    });
+
     $('#mobile_menu_button').on("click", function(){
         if($('#menu').css('display') === "none"){
             $('#menu').slideDown();
