@@ -8,10 +8,15 @@ function copyHeightNavBar(){
 
 //Scroll automatique
 function goToByScroll(id){
+
+    Waypoint.disableAll();
+
     var size_bar = $('#menu_left').css('height');
     var size_bar_split = size_bar.split("px");
 
-    $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow');
+    $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow', function () {
+        Waypoint.enableAll();
+    });
 }
 
 //Gère la subrillance de la barre de navigation
@@ -51,6 +56,7 @@ $(function(){
     $("#menu ul li a").on("click", function(e){
         e.preventDefault();
         deleteCurrent();
+
         $(this).addClass("current");
 
         if(window.innerWidth <= 600) {
