@@ -23,10 +23,12 @@ function change($div){
 
 //Toggle la class current
 function deleteCurrent(){
-    $('#menu ul li a').each(function(i){
+    $('#menu ul li a').each(function(){
         $(this).removeClass("current");
     })
 }
+
+var scrollWaypoint = [];
 
 //Création des waypoints de scroll pour animation
 function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
@@ -39,9 +41,11 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
         },
         offset: offsetScroll
     });
+
+    scrollWaypoint.push(waypoint_presentation);
 }
 
-$(document).ready(function(){
+$(function(){
 
     //Ajoute la fonction pour toggle la class "current"
     $("#menu ul li a").on("click", function(e){
@@ -54,19 +58,22 @@ $(document).ready(function(){
         }
     });
 
+    //Désactive le comportement standard du lien découvrir
     $('#intro a').on("click", function (e) {
         e.preventDefault();
     });
 
+    //Gère l'animation du menu pour mobile
     $('#mobile_menu_button').on("click", function(){
-        if($('#menu').css('display') === "none"){
-            $('#menu').slideDown();
+        var menu = $('#menu');
+        if(menu.css('display') === "none"){
+            menu.slideDown();
         } else {
-            //$('#menu').toggle();
-            $('#menu').slideUp();
+            menu.slideUp();
         }
     });
 
+    //Permet de faire disparaitre le menu en cliquant en dehors
     $('main, footer').on("click", function() {
         if(window.innerWidth <= 600){
             if($('#menu:visible')){
@@ -74,6 +81,12 @@ $(document).ready(function(){
             }
         }
     });
+
+    //Si internet explorer
+    // noinspection RegExpRedundantEscape
+    if ((window.navigator.userAgent.indexOf("MSIE ")) > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        $("mobile_menu_button").css('top', '1em');
+    }
 
     createWaypointScroll('presentation', 'up', '-20%', 2);
     createWaypointScroll('presentation', 'down', '20%', 2);
@@ -88,7 +101,8 @@ $(document).ready(function(){
 
 });
 
-$(window).resize(function() {
+//Chaque fois que la fenêtre est redimensionnée
+$().on("resize", function(){
 
     if(window.innerWidth > 600){
         $('#menu').show();

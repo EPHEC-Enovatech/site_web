@@ -14,9 +14,10 @@
     grid-template-columns: 33% 33% 33%;
     -ms-grid-rows: auto auto;
     grid-template-rows: auto auto;
-    -webkit-box-pack: space-evenly;
-    -ms-flex-pack: space-evenly;
+    /*-webkit-box-pack: space-evenly;*/
+    /*-ms-flex-pack: space-evenly;*/
     justify-content: space-evenly;
+    /*noinspection CssUnknownProperty*/
     -ms-flex-line-pack: space-evenly;
     align-content: space-evenly;
     text-align: center;
