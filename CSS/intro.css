@@ -1,5 +1,5 @@
 #intro {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     text-align: center;
 
     display: table-row;
@@ -23,9 +23,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg") no-repeat fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -36,7 +34,7 @@
 #intro h1 {
     color: limegreen;
     font-size: 5em;
-    margin: 10vh 2vw 20vh 2vw;
+    margin: 20vh 2vw 0 2vw;
 }
 
 #intro a {
@@ -45,7 +43,13 @@
     background-color: limegreen;
     padding: 1em;
     border-radius: 5px;
-    margin: 100px 0;
+
+    position: absolute;
+    transform: translateX(-50%); /*Pour centrer l'élément*/
+    bottom: 10vh;
+
+    /*Pas de retour à la ligne*/
+    white-space: nowrap;
 }
 
 #intro a:hover {
