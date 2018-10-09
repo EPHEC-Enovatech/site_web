@@ -119,6 +119,25 @@ $(function(){
         }
     });
 
+    // noinspection JSUnusedLocalSymbols
+    var egg = new Egg("c,o,o,k,i,e,s", function() {
+        console.log("COOKIES !");
+        $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
+        $('#logo_title').text("COOKIES HUB");
+        $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
+        $("#js-rotating").Morphext({
+            // Animation de animate.css
+            animation: "bounceIn",
+            // Séparateur
+            separator: ",",
+            // Délais entre chaque mot
+            speed: 2500,
+            complete: function () {
+                // CallBack
+            }
+        });
+    }).listen();
+
 });
 
 //Chaque fois que la fenêtre est redimensionnée

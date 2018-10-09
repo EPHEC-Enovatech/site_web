@@ -35,6 +35,7 @@
     color: limegreen;
     font-size: 5em;
     margin: 20vh 2vw 0 2vw;
+    text-shadow: 1px 0 black;
 }
 
 #intro a {
