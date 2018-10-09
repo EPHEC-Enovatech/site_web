@@ -4,14 +4,16 @@
 
     display: table-row;
 
-    /*background-origin: border-box;
+    background-origin: border-box;
     background-image: url("../IMG/kelli-tungay-363192-unsplash.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;*/
+    background-size: cover;
+
+    background-position: bottom center;
 }
 
-#intro::before {
+/*#intro::before {
     content: "";
     display: block;
     width: 100vw;
@@ -27,7 +29,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
+}*/
 
 /*#intro::before {
     content: "";
