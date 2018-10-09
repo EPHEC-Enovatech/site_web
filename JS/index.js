@@ -52,6 +52,8 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
 
 $(function(){
 
+    copyHeightNavBar();
+
     //Ajoute la fonction pour toggle la class "current"
     $("#menu ul li a").on("click", function(e){
         e.preventDefault();
@@ -104,6 +106,18 @@ $(function(){
     createWaypointScroll('team', 'down', '20%', 3);
 
     copyHeightNavBar();
+
+    $("#js-rotating").Morphext({
+        // Animation de animate.css
+        animation: "bounceIn",
+        // Séparateur
+        separator: ",",
+        // Délais entre chaque mot
+        speed: 2500,
+        complete: function () {
+            // CallBack
+        }
+    });
 
 });
 

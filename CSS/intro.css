@@ -4,16 +4,17 @@
 
     display: table-row;
 
-    background-origin: border-box;
-    background-image: url("../IMG/kelli-tungay-363192-unsplash.png");
+    /*background-origin: border-box;
+    background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 
-    background-position: bottom center;
+    background-position: bottom center;*/
+
 }
 
-/*#intro::before {
+#intro::before {
     content: "";
     display: block;
     width: 100vw;
@@ -22,30 +23,15 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: url("../IMG/kelli-tungay-363192-unsplash.png");
+    background: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}*/
-
-/*#intro::before {
-    content: "";
-    display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -10;
-    background: url("../IMG/kelli-tungay-363192-unsplash.png") no-repeat fixed center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}*/
+    opacity: 0.90;
+}
 
 #intro h1 {
     color: limegreen;
