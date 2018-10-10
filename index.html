@@ -21,12 +21,14 @@
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/jquery.waypoints.min.js"></script>
     <script src="JS/morphext.min.js"></script>
+    <script src="JS/easing.js"></script>
+    <script src="JS/jquery.disablescroll.min.js"></script>
+    <script src="JS/cookie_hub.js" defer></script>
     <script src="JS/index.js" defer></script>
-
-    <script src="JS/cookie_hub.js" async></script>
 </head>
 <body>
     <header>
+
         <div id="headers_menu">
             <div id="menu_left">
                 <a href="#intro" onclick="goToByScroll('intro');">
@@ -49,15 +51,17 @@
 
     <main>
 
-        <div id="allIntroElement" class="section">
+        <section id="allIntroElement">
             <div id="startPageHeader"></div>
             <div id="intro" class="div1">
                 <h1>SensoryGarden, le potager <span id="js-rotating">connecté, accessible à tous, trop Cool</span></h1>
                 <a href="#presentation" onclick="goToByScroll('presentation')">Découvrir Sensory Garden</a>
             </div>
-        </div>
+        </section>
+
         <hr>
-        <div id="presentation" class="div2, section">
+
+        <section id="presentation" class="div2">
             <div id="gridBox">
                 <div id="sensory" class="gridPresentation">
                     <img src="IMG/icon/soil.svg">
@@ -89,10 +93,11 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
+
         <hr>
 
-        <div id="team" class="div3">
+        <section id="team" class="div3">
             <h1>Notre équipe : </h1>
             <div id="gridBoxTeam">
                 <div id="simFau">
@@ -131,7 +136,7 @@
                 </div>
 
             </div>
-        </div>
+        </section>
 
     </main>
 

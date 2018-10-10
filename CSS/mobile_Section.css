@@ -119,6 +119,6 @@
 @media screen and (orientation:landscape) and (max-height: 350px) {
     #intro h1 {
         font-size: 8vw;
-        margin: 0 0 10vh 0;
+        margin-top: 10vh;
     }
 }

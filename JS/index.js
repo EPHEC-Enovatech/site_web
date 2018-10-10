@@ -14,7 +14,8 @@ function goToByScroll(id){
     var size_bar = $('#menu_left').css('height');
     var size_bar_split = size_bar.split("px");
 
-    $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow', function () {
+    $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow','easeInOutCubic', function () {
+        //$("html, body").removeClass('disableScroll');
         Waypoint.enableAll();
     });
 }
@@ -37,7 +38,7 @@ var scrollWaypoint = [];
 
 //Création des waypoints de scroll pour animation
 function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
-    var waypoint_presentation = new Waypoint({
+    var waypoint = new Waypoint({
         element: document.getElementById(id),
         handler: function(direction) {
             if (direction === directionScroll) {
@@ -47,7 +48,30 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
         offset: offsetScroll
     });
 
-    scrollWaypoint.push(waypoint_presentation);
+    scrollWaypoint.push(waypoint);
+}
+
+//Création des waypoints de super scroll pour animation de l'intro
+function createWaypointSuperScroll(id, directionScroll, offsetScroll, idToGo){
+    var waypointSuperScroll = new Waypoint({
+        element: document.getElementById(id),
+        handler: function(direction) {
+            if (direction === directionScroll) {
+                goToByScroll(idToGo);
+                //$('html, body').addClass('disableScroll');
+            }
+        },
+        offset: offsetScroll
+    });
+
+    scrollWaypoint.push(waypointSuperScroll);
+}
+
+function superScrollTriger(offset){
+    var taille = $('#menu_left').css('height').split("px")[0];
+    offset += parseInt(taille);
+    console.log(offset);
+    return offset;
 }
 
 $(function(){
@@ -105,6 +129,10 @@ $(function(){
     createWaypointScroll('team', 'up', '-20%', 3);
     createWaypointScroll('team', 'down', '20%', 3);
 
+    //createWaypointSuperScroll('presentation', 'down', '99.5%', 'presentation');
+
+    //createWaypointSuperScroll('presentation', 'up', superScrollTriger(5), 'allIntroElement');
+
     copyHeightNavBar();
 
     $("#js-rotating").Morphext({
@@ -119,6 +147,7 @@ $(function(){
         }
     });
 
+    //Easter Egg - private joke
     // noinspection JSUnusedLocalSymbols
     var egg = new Egg("c,o,o,k,i,e,s", function() {
         console.log("COOKIES !");
@@ -126,15 +155,9 @@ $(function(){
         $('#logo_title').text("COOKIES HUB");
         $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
         $("#js-rotating").Morphext({
-            // Animation de animate.css
             animation: "bounceIn",
-            // Séparateur
             separator: ",",
-            // Délais entre chaque mot
-            speed: 2500,
-            complete: function () {
-                // CallBack
-            }
+            speed: 2500
         });
     }).listen();
 
@@ -149,5 +172,6 @@ $().on("resize", function(){
         $('#menu').hide();
     }
 
+    Waypoint().refreshAll();
     copyHeightNavBar();
 });
