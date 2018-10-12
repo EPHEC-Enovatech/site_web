@@ -2,6 +2,7 @@
 function copyHeightNavBar(){
     var taille = $('#menu_left').css('height');
     $('#startPageHeader').css('height', taille);
+    $('#presentation, #gridBox').css("min-height", "calc(100vh - " + taille + ")");
     console.log("taille : " + taille);
     return taille;
 }
@@ -15,12 +16,11 @@ function goToByScroll(id){
     var size_bar_split = size_bar.split("px");
 
     $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow','easeInOutCubic', function () {
-        //$("html, body").removeClass('disableScroll');
         Waypoint.enableAll();
     });
 }
 
-//Gère la subrillance de la barre de navigation
+//Gère la surbrillance de la barre de navigation
 function change($div){
     $('#menu ul li a').removeClass('current');
     $('.target-div'+$div).addClass('current');
@@ -51,27 +51,20 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
     scrollWaypoint.push(waypoint);
 }
 
-//Création des waypoints de super scroll pour animation de l'intro
-function createWaypointSuperScroll(id, directionScroll, offsetScroll, idToGo){
-    var waypointSuperScroll = new Waypoint({
-        element: document.getElementById(id),
-        handler: function(direction) {
-            if (direction === directionScroll) {
-                goToByScroll(idToGo);
-                //$('html, body').addClass('disableScroll');
-            }
-        },
-        offset: offsetScroll
+//https://www.coordonnees-gps.fr/
+//Initialise la carte
+function initMap() {
+    var ephec = {lat: 50.665859, lng: 4.61213900000007};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: ephec,
+        scrollwheel: true
     });
-
-    scrollWaypoint.push(waypointSuperScroll);
-}
-
-function superScrollTriger(offset){
-    var taille = $('#menu_left').css('height').split("px")[0];
-    offset += parseInt(taille);
-    console.log(offset);
-    return offset;
+    new google.maps.Marker({
+        position: ephec,
+        map: map,
+        title: "Haute École EPHEC"
+    });
 }
 
 $(function(){
@@ -129,9 +122,8 @@ $(function(){
     createWaypointScroll('team', 'up', '-20%', 3);
     createWaypointScroll('team', 'down', '20%', 3);
 
-    //createWaypointSuperScroll('presentation', 'down', '99.5%', 'presentation');
-
-    //createWaypointSuperScroll('presentation', 'up', superScrollTriger(5), 'allIntroElement');
+    createWaypointScroll('contact', 'up', '-20%', 4);
+    createWaypointScroll('contact', 'down', '20%', 4);
 
     copyHeightNavBar();
 
@@ -145,6 +137,20 @@ $(function(){
         complete: function () {
             // CallBack
         }
+    });
+
+    //Chaque fois que la fenêtre est redimensionnée
+    $(window).on("resize", function(){
+
+        if(window.innerWidth > 600){
+            $('#menu').show();
+            $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
+            console.log("petit");
+        } else {
+            $('#menu').hide();
+            $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
+        }
+        copyHeightNavBar();
     });
 
     //Easter Egg - private joke
@@ -161,17 +167,4 @@ $(function(){
         });
     }).listen();
 
-});
-
-//Chaque fois que la fenêtre est redimensionnée
-$().on("resize", function(){
-
-    if(window.innerWidth > 600){
-        $('#menu').show();
-    } else {
-        $('#menu').hide();
-    }
-
-    Waypoint().refreshAll();
-    copyHeightNavBar();
 });

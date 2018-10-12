@@ -24,12 +24,20 @@
     overflow: hidden;
 }
 
+#map {
+    height: 40vh;
+    width: 100vw;
+}
+
 /*----------------------------------------------------------------------------------------------------------------*/
 
 html, body {
     margin: 0; padding: 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+
+    /*overflow-y: scroll;
+    -webkit-overflow-scrolling: auto;*/
 }
 
 #startPageHeader {

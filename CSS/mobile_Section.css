@@ -78,11 +78,11 @@
         grid-row: 2;
     }
 
-    #benDem {
-        -ms-grid-column: 2;
-        grid-column: 2;
-        -ms-grid-row: 2;
-        grid-row: 2;
+    #benDmh {
+        -ms-grid-column: 1;
+        grid-column: 1;
+        -ms-grid-row: 4;
+        grid-row: 4;
     }
 
     #casDuq {
@@ -100,10 +100,36 @@
     }
 
     #yveHen {
-        -ms-grid-column: 1;
-        grid-column: 1;
-        -ms-grid-row: 4;
-        grid-row: 4;
+        -ms-grid-column: 2;
+        grid-column: 2;
+        -ms-grid-row: 2;
+        grid-row: 2;
+    }
+
+    /*-------------------------------------------------------------------*/
+    /*Contact*/
+    #stamp, #addressZone {
+        display: none;
+    }
+
+    #letter #formData {
+        border-right: none;
+        padding: 0;
+    }
+
+    #contact #letter {
+        display: block;
+        box-shadow: none;
+        margin: auto;
+        padding: 0;
+        width: auto;
+    }
+
+    #contact form {
+        box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+        padding: 1em;
+        margin: auto;
+        width: auto;
     }
 
     /*-------------------------------------------------------------------*/

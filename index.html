@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="CSS/navBar_mobile.css">
     <link rel="stylesheet" href="CSS/mobile_Section.css">
     <link rel="stylesheet" href="CSS/big_screen.css">
+    <link rel="stylesheet" href="CSS/contact.css">
 
     <link rel="stylesheet" href="CSS/animate.css">
 
@@ -22,9 +23,9 @@
     <script src="JS/jquery.waypoints.min.js"></script>
     <script src="JS/morphext.min.js"></script>
     <script src="JS/easing.js"></script>
-    <script src="JS/jquery.disablescroll.min.js"></script>
     <script src="JS/cookie_hub.js" defer></script>
     <script src="JS/index.js" defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
 </head>
 <body>
     <header>
@@ -32,7 +33,7 @@
         <div id="headers_menu">
             <div id="menu_left">
                 <a href="#intro" onclick="goToByScroll('intro');">
-                    <img id="logo" src="IMG/leaf.svg" alt="logo_temp">
+                    <img id="logo" src="IMG/logo.svg" alt="logo_temp">
                     <h1 id="logo_title">Sensory Garden</h1>
                 </a>
                 <img id="mobile_menu_button" src="IMG/menu.svg">
@@ -42,8 +43,8 @@
                     <li><a class="target-div1 current" href="#intro" onclick="goToByScroll('intro');">Home</a></li>
                     <li><a class="target-div2" href="#presentation" onclick="goToByScroll('presentation');">Présentation</a></li>
                     <li><a class="target-div3" href="#team" onclick="goToByScroll('team');">Notre équipe</a></li>
-                    <li><a class="target-div4" href="#presentation" onclick="goToByScroll('presentation');">Section</a></li>
-                    <li><a class="target-div5" href="#presentation" onclick="goToByScroll('presentation');">Contact</a></li>
+                    <li><a class="target-div4" href="#presentation" onclick="goToByScroll('contact');">Contact</a></li>
+                    <li><a class="target-div5" href="#presentation" onclick="goToByScroll('presentation');">Connection</a></li>
                 </ul>
             </nav>
         </div>
@@ -55,7 +56,7 @@
             <div id="startPageHeader"></div>
             <div id="intro" class="div1">
                 <h1>SensoryGarden, le potager <span id="js-rotating">connecté, accessible à tous, trop Cool</span></h1>
-                <a href="#presentation" onclick="goToByScroll('presentation')">Découvrir Sensory Garden</a>
+                <a href="#presentation" onclick="goToByScroll('presentation');change(2)">Découvrir Sensory Garden</a>
             </div>
         </section>
 
@@ -101,42 +102,85 @@
             <h1>Notre équipe : </h1>
             <div id="gridBoxTeam">
                 <div id="simFau">
-                    <img src="IMG/avatar.png">
-                    <p>Simon Fauconnier</p>
+                    <img src="IMG/team/simFau2.jpg">
+                    <p><b>Simon Fauconnier</b></p>
+                    <p><i>Développeur</i></p>
                 </div>
 
                 <div id="adrNin">
-                    <img src="IMG/avatar.png">
-                    <p>Adrien Nini Pereira</p>
+                    <img src="IMG/team/adrNini.jpg">
+                    <p><b>Adrien Nini Pereira</b></p>
+                    <p><i>Développeur</i></p>
                 </div>
 
                 <div id="jonGoo">
-                    <img src="IMG/avatar.png">
-                    <p>Jonathan Goossens</p>
+                    <img src="IMG/team/jonGoo2.jpg">
+                    <p><b>Jonathan Goossens</b></p>
+                    <p><i>Développeur</i></p>
                 </div>
 
-                <div id="benDem">
-                    <img src="IMG/avatar.png">
-                    <p>Benoît de Mahieu</p>
+                <div id="benDmh">
+                    <img src="IMG/team/benDmh.jpg">
+                    <p><b>Benoît de Mahieu</b></p>
+                    <p><i>Product Owner</i></p>
                 </div>
 
                 <div id="yveHen">
                     <img src="IMG/avatar.png">
-                    <p>Yves Henry de Generet</p>
+                    <p><b>Yves Henry de Generet</b></p>
+                    <p><i>Marketing</i></p>
                 </div>
 
                 <div id="casDuq">
                     <img src="IMG/avatar.png">
-                    <p>Cassandra Duquaine</p>
+                    <p><b>Cassandra Duquaine</b></p>
+                    <p><i>Marketing</i></p>
                 </div>
 
                 <div id="nazHey">
                     <img src="IMG/avatar.png">
-                    <p>Nazanin Heydari</p>
+                    <p><b>Nazanin Heydari</b></p>
+                    <p><i>Marketing</i></p>
                 </div>
 
             </div>
         </section>
+
+        <hr>
+
+        <section id="contact" class="div4">
+            <p id="contactTitle">Une question ou suggestion ? Envoyer nous une lettre !</p>
+            <form action="#" method="post">
+                <div id="letter">
+                    <div id="formData">
+                        <label for="name">Nom *</label>
+                        <input id="name" name="name" type="text" required>
+
+                        <label for="mail">Adresse email *</label>
+                        <input id="mail" name="mail" type="email" required>
+
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Écrivez votre message ici" required></textarea>
+
+                    </div>
+
+                    <div id="stamp">
+                        <img src="IMG/icon/stamp.svg">
+                    </div>
+
+                    <div id="addressZone">
+                        <p>To: SensoryGarden</p>
+                        <p>Belgique</p>
+                    </div>
+                </div>
+
+                <input type="submit" value="Envoyer">
+                <input type="reset" value="Supprimer">
+            </form>
+        </section>
+
+        <hr>
+        <div id="map"></div>
 
     </main>
 
