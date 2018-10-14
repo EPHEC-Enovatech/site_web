@@ -58,13 +58,30 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
         center: ephec,
-        scrollwheel: true
+        scrollwheel: false
     });
     new google.maps.Marker({
         position: ephec,
         map: map,
         title: "Haute École EPHEC"
     });
+}
+
+var connexionOpen = false;
+
+function connexionPopUp() {
+
+    $('#connexion').fadeToggle();
+
+    var page = $('header, main, footer');
+    if(connexionOpen){
+        page.css('filter', 'none');
+        connexionOpen = false;
+    } else {
+        page.css('filter', 'blur(2px)');
+        connexionOpen = true;
+    }
+
 }
 
 $(function(){
@@ -90,12 +107,7 @@ $(function(){
 
     //Gère l'animation du menu pour mobile
     $('#mobile_menu_button').on("click", function(){
-        var menu = $('#menu');
-        if(menu.css('display') === "none"){
-            menu.slideDown();
-        } else {
-            menu.slideUp();
-        }
+        $('#menu').slideToggle()
     });
 
     //Permet de faire disparaitre le menu en cliquant en dehors
@@ -151,6 +163,13 @@ $(function(){
             $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
         }
         copyHeightNavBar();
+    });
+
+    $('main, footer').on("click", function() {
+        if(connexionOpen){
+            console.log('break :/')
+            connexionPopUp();
+        }
     });
 
     //Easter Egg - private joke

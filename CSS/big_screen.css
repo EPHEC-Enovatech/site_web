@@ -1,5 +1,44 @@
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1400px) {
+
+    /*----------------------------------------------------------------------------*/
+    /*Menu - Header*/
+
+    #logo_title {
+        font-size: 4.8vw;
+    }
+
+    #logo {
+        height: 3.5vw;
+    }
+
+    #menu {
+        font-size: 1.3vw;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Intro*/
+
     #intro h1 {
         font-size: 7vw;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Team*/
+
+    #gridBoxTeam {
+        font-size: 1.5em;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Contact*/
+
+    #contact form {
+        width: 60vw;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    #contact form {
+        width: 70vw;
     }
 }
