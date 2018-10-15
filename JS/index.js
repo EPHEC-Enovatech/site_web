@@ -67,8 +67,10 @@ function initMap() {
     });
 }
 
+//True si la fenètre de connection est ouverte
 var connexionOpen = false;
 
+//Gère l'apparition/disparition de la fenètre de connection
 function connexionPopUp() {
 
     $('#connexion').fadeToggle();
@@ -78,7 +80,7 @@ function connexionPopUp() {
         page.css('filter', 'none');
         connexionOpen = false;
     } else {
-        page.css('filter', 'blur(2px)');
+        page.css('filter', 'blur(3px)');
         connexionOpen = true;
     }
 
@@ -89,7 +91,7 @@ $(function(){
     copyHeightNavBar();
 
     //Ajoute la fonction pour toggle la class "current"
-    $("#menu ul li a").on("click", function(e){
+    $("#menu ul li a:not(.target-div5)").on("click", function(e){
         e.preventDefault();
         deleteCurrent();
 
@@ -165,9 +167,10 @@ $(function(){
         copyHeightNavBar();
     });
 
-    $('main, footer').on("click", function() {
+    //#menu ul li a:not(.target-div5)
+    $('main, footer, header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
+        console.log('nope');
         if(connexionOpen){
-            console.log('break :/')
             connexionPopUp();
         }
     });
