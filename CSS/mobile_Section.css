@@ -123,6 +123,7 @@
 
     #contact #letter {
         display: block;
+        -webkit-box-shadow: none;
         box-shadow: none;
         margin: auto;
         padding: 0;
@@ -130,6 +131,7 @@
     }
 
     #contact #formContact {
+        -webkit-box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
         padding: 1em;
         margin: auto;
@@ -145,6 +147,8 @@
     /*-------------------------------------------------------------------*/
     /*Footer*/
     footer p {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 3;
         grid-column: 2 / span 3;
         padding: 0.5em;
     }

@@ -49,6 +49,8 @@
     border-radius: 5px;
 
     position: absolute;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
     transform: translateX(-50%); /*Pour centrer l'élément*/
     bottom: 10vh;
 
