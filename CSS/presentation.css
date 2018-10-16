@@ -64,8 +64,15 @@
 }
 
 #textIntro p {
-    text-align: justify;
     width: 80%;
     height: auto;
     margin: auto;
+}
+
+#presentation h2 {
+    font-family: "fall_is_comingregular", sans-serif;
+    font-size: 5em;
+    letter-spacing: 4px;
+    margin: 0;
+    text-align: center;
 }

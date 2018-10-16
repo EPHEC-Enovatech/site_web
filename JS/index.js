@@ -75,12 +75,14 @@ function connexionPopUp() {
 
     $('#connexion').fadeToggle();
 
-    var page = $('header, main, footer');
+    var page = $('#document_Header, main, footer');
     if(connexionOpen){
         page.css('filter', 'none');
+        $('html, body').removeClass('disableScroll');
         connexionOpen = false;
     } else {
         page.css('filter', 'blur(3px)');
+        $('html, body').addClass('disableScroll');
         connexionOpen = true;
     }
 
@@ -110,6 +112,12 @@ $(function(){
     //Gère l'animation du menu pour mobile
     $('#mobile_menu_button').on("click", function(){
         $('#menu').slideToggle()
+    });
+
+    $('#menu ul li .target-div5').on("click", function(){
+        if(window.innerWidth <= 600){
+            $('#menu').hide();
+        }
     });
 
     //Permet de faire disparaitre le menu en cliquant en dehors
@@ -168,7 +176,7 @@ $(function(){
     });
 
     //#menu ul li a:not(.target-div5)
-    $('main, footer, header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
+    $('main, footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
         console.log('nope');
         if(connexionOpen){
             connexionPopUp();

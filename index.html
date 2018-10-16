@@ -30,15 +30,15 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
 </head>
 <body>
-    <header>
+    <header id="document_Header">
 
         <div id="headers_menu">
             <div id="menu_left">
                 <a href="#intro" onclick="goToByScroll('intro');">
-                    <img id="logo" src="IMG/logo.svg" alt="logo_temp">
+                    <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden. Cliquez pour remonter en haut de la page">
                     <h1 id="logo_title">Sensory Garden</h1>
                 </a>
-                <img id="mobile_menu_button" src="IMG/menu.svg">
+                <img id="mobile_menu_button" src="IMG/menu.svg" alt="Menu">
             </div>
             <nav id="menu">
                 <ul>
@@ -65,26 +65,29 @@
         <hr>
 
         <section id="presentation" class="div2">
+            <header>
+                <h2>Sensory Garden, c'est quoi ?</h2>
+            </header>
             <div id="gridBox">
                 <div id="sensory" class="gridPresentation">
-                    <img src="IMG/icon/soil.svg">
+                    <img src="IMG/icon/soil.svg" alt="Image Mains dans la terre">
                     <h3>Sensory Garden</h3>
                     <p>Ayez toujours un oeil sur votre potager</p>
                 </div>
                 <div id="solarPanl" class="gridPresentation">
-                    <img src="IMG/icon/solar-energy.svg">
+                    <img src="IMG/icon/solar-energy.svg" alt="Image Énergie Solaire">
                     <h3>Panneau solaire</h3>
                     <p>Energie Solaire pour alimenter la batterie</p>
                 </div>
 
                 <div id="water" class="gridPresentation">
-                    <img src="IMG/icon/raindrops.svg">
+                    <img src="IMG/icon/raindrops.svg" alt="Image de goutte d'eau">
                     <h3>Humidité</h3>
                     <p>Détecteur d'humidité dans la terre</p>
                 </div>
 
                 <div id="forum" class="gridPresentation">
-                    <img src="IMG/icon/globe-grid.svg">
+                    <img src="IMG/icon/globe-grid.svg" alt="Image de main autour de la terre">
                     <h3>Forum</h3>
                     <p>Partage de connaissance</p>
                 </div>
@@ -101,46 +104,48 @@
         <hr>
 
         <section id="team" class="div3">
-            <h1>Notre équipe : </h1>
+            <header>
+                <h2>Notre équipe : </h2>
+            </header>
             <div id="gridBoxTeam">
                 <div id="simFau">
-                    <img src="IMG/team/simFau2.jpg">
+                    <img src="IMG/team/simFau2.jpg" alt="Photo Simon Fauconnier">
                     <p><b>Simon Fauconnier</b></p>
                     <p><i>Développeur</i></p>
                 </div>
 
                 <div id="adrNin">
-                    <img src="IMG/team/adrNini.jpg">
+                    <img src="IMG/team/adrNini.jpg" alt="Photo Adrien Nini Pereira">
                     <p><b>Adrien Nini Pereira</b></p>
                     <p><i>Développeur Back-end</i></p>
                 </div>
 
                 <div id="jonGoo">
-                    <img src="IMG/team/jonGoo2.jpg">
+                    <img src="IMG/team/jonGoo2.jpg" alt="Photo Jonathan Goossens">
                     <p><b>Jonathan Goossens</b></p>
                     <p><i>Développeur</i></p>
                 </div>
 
                 <div id="benDmh">
-                    <img src="IMG/team/benDmh.jpg">
+                    <img src="IMG/team/benDmh.jpg" alt="Photo Benoît de Mahieu">
                     <p><b>Benoît de Mahieu</b></p>
                     <p><i>Product Owner</i></p>
                 </div>
 
                 <div id="yveHen">
-                    <img src="IMG/team/yveHen2.jpg">
+                    <img src="IMG/team/yveHen2.jpg" alt="Photo Yves Henry de Generet">
                     <p><b>Yves Henry de Generet</b></p>
                     <p><i>Responsable légal</i></p>
                 </div>
 
                 <div id="casDuq">
-                    <img src="IMG/team/casDuq.jpg">
+                    <img src="IMG/team/casDuq.jpg" alt="Photo Cassandra Duquaine">
                     <p><b>Cassandra Duquaine</b></p>
                     <p><i>Chairman - Responsable Financier</i></p>
                 </div>
 
                 <div id="nazHey">
-                    <img src="IMG/team/nazHey.jpg">
+                    <img src="IMG/team/nazHey.jpg" alt="Photo Nazanin Heydari">
                     <p><b>Nazanin Heydari</b></p>
                     <p><i>Responsable Stratégique et Opérationnel</i></p>
                 </div>
@@ -151,7 +156,9 @@
         <hr>
 
         <section id="contact" class="div4">
-            <p id="contactTitle">Une question ou suggestion ? Envoyer nous une lettre !</p>
+            <header>
+                <h2 id="contactTitle">Une question ou suggestion ? Envoyer nous une lettre !</h2>
+            </header>
             <form id="formContact" action="#" method="post">
                 <div id="letter">
                     <div id="formData">
@@ -167,7 +174,7 @@
                     </div>
 
                     <div id="stamp">
-                        <img src="IMG/icon/stamp.svg">
+                        <img src="IMG/icon/stamp.svg" alt="Image de timbre">
                     </div>
 
                     <div id="addressZone">
@@ -182,15 +189,17 @@
         </section>
 
         <hr>
-        <div id="map"></div>
+        <section id="map"></section>
 
     </main>
 
     <div id="connexion">
 
         <form id="formConnexion" action="#" method="post">
+            <label for="user">Nom d'utilisateur</label>
             <input id="user" name="user" type="text" placeholder="Nom utilisateur" required>
             <br>
+            <label for="password">Mot de passe</label>
             <input id="password" name="password" type="password" placeholder="Mot de passe" required>
             <br>
             <input type="submit" value="Se connecter">
