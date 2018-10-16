@@ -118,5 +118,8 @@
 }
 
 #contactTitle {
-    font-size: 1.7em;
+    font-size: 3.5em;
+    margin: 0 auto 0.3em auto;
+    font-family: fall_is_comingregular;
+    letter-spacing: 4px;
 }

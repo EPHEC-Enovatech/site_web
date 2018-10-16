@@ -47,6 +47,10 @@
         margin: 0;
     }
 
+    #presentation h2 {
+        font-size: 15vw;
+    }
+
     /*-------------------------------------------------------------------*/
     /*Section TEAM*/
     #gridBoxTeam {
@@ -57,7 +61,7 @@
 
     }
 
-    #team h1 {
+    #team h2 {
         font-size: 15vw;
     }
 
@@ -136,6 +140,10 @@
         padding: 1em;
         margin: auto;
         width: auto;
+    }
+
+    #contactTitle {
+        font-size: 9vw;
     }
 
     /*-------------------------------------------------------------------*/
