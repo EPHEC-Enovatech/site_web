@@ -19,13 +19,32 @@
     display: inline-block;
 }
 
-.disableScroll {
-    overflow: hidden;
-}
-
 #map {
     height: 40vh;
     width: 100vw;
+}
+
+/*----------------------------------------------------------------------------------------------------------------*/
+/*Accessibilité*/
+
+.visuallyhidden:not(:focus):not(:active) {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.disableScroll {
+    overflow: hidden;
 }
 
 /*----------------------------------------------------------------------------------------------------------------*/
@@ -54,7 +73,7 @@ hr {
 /*----------------------------------------------------------------------------------------------------------------*/
 
 
-footer {
+#document_Footer {
     background-color: limegreen;
     width: 100%;
     margin: 0;
@@ -71,7 +90,7 @@ footer {
     grid-template-rows: auto;
 }
 
-footer p {
+#document_Footer p {
     margin: auto;
     color: white;
 
@@ -82,11 +101,11 @@ footer p {
     grid-row: 1;
 }
 
-footer a {
+#document_Footer a {
     text-decoration: none;
 }
 
-footer ul {
+#document_Footer ul {
     list-style: none;
     text-align: left;
 }
@@ -103,11 +122,11 @@ footer ul {
     grid-row: 1;
 }
 
-footer #linkGitHub::before {
+#document_Footer #linkGitHub::before {
     content:url('../IMG/icon/github.svg');
 }
 
-footer #linkTrello::before {
+#document_Footer #linkTrello::before {
     content:url('../IMG/icon/trello.svg');
 }
 

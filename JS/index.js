@@ -75,7 +75,7 @@ function connexionPopUp() {
 
     $('#connexion').fadeToggle();
 
-    var page = $('#document_Header, main, footer');
+    var page = $('#document_Header, #document_Main, #document_Footer');
     if(connexionOpen){
         page.css('filter', 'none');
         $('html, body').removeClass('disableScroll');
@@ -86,6 +86,27 @@ function connexionPopUp() {
         connexionOpen = true;
     }
 
+}
+
+//Toggle le mode inscription et connexion
+function toggleRegisterLogIn(mode) {
+    if(mode === "logIn"){
+        $('#subName').hide();
+        $('#subSurname').hide();
+        $('#confirmPassword').hide();
+        $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
+        $('#buttonRegister').attr("value", "Se connecter");
+        $('#formConnexion header h2').text("Connexion");
+    } else if (mode === "register"){
+        $('#subName').show();
+        $('#subSurname').show();
+        $('#confirmPassword').show();
+        $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
+        $('#buttonRegister').attr("value","S'inscrire");
+        $('#formConnexion header h2').text("Inscription");
+    } else {
+
+    }
 }
 
 $(function(){
@@ -105,7 +126,7 @@ $(function(){
     });
 
     //Désactive le comportement standard du lien découvrir
-    $('#intro a').on("click", function (e) {
+    $('#intro a, #formConnexion a').on("click", function (e) {
         e.preventDefault();
     });
 
@@ -121,12 +142,16 @@ $(function(){
     });
 
     //Permet de faire disparaitre le menu en cliquant en dehors
-    $('main, footer').on("click", function() {
+    $('#document_Main, #document_Footer').on("click", function() {
         if(window.innerWidth <= 600){
             if($('#menu:visible')){
                 $('#menu').hide();
             }
         }
+    });
+
+    $('#closeConnexion').on("click", function() {
+        $('#formConnexion').trigger("reset");
     });
 
     //Si internet explorer
@@ -176,7 +201,7 @@ $(function(){
     });
 
     //#menu ul li a:not(.target-div5)
-    $('main, footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
+    $('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
         console.log('nope');
         if(connexionOpen){
             connexionPopUp();

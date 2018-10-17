@@ -46,13 +46,13 @@
                     <li><a class="target-div2" href="#presentation" onclick="goToByScroll('presentation');">Présentation</a></li>
                     <li><a class="target-div3" href="#team" onclick="goToByScroll('team');">Notre équipe</a></li>
                     <li><a class="target-div4" href="#presentation" onclick="goToByScroll('contact');">Contact</a></li>
-                    <li><a class="target-div5" href="#connexion" onclick="connexionPopUp();">Connection</a></li>
+                    <li><a class="target-div5" href="#connexion" onclick="connexionPopUp();toggleRegisterLogIn('logIn')">Connexion</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
+    <main id="document_Main">
 
         <section id="allIntroElement">
             <div id="startPageHeader"></div>
@@ -157,13 +157,13 @@
 
         <section id="contact" class="div4">
             <header>
-                <h2 id="contactTitle">Une question ou suggestion ? Envoyer nous une lettre !</h2>
+                <h2 id="contactTitle">Une question ou suggestion ? <wbr> Envoyer nous une lettre !</h2>
             </header>
             <form id="formContact" action="#" method="post">
                 <div id="letter">
                     <div id="formData">
-                        <label for="name">Nom *</label>
-                        <input id="name" name="name" type="text" placeholder="Votre nom" required>
+                        <label for="formName">Nom *</label>
+                        <input id="formName" name="formName" type="text" placeholder="Votre nom" required>
 
                         <label for="mail">Adresse email *</label>
                         <input id="mail" name="mail" type="email" placeholder="Votre adresse mail" required>
@@ -193,21 +193,37 @@
 
     </main>
 
-    <div id="connexion">
-
+    <div id="connexion" role="dialog" hidden>
         <form id="formConnexion" action="#" method="post">
-            <label for="user">Nom d'utilisateur</label>
-            <input id="user" name="user" type="text" placeholder="Nom utilisateur" required>
-            <br>
-            <label for="password">Mot de passe</label>
-            <input id="password" name="password" type="password" placeholder="Mot de passe" required>
-            <br>
-            <input type="submit" value="Se connecter">
-            <p id="register">Pas encore inscrit ? <a href="https://youtu.be/oavMtUWDBTM?t=26">S'inscrire</a></p>
+            <header>
+                <h2>Connexion</h2>
+                <a href="#" onclick="connexionPopUp()"><img id="closeConnexion" src="IMG/icon/close-white.svg" alt="Annuler"></a>
+            </header>
+            <main>
+                <label for="subName" class="visuallyhidden">Nom</label>
+                <input id="subName" name="subName" type="text" placeholder="Nom" hidden required>
+                <br>
+                <label for="subSurname" class="visuallyhidden">Prénom</label>
+                <input id="subSurname" name="subSurname" type="text" placeholder="Prénom" hidden required>
+                <br>
+                <label for="subMail" class="visuallyhidden">Adresse email</label>
+                <input id="subMail" name="subMail" type="email" placeholder="Votre adresse email" required>
+                <br>
+                <label for="password" class="visuallyhidden">Mot de passe</label>
+                <input id="password" name="password" type="password" placeholder="Mot de passe" required>
+                <br>
+                <label for="confirmPassword" class="visuallyhidden">Confirmer le mot de passe</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" hidden placeholder="Confirmer le mot de passe" required>
+                <br>
+            </main>
+            <footer>
+                <input id="buttonRegister" type="submit" value="Se connecter">
+                <p id="register">Pas encore inscrit ? <a href="#" onclick="toggleRegisterLogIn('register')">S'inscrire</a></p>
+            </footer>
         </form>
     </div>
 
-    <footer>
+    <footer id="document_Footer">
         <div id="linkFooter">
             <ul>
                 <li>

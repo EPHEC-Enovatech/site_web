@@ -1,4 +1,4 @@
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px){
 
     #map {
         height: 50vh;
@@ -147,14 +147,39 @@
     }
 
     /*-------------------------------------------------------------------*/
-    /*Footer*/
+    /*Connexion*/
     #connexion {
-        width: 60vw;
+        width: 85vw;
+        height: 70vh;
+        overflow: auto;
+    }
+
+    #formConnexion h2 {
+        font-size: 10vw;
+    }
+
+    #formConnexion {
+        height: auto;
+    }
+
+    #formConnexion main {
+        padding: 0;
+    }
+
+    #formConnexion header {
+        margin-bottom: 1em;
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
+
+    #closeConnexion {
+        height: 1.5em;
     }
 
     /*-------------------------------------------------------------------*/
     /*Footer*/
-    footer p {
+    #document_Footer p {
         -ms-grid-column: 2;
         -ms-grid-column-span: 3;
         grid-column: 2 / span 3;
