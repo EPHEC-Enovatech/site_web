@@ -1,25 +1,42 @@
+@media only screen and (min-width: 750px) {
+    #letter {
+        width: 70vw;
+    }
+}
+
 @media screen and (min-width: 1400px) {
 
     /*----------------------------------------------------------------------------*/
     /*Menu - Header*/
 
     #logo_title {
-        font-size: 4.8vw;
+        font-size: 3.5vw;
     }
 
     #logo {
-        height: 3.5vw;
+        height: 2.4vw;
     }
 
     #menu {
-        font-size: 1.3vw;
+        font-size: 0.8vw;
     }
 
     /*----------------------------------------------------------------------------*/
     /*Intro*/
 
     #intro h1 {
-        font-size: 7vw;
+        font-size: 6vw;
+    }
+
+    #intro a {
+        font-size: 1.1vw;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Présentation*/
+
+    #presentation p {
+        font-size: 1.5em;
     }
 
     /*----------------------------------------------------------------------------*/
@@ -32,13 +49,37 @@
     /*----------------------------------------------------------------------------*/
     /*Contact*/
 
-    #contact form {
-        width: 60vw;
+    #letter {
+        width: 45vw;
     }
-}
 
-@media only screen and (min-width: 750px) {
-    #contact form {
-        width: 70vw;
+    #formContact {
+        width: 60%;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Footer*/
+
+    #document_Footer {
+        font-size: 1.3em;
+    }
+
+    #linkGitHub, #linkTrello {
+        text-indent: -0.5em;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    /*Connexion*/
+
+    #connexion {
+        width: 30vw;
+    }
+
+    #closeConnexion {
+        margin-top: 0;
+    }
+
+    #formConnexion h2 {
+        font-size: 3vw;
     }
 }

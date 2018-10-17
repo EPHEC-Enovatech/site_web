@@ -3,7 +3,7 @@ function copyHeightNavBar(){
     var taille = $('#menu_left').css('height');
     $('#startPageHeader').css('height', taille);
     $('#presentation, #gridBox').css("min-height", "calc(100vh - " + taille + ")");
-    console.log("taille : " + taille);
+    //console.log("taille : " + taille);
     return taille;
 }
 
@@ -24,7 +24,7 @@ function goToByScroll(id){
 function change($div){
     $('#menu ul li a').removeClass('current');
     $('.target-div'+$div).addClass('current');
-    console.log("event + " + $div);
+    //console.log("event + " + $div);
 }
 
 //Toggle la class current
@@ -192,7 +192,6 @@ $(function(){
         if(window.innerWidth > 600){
             $('#menu').show();
             $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
-            console.log("petit");
         } else {
             $('#menu').hide();
             $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
@@ -202,10 +201,14 @@ $(function(){
 
     //#menu ul li a:not(.target-div5)
     $('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
-        console.log('nope');
         if(connexionOpen){
             connexionPopUp();
         }
+    });
+
+    //Prevent le default du lien "déjà inscrit ?"
+    $('#register a').on("click", function(e){
+        e.preventDefault()
     });
 
     //Easter Egg - private joke
