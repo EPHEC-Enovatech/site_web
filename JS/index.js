@@ -1,3 +1,5 @@
+let register = document.getElementById('connexion');
+
 //Copie la hauteur de la barre de navigation et l'injecte dans #startPageHeader
 function copyHeightNavBar(){
     var taille = $('#menu_left').css('height');
@@ -84,6 +86,7 @@ function connexionPopUp() {
         page.css('filter', 'blur(3px)');
         $('html, body').addClass('disableScroll');
         connexionOpen = true;
+        trapFocus(register);
     }
 
 }
@@ -97,6 +100,7 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
         $('#buttonRegister').attr("value", "Se connecter");
         $('#formConnexion header h2').text("Connexion");
+        trapFocus(register);
     } else if (mode === "register"){
         $('#subName').show();
         $('#subSurname').show();
@@ -104,10 +108,11 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
         $('#buttonRegister').attr("value","S'inscrire");
         $('#formConnexion header h2').text("Inscription");
-    } else {
-
+        trapFocus(register);
     }
 }
+
+//-----------------------------------------------------------------------------
 
 $(function(){
 
