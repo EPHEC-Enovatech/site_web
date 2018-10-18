@@ -230,4 +230,16 @@ $(function(){
         });
     }).listen();
 
+    // Authentication event handle
+    $("#formConnexion").submit(evt => {
+        evt.preventDefault()
+        let form = $("#formConnexion")[0]
+        let data = { "auth": { "email": form.subMail.value, "password": form.password.value }}
+        $.post("https://api.sensorygarden.be/user_token", data).done(data => {
+            document.cookie = "token=" + data.jwt + ";"
+            document.cookie = "user_id=1;"
+            location.href = "log_success.html"
+        })
+    });
+
 });
