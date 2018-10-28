@@ -1,0 +1,20 @@
+/*---------------------------------------------------------------------------*/
+/*userInfo*/
+
+#userTitle {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: auto;
+}
+
+#userPicture {
+    height: 70%;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#userInfo p {
+    display: inline-block;
+}
