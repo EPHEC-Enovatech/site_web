@@ -1,0 +1,43 @@
+@media only screen and (max-width: 600px){
+
+    #document_Main {
+        display: initial;
+    }
+
+    #menuUser {
+        display: none;
+    }
+
+    #contentZone {
+        border-radius: 10px;
+    }
+
+    #menuUser {
+        position: absolute;
+    }
+
+    #sideNav{
+        margin: 1em 0 0 0;
+    }
+
+    /*Footer*/
+    #document_Footer p {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 3;
+        grid-column: 2 / span 3;
+        padding: 0.5em;
+    }
+}
+
+/*Grand écran*/
+@media screen and (min-width: 1400px) {
+    /*Footer*/
+
+    #document_Footer {
+        font-size: 1.3em;
+    }
+
+    #linkGitHub, #linkTrello {
+        text-indent: -0.5em;
+    }
+}
