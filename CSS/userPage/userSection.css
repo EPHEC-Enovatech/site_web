@@ -18,3 +18,42 @@
 #userInfo p {
     display: inline-block;
 }
+
+/*---------------------------------------------------------------------------*/
+/*changeMDP*/
+
+#formChangeMDP {
+    text-align: center;
+}
+
+#formChangeMDP input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 90%;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#formChangeMDP input[type=submit] {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+#formChangeMDP input[type=submit]:hover {
+    background: #43A047;
+}
+
+#formChangeMDP #noMail {
+    color: #b3b3b3;
+    font-size: 0.8em;
+}
+#formChangeMDP #noMail a {
+    color: #4CAF50;
+    text-decoration: none;
+}

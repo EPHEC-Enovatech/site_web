@@ -3,7 +3,10 @@ function calculateSizeMain(){
     let tailleFooter = parseFloat((($('#document_Footer').css('height')).split("px"))[0]);
     let tailleHeaderFooter = tailleHeader + tailleFooter;
 
-    $('#document_Main').css('min-height', "calc(100vh - " + tailleHeaderFooter + "px)");
+    $('#document_Main').css('height', "calc(100vh - " + tailleHeaderFooter + "px)");
+    $('#menuUser').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
+    $('#contentZone').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
+    $('#sideNav').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
 }
 
 function loadHTML(page){
@@ -22,7 +25,6 @@ function loadHTML(page){
 }
 
 $(function(){
-    calculateSizeMain();
 
     $('.sousMenu').on("click", function(){
         loadHTML($(this).attr('id'));
@@ -40,6 +42,8 @@ $(function(){
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         success: showUserInfo
     });
+
+    calculateSizeMain();
 });
 
 function showUserInfo(response) {

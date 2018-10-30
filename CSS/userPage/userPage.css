@@ -52,6 +52,8 @@ html, body {
     background-color: rgb(231 250 231);
 
     font-family: "Roboto", sans-serif;
+
+    overflow: hidden;
 }
 
 #sideNav a {
@@ -97,6 +99,10 @@ hr {
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid black;
+}
+
+#menuUser {
+    overflow: auto;
 }
 
 /*-----------------------------------------------------------------------------*/
