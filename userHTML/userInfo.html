@@ -3,12 +3,24 @@
     <img id="userPicture" src="../IMG/avatar.png">
 </div>
 <hr>
-<div id="userInfo">
-    <h2>Vos informations</h2>
-    <p>Nom :</p>
-    <p id="userName">NAME_HERE</p><br>
-    <p>Prenom :</p>
-    <p id="userSurname">SURNAME_HERE</p><br>
-    <p>Adresse email :</p>
-    <p id="userMail">MAIL_HERE</p><br>
+<div id="userInfoZone">
+    <form id="userInfoForm" action="#">
+        <header>
+            <h2>Vos informations</h2>
+        </header>
+        <main>
+            <label>Nom</label>
+            <input id="userName" type="text" placeholder="Nom"><br>
+            <label>Prenom</label>
+            <input id="userSurname" type="text" placeholder="Prenom"><br>
+            <label>Email</label>
+            <input id="userMail" type="text" placeholder="Mail"><br>
+        </main>
+        <footer>
+            <input type="submit" value="Modifier">
+        </footer>
+    </form>
 </div>
+<script>
+    callAPI("users/1", showUserInfo);
+</script>

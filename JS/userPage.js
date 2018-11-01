@@ -1,12 +1,10 @@
 function calculateSizeMain(){
     let tailleHeader = parseFloat((($('#document_Header').css('height')).split("px"))[0]);
-    let tailleFooter = parseFloat((($('#document_Footer').css('height')).split("px"))[0]);
-    let tailleHeaderFooter = tailleHeader + tailleFooter;
 
-    $('#document_Main').css('height', "calc(100vh - " + tailleHeaderFooter + "px)");
-    $('#menuUser').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
-    $('#contentZone').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
-    $('#sideNav').css('max-height', "calc(100vh - " + tailleHeaderFooter + "px)");
+    $('#document_Main').css('height', "calc(100vh - " + tailleHeader + "px)");
+    $('#menuUser').css('max-height', "calc(100vh - " + tailleHeader + "px)");
+    $('#contentZone').css('max-height', "calc(100vh - " + tailleHeader + "px)");
+    $('#sideNav').css('max-height', "calc(100vh - " + tailleHeader + "px)");
 }
 
 function loadHTML(page){
@@ -36,49 +34,40 @@ $(function(){
         calculateSizeMain();
     });
 
-    $.ajax({
-        url: "https://api.sensorygarden.be/users/1",
-        type: "GET",
-        beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
-        success: showUserInfo
-    });
+    callAPI("users/1", showUserInfo);
 
     calculateSizeMain();
 });
 
-function showUserInfo(response) {
-    $('#userWelcome').html(response.data.prenom + " " + response.data.nom);
-
-    $('#userName').html(response.data.nom);
-    $('#userSurname').html(response.data.prenom);
-    $('#userMail').html(response.data.email);
-
-    /*$('#name').html(response.data.prenom);
+function callAPI(arg, func){
     $.ajax({
-        url: "https://api.sensorygarden.be/records/1C8779C000000274/",
+        url: "https://api.sensorygarden.be/" + arg,
         type: "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
-        success: showDataTable
-    });*/
-}
-
-function showDataTable(response) {
-    $('#table').html(createTable(response.data))
-}
-
-function createTable(data) {
-    var html = "";
-    console.log(data);
-    data.forEach(element => {
-        html += "<tr>";
-        html += "<td>" + element.id + "</td>";
-        html += "<td>" + element.device_id + "</td>";
-        html += "<td>" + element.timestamp + "</td>";
-        html += "<td>" + element.sensor_id + "</td>";
-        html += "<td>" + element.data + "</td>";
-        html +=  "</tr>";
+        success: func
     });
-    return html;
+}
+
+function showUserInfo(response) {
+    $('#userWelcome').html(response.data.prenom + " " + response.data.nom);
+    $('#userName').val(response.data.nom);
+    $('#userSurname').val(response.data.prenom);
+    $('#userMail').val(response.data.email);
+}
+
+function showBox(response){
+    var table = "<td>";
+    table += response.data.deviceName + "</td><td>";
+    table += response.data.device_id + "</td>";
+
+    $('#insertBox').html(table);
+}
+
+function selectData(response){
+    var select = "<option>";
+    select += response.data.deviceName + "</option>";
+
+    $('#selectBox').html(select);
 }
 
 function getCookie(cname) {

@@ -15,8 +15,50 @@
     margin: auto;
 }
 
-#userInfo p {
+#userInfoZone p {
     display: inline-block;
+}
+
+#userInfoZone footer {
+    text-align: center;
+}
+
+#userInfoForm input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 70%;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#userInfoForm label {
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+    display: inline-block;
+    width: 20%;
+}
+
+#userInfoForm input[type=submit] {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+#userInfoForm input[type=submit]:hover {
+    background: #43A047;
+}
+
+#userInfoForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -24,6 +66,8 @@
 
 #formChangeMDP {
     text-align: center;
+    max-width: 500px;
+    margin: auto;
 }
 
 #formChangeMDP input {
@@ -49,11 +93,96 @@
     background: #43A047;
 }
 
-#formChangeMDP #noMail {
-    color: #b3b3b3;
-    font-size: 0.8em;
+/*---------------------------------------------------------------------------*/
+/*showBox*/
+
+#showBox table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
 }
-#formChangeMDP #noMail a {
-    color: #4CAF50;
-    text-decoration: none;
+
+#showBox table th {
+    border: 1px solid black;
+    width: 50%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+}
+
+#insertBox td {
+    border: 1px solid black;
+    width: 50%;
+    background: #f2f2f2;
+    padding: 1em;
+}
+
+/*---------------------------------------------------------------------------*/
+/*showData*/
+
+#selectZone label {
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+    display: inline-block;
+    width: 40%;
+}
+
+#selectZone select {
+    outline: 0;
+    background: #f2f2f2;
+    width: 50%;
+    border: 0;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+    margin: 0.5em 0 0.5em 0;
+    text-align: center;
+}
+
+/*---------------------------------------------------------------------------*/
+/*addBox*/
+
+#addBoxForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+
+}
+
+#addBoxForm label {
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+    display: inline-block;
+    width: 40%;
+}
+
+#addBoxForm input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 50%;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#addBoxForm input[type=submit] {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+#addBoxForm input[type=submit]:hover {
+    background: #43A047;
 }

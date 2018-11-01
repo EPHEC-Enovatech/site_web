@@ -2,10 +2,11 @@
     <h1>Le potager graphique</h1>
     <hr>
     <div id="selectZone">
-        <label for="selectBox">Selectionner votre Sensory Captor</label>
+        <p>Vous avez acquis un Sensory Captor ? Selectionner le dans la liste ci dessous et commencez l'aventure !</p>
+        <br>
+        <label for="selectBox">Sensory Captor :</label>
         <select id="selectBox" name="selectBox">
-            <option>Box 1</option>
-            <option>Box 2</option>
+
         </select>
     </div>
     <hr>
@@ -13,3 +14,6 @@
         <p>Insérer graphique ici</p>
     </div>
 </div>
+<script>
+    callAPI("devices/1", selectData);
+</script>

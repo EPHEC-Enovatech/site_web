@@ -6,12 +6,13 @@
             <h2>Formulaire de changement de mot de passe</h2>
         </header>
         <main>
-            <p>Entrez votre adresse email, si elle existe nous vous enverrons un mail avec les instructions</p>
-            <input name="mailMDP" type="email" required placeholder="Votre email">
+            <p>Remplissez le formulaire pour modifier votre mot de passe</p>
+            <input name="oldMdp" type="password" required placeholder="Ancien Mot de passe">
+            <input name="newMDP" type="password" required placeholder="Nouveau mot de passe">
+            <input name="newMDPCheck" type="password" required placeholder="Confirmer le mot de passe">
         </main>
         <footer>
-            <input type="submit" value="Envoyer l'email">
-            <p id="noMail">Adresse mail oubliée ? <a href="index.html">Nous contactez</a></p>
+            <input type="submit" value="Changer de mot de passe">
         </footer>
     </form>
 </div>

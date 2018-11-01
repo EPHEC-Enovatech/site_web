@@ -22,7 +22,7 @@ html, body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #document_Header {
@@ -94,7 +94,7 @@ hr {
     padding: 0;
 }
 
-#sideNav .sousMenu:hover  {
+#sideNav .sousMenu:hover, #sideNav .currentUserMenu  {
     background-color: white;
     border-radius: 5px;
     cursor: pointer;
