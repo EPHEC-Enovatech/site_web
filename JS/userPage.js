@@ -16,13 +16,15 @@ function loadHTML(page){
     } else {
         contentZone.load("userHTML/" + page + ".html", function( response, status, xhr ) {
             if (status === "error") {
-                contentZone.html("<p>Erreur, vérifier votre connexion internet</p>");
+                contentZone.html("<p>Impossible de charger le contenu, vérifier votre connexion internet</p>");
             }
         });
     }
 }
 
 $(function(){
+
+    moment.locale("fr");
 
     $('.sousMenu').on("click", function(){
         loadHTML($(this).attr('id'));
@@ -44,10 +46,12 @@ function callAPI(arg, func){
         url: "https://api.sensorygarden.be/" + arg,
         type: "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
-        success: func
+        success: func,
+        error: func
     });
 }
 
+//Affiche les données personnelles de l'utilisateur
 function showUserInfo(response) {
     $('#userWelcome').html(response.data.prenom + " " + response.data.nom);
     $('#userName').val(response.data.nom);
@@ -55,19 +59,13 @@ function showUserInfo(response) {
     $('#userMail').val(response.data.email);
 }
 
+//Affiche les box de l'utilisateur dans showBox
 function showBox(response){
-    var table = "<td>";
+    let table = "<td>";
     table += response.data.deviceName + "</td><td>";
     table += response.data.device_id + "</td>";
 
     $('#insertBox').html(table);
-}
-
-function selectData(response){
-    var select = "<option>";
-    select += response.data.deviceName + "</option>";
-
-    $('#selectBox').html(select);
 }
 
 function getCookie(cname) {
