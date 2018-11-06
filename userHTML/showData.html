@@ -90,6 +90,7 @@
             data: humidData,
         }];
         buildGraph("humiditeDemo", "line", humidDate, datasets, "Taux d'humidité dans le sol");
+        buildFailBack("humiditeDemo", humidData, humidDate, ["Heure", "Taux d'humidité"],"Taux d'humidité dans le sol");
     }
 
     function buildAverageHumiditeDemo(response){
@@ -174,7 +175,8 @@
                     borderColor: 'rgb(20, 50, 199)',
                     data: dataWeekDay
                 }];
-                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "Valeurs moyennes récupérées sur la semaine");
+                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "Humidité moyenne de la semaine");
+                buildFailBack("humiditeDemoSemaine", dataWeekDay, weekDay, ["Jour", "Humidité moyenne"], "Valeurs moyennes récupérées sur la semaine");
 
                 break;
             default:
@@ -200,5 +202,23 @@
                 maintainAspectRatio: true,
             }
         });
+    }
+
+    //Construis les failback des canvas (accessibilité)
+    function buildFailBack(id, data, titreData, titreCol, legende){
+        let failBack = "<table><caption>" + legende + "</caption><tr>";
+
+        titreCol.forEach(function(item){
+            failBack += "<th>" + item + "</th>";
+        });
+
+        failBack += "</tr>";
+
+        for(item in titreData){
+            failBack += "<tr><td>" + titreData[item] + "</td><td>" + data[item] + "</td></tr>";
+        }
+        failBack += "</table>";
+
+        $('#' + id).html(failBack);
     }
 </script>
