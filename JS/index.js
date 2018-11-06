@@ -211,6 +211,9 @@ $(function(){
         }
     });
 
+    //Anti robot
+    $('#mail2').hide();
+
     //Prevent le default du lien "déjà inscrit ?"
     $('#register a').on("click", function(e){
         e.preventDefault()

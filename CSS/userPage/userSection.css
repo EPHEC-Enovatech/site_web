@@ -145,6 +145,15 @@
     text-align: center;
 }
 
+.errorData {
+    color: red;
+    font-weight: bold;
+}
+
+#showDataBox {
+    text-align: center;
+}
+
 /*---------------------------------------------------------------------------*/
 /*addBox*/
 

@@ -12,15 +12,15 @@
     <hr>
     <div id="showDataBox">
 
-        <span id="errorData"></span>
+        <p id="infoData">Aucun Sensory Captor de selectionné</p>
 
         <div id="canvasHumiditeDemo">
             <span id="errorHumiditeDemo"></span>
             <canvas id="humiditeDemo"></canvas>
         </div>
 
-        <div id="canvas2">
-            <canvas id="myChart2"></canvas>
+        <div id="canvasHumiditeDemoSemaine">
+            <canvas id="humiditeDemoSemaine"></canvas>
         </div>
 
         <div id="canvas3">
@@ -31,34 +31,41 @@
 <script>
     callAPI("devices/1", selectData);
 
+    $(function(){
+
+        $('#selectBox').on('change', function(){
+            let selectedCaptor = $('#selectBox').val();
+
+            if(selectedCaptor === "noData"){
+
+                //Cache les graphiques
+                $('#infoData').text("Veuillez sélectionner un Sensory Captor").addClass("errorData");
+                $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine').animate({ opacity: 0.0 }, 200, function(){
+                    new Chart(document.getElementById('humiditeDemo').getContext('2d'), 0);
+                    $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine').hide().css('opacity', 1.0);
+                });
+
+            } else {
+
+                $('#infoData').removeClass("errorData").text($('#selectBox option:selected').text());
+
+                //Appel l'API
+                callAPI("records/" + selectedCaptor + "/humidite/18-10-2018", buildHumiditeDemo);
+
+                let today = moment(new Date()).format("DD-MM-YYYY");
+                let previousWeekDay = moment(new Date()).subtract(7, 'days').format("DD-MM-YYYY");
+                callAPI("records/" + selectedCaptor + "/humidite/" + previousWeekDay + "/" + today, buildAverageHumiditeDemo);
+            }
+        });
+    });
+
     //Rempli le seclect de box dans showData
     function selectData(response){
 
         let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
-        select += "<option value=" + response.data.device_id + ">";
-        select += response.data.deviceName + "</option>";
+        select += "<option value=" + response.responseJSON.data.device_id + ">";
+        select += response.responseJSON.data.deviceName + "</option>";
         $('#selectBox').html(select);
-
-        $('#selectBox').on('change', function(){
-            var selectedCaptor = $('#selectBox').val();
-            console.log(selectedCaptor);
-
-            if(selectedCaptor === "noData"){
-                $('#errorData').text("Veuillez sélectionner un Sensory Captor");
-                $('#canvasHumiditeDemo').hide();
-                let chartHumiditeDemo = new Chart(document.getElementById('humiditeDemo').getContext('2d'), 0);
-            } else {
-                $('#errorData').text("");
-                let endPoint = "/records/" + selectedCaptor + "/humidite/18-10-2018";
-                callAPI(endPoint, buildHumiditeDemo);
-
-                let today = buildDateAPI(moment(new Date()).format("L"));
-                let previousWeekDay = buildDateAPI(moment(new Date(today)).subtract(7, 'days').format("L"));
-
-                let endPoint2 = "/records/" + selectedCaptor + "/humidite/" + previousWeekDay + "/" + today;
-                callAPI(endPoint2, buildAverageHumiditeDemo);
-            }
-        });
     }
 
     //Construit le graphique de démo de l'humidité
@@ -66,57 +73,129 @@
 
         $('#canvasHumiditeDemo').show();
 
-        var humidData = [];
+        let humidData = [];
+        let humidDate = [];
 
-        var humidDate = [];
-
-        var data = response.data;
-
+        let data = response.responseJSON.data;
         data.forEach(function(item){
             let date = moment(new Date(item.timestamp)).format('LTS');
             humidDate.push(date);
-        });
-
-        data.forEach(function(item){
             humidData.push(item.data);
         });
 
-        let dateJour = moment(response.data[0].timestamp).format('LL');
-
-        var ctx = document.getElementById('humiditeDemo').getContext('2d');
-        var chartHumiditeDemo = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: humidDate,
-                datasets: [{
-                    label: "Humidité du sol le " + dateJour,
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: humidData,
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                title: {
-                    text: "Taux d'humidité dans le sol"
-                },
-            }
-        });
+        let datasets = [{
+            label: "Humidité du sol le " + moment(response.responseJSON.data[0].timestamp).format('LL'),
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: humidData,
+        }];
+        buildGraph("humiditeDemo", "line", humidDate, datasets, "Taux d'humidité dans le sol");
     }
 
     function buildAverageHumiditeDemo(response){
-        let weekDay = [];
-        let dataWeekDay = [];
 
-        
+        switch(response.status){
+            case 404:
+                console.log("Pas de donnée disponible");
+                break;
+            case 401:
+                console.log("Vous n'êtes pas connecté");
+                break;
+            case 200:
+                $('#canvasHumiditeDemoSemaine').show();
+
+                let weekDay = []; //Liste des jours
+                let dataWeekDay = []; //Moyenne pour chaque jour
+
+                let previousWeekDay = moment(new Date()).subtract(7, 'days'); //Date de 7 jours avant today
+
+                let averageData = 0; //Addition de toutes les valeurs
+                let countAverage = 0; //Le nombre de valeurs aditionnée
+                let testDate = moment(previousWeekDay); //La date a tester
+
+                let data = response.responseJSON.data;
+                data.forEach(function(item){
+
+                    let itemDate = moment(item.timestamp); //La date de l'item
+                    let itemData = item.data; //Les data de l'item
+
+                    //Tant que la date de l'item >< la date a tester
+                    while(moment(itemDate).format("LL") !== moment(testDate).format("LL")){
+
+                        //Ajoute la date a tester dans les dates
+                        weekDay.push(moment(testDate).format("L"));
+
+                        //Remplir le tableau de Data
+                        if(countAverage === 0){
+                            dataWeekDay.push(0);
+                        } else {
+                            dataWeekDay.push((averageData/countAverage).toFixed(2));
+                        }
+                        averageData = 0;
+                        countAverage = 0;
+
+                        //Incrémente la date a tester
+                        testDate = moment(testDate).add(1, "days");
+
+                        //Si la date a tester est la dernière
+                        if(moment(itemDate).format("LL") === moment(previousWeekDay).format("LL")){
+                            break;
+                        }
+                    }
+
+                    //Ajoute la valeur de l'item
+                    averageData += itemData;
+                    countAverage ++;
+
+                    //Si l'item est le dernier élément de data
+                    if(item === data[data.length-1]){
+                        weekDay.push(moment(testDate).format("L"));
+                        if(countAverage === 0){
+                            dataWeekDay.push(0);
+                        } else {
+                            dataWeekDay.push((averageData/countAverage).toFixed(2));
+                        }
+                        averageData = 0;
+                        countAverage = 0;
+                    }
+                });
+
+                testDate = moment(testDate).add(1, "days");
+                while(moment(testDate).format("LL") !== moment(new Date()).format("LL")){
+                    //Ajoute la date a tester dans les dates
+                    weekDay.push(moment(testDate).format("L"));
+                    dataWeekDay.push(0);
+                    testDate = moment(testDate).add(1, "days");
+                }
+
+                let datasets = [{
+                    label: "Humidité moyenne du sol ",
+                    backgroundColor: 'rgba(20, 50, 199, 0.5)',
+                    borderColor: 'rgb(20, 50, 199)',
+                    data: dataWeekDay
+                }];
+                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "valeurs moyennes récupérées sur la semaine");
+
+                break;
+            default:
+                console.log("Erreur serveur");
+        }
     }
 
-    //Renvoie la date dans la bonne forme pour l'API
-    function buildDateAPI(date){
-        return date.replace(/\//g, '-');
+    //Construis les graphiques
+    function buildGraph(id, type, labels, datasets, title){
+        let ctx = document.getElementById(id).getContext('2d');
+        new Chart(ctx, {
+            type: type,
+            data : {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                title: {
+                    text: title
+                },
+            }
+        });
     }
 </script>
