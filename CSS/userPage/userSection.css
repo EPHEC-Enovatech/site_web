@@ -1,3 +1,33 @@
+.labelForm{
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+    display: inline-block;
+}
+
+.inputForm{
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.submitForm{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+.submitForm:hover{
+    background: #43A047;
+}
+
 /*---------------------------------------------------------------------------*/
 /*userInfo*/
 
@@ -24,35 +54,11 @@
 }
 
 #userInfoForm input {
-    outline: 0;
-    background: #f2f2f2;
     width: 70%;
-    border: 0;
-    margin: 0 0 1em;
-    padding: 1em;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 1em;
 }
 
 #userInfoForm label {
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-    padding: 1em;
-    display: inline-block;
     width: 20%;
-}
-
-#userInfoForm input[type=submit] {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-}
-
-#userInfoForm input[type=submit]:hover {
-    background: #43A047;
 }
 
 #userInfoForm {
@@ -71,26 +77,7 @@
 }
 
 #formChangeMDP input {
-    outline: 0;
-    background: #f2f2f2;
     width: 90%;
-    border: 0;
-    margin: 0 0 1em;
-    padding: 1em;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 1em;
-}
-
-#formChangeMDP input[type=submit] {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-}
-
-#formChangeMDP input[type=submit]:hover {
-    background: #43A047;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -124,25 +111,12 @@
 /*showData*/
 
 #selectZone label {
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-    padding: 1em;
-    display: inline-block;
     width: 40%;
 }
 
 #selectZone select {
-    outline: 0;
-    background: #f2f2f2;
     width: 50%;
-    border: 0;
-    padding: 1em;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 1em;
     margin: 0.5em 0 0.5em 0;
-    text-align: center;
 }
 
 .errorData {
@@ -165,33 +139,9 @@
 }
 
 #addBoxForm label {
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-    padding: 1em;
-    display: inline-block;
     width: 40%;
 }
 
 #addBoxForm input {
-    outline: 0;
-    background: #f2f2f2;
     width: 50%;
-    border: 0;
-    margin: 0 0 1em;
-    padding: 1em;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 1em;
-}
-
-#addBoxForm input[type=submit] {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
-}
-
-#addBoxForm input[type=submit]:hover {
-    background: #43A047;
 }

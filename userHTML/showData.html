@@ -4,8 +4,8 @@
     <div id="selectZone">
         <p>Vous avez acquis un Sensory Captor ? Selectionner le dans la liste ci dessous et commencez l'aventure !</p>
         <br>
-        <label for="selectBox">Sensory Captor :</label>
-        <select id="selectBox" name="selectBox">
+        <label for="selectBox" class="labelForm">Sensory Captor :</label>
+        <select id="selectBox" name="selectBox" class="inputForm">
 
         </select>
     </div>
@@ -174,7 +174,7 @@
                     borderColor: 'rgb(20, 50, 199)',
                     data: dataWeekDay
                 }];
-                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "valeurs moyennes récupérées sur la semaine");
+                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "Valeurs moyennes récupérées sur la semaine");
 
                 break;
             default:
@@ -193,8 +193,11 @@
             },
             options: {
                 title: {
+                    display: true,
                     text: title
                 },
+                responsive: true,
+                maintainAspectRatio: true,
             }
         });
     }
