@@ -54,6 +54,8 @@ html, body {
     font-family: "Roboto", sans-serif;
 
     overflow: hidden;
+
+    z-index: 10;
 }
 
 #sideNav a {
