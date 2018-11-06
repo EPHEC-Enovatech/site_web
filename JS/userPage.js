@@ -31,12 +31,13 @@ function toggleHoverMenu(li){
 function toggleSlideMenu(){
     if(window.innerWidth <= 600){
         $('#menuUser').show().css("max-height", "100vh").css("height", "100vh");
-        $('#sideNav').css("max-height", "100vh").css("height", "100vh");
+        $('#sideNav').css("height", window.innerHeight).css("max-height", window.innerHeight);
         $('.menu-link').show().bigSlide({
             menu: '#menuUser',
             easyClose: true,
         });
     } else {
+        $('#sideNav').css("height", "auto");
         $('#menuUser').css("position", "initial").css("left", 0).css("width", "auto").css("height", "auto");
         $('.menu-link').hide();
         calculateSizeMain();
