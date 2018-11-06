@@ -13,13 +13,15 @@
     <link rel="stylesheet" href="CSS/userPage/userSection.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/bigSlide.min.js"></script>
     <script src="JS/userPage.js"></script>
     <script src="JS/Chart.bundle.min.js" async defer></script>
 </head>
 <body>
-<header id="document_Header">
+<header id="document_Header" class="push">
     <div id="headers_menu">
         <div id="menu_left">
+            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu">
             <div>
                 <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden. Cliquez pour remonter en haut de la page">
                 <h1 id="logo_title">Sensory Garden</h1>
@@ -34,7 +36,7 @@
     </div>
 </header>
     <main id="document_Main">
-        <div id="menuUser">
+        <div id="menuUser" class="panel" role="navigation">
             <nav id="sideNav">
                 <ul>
                     <li>
@@ -62,7 +64,7 @@
                 </ul>
             </nav>
         </div>
-        <div id="contentZone">
+        <div id="contentZone" class="push">
 
         </div>
     </main>

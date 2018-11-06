@@ -23,8 +23,8 @@
             <canvas id="humiditeDemoSemaine"></canvas>
         </div>
 
-        <div id="canvas3">
-            <canvas id="myChart3"></canvas>
+        <div id="canvasRecapDemo">
+            <canvas id="recapDemo"></canvas>
         </div>
     </div>
 </div>
@@ -40,9 +40,11 @@
 
                 //Cache les graphiques
                 $('#infoData').text("Veuillez sélectionner un Sensory Captor").addClass("errorData");
-                $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine').animate({ opacity: 0.0 }, 200, function(){
+                $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo').animate({ opacity: 0.0 }, 200, function(){
                     new Chart(document.getElementById('humiditeDemo').getContext('2d'), 0);
-                    $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine').hide().css('opacity', 1.0);
+                    new Chart(document.getElementById('humiditeDemoSemaine').getContext('2d'), 0);
+                    new Chart(document.getElementById('recapDemo').getContext('2d'), 0);
+                    $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo').hide().css('opacity', 1.0);
                 });
 
             } else {

@@ -16,8 +16,34 @@
         position: absolute;
     }
 
+    #mobile_menu_button_side {
+        display: inline-block;
+        height: 8vw;
+        width: auto;
+        margin: auto auto auto 1em;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+    }
+
+    #mobile_menu_button_side:hover {
+        opacity: 0.6;
+    }
+
     #sideNav{
-        margin: 1em 0 0 0;
+        margin: 0;
+
+        border: 1px solid black;
+        border-radius: 0;
+        height: fit-content;
+
+        padding: 1em 0.5em 1em 0.5em;
+
+        background-color: rgb(231 250 231);
+
+        font-family: "Roboto", sans-serif;
+
+        overflow: hidden;
     }
 
     /*Footer*/
