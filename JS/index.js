@@ -100,6 +100,7 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
         $('#buttonRegister').attr("value", "Se connecter");
         $('#formConnexion header h2').text("Connexion");
+        $('#formConnexion').off('submit').submit(authenticate);
         trapFocus(register);
     } else if (mode === "register"){
         $('#subName').show();
@@ -108,6 +109,7 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
         $('#buttonRegister').attr("value","S'inscrire");
         $('#formConnexion header h2').text("Inscription");
+        $('#formConnexion').off('submit').submit(signin);
         trapFocus(register);
     }
 }
