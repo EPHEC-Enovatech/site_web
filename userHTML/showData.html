@@ -81,7 +81,7 @@
 
         let data = response.responseJSON.data;
         data.forEach(function(item){
-            let date = moment(new Date(item.timestamp)).format('LTS');
+            let date = moment(new Date(item.timestamp)).format('LT');
             humidDate.push(date);
             humidData.push(item.data);
         });
@@ -128,7 +128,7 @@
                     while(moment(itemDate).format("LL") !== moment(testDate).format("LL")){
 
                         //Ajoute la date a tester dans les dates
-                        weekDay.push(moment(testDate).format("L"));
+                        weekDay.push(moment(testDate).format("DD/MM"));
 
                         //Remplir le tableau de Data
                         if(countAverage === 0){
@@ -154,7 +154,7 @@
 
                     //Si l'item est le dernier élément de data
                     if(item === data[data.length-1]){
-                        weekDay.push(moment(testDate).format("L"));
+                        weekDay.push(moment(testDate).format("DD/MM"));
                         if(countAverage === 0){
                             dataWeekDay.push(0);
                         } else {
@@ -168,7 +168,7 @@
                 testDate = moment(testDate).add(1, "days");
                 while(moment(testDate).format("LL") !== moment(new Date()).format("LL")){
                     //Ajoute la date a tester dans les dates
-                    weekDay.push(moment(testDate).format("L"));
+                    weekDay.push(moment(testDate).format("DD/MM"));
                     dataWeekDay.push(0);
                     testDate = moment(testDate).add(1, "days");
                 }
