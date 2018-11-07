@@ -9,75 +9,65 @@
     <link rel="stylesheet" href="CSS/navBar.css">
     <link rel="stylesheet" href="CSS/navBar_mobile.css">
     <link rel="stylesheet" href="CSS/userPage/userPage.css">
+    <link rel="stylesheet" href="CSS/userPage/userSection.css">
     <link rel="stylesheet" href="CSS/userPage/userPage_mobile.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
+    <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/bigSlide.min.js"></script>
+    <script src="JS/auth.js"></script>
     <script src="JS/userPage.js"></script>
+    <script src="JS/Chart.bundle.min.js" async defer></script>
 </head>
 <body>
-<header id="document_Header">
+<header id="document_Header" class="push">
     <div id="headers_menu">
         <div id="menu_left">
-            <a href="#intro">
+            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu">
+            <div>
                 <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden. Cliquez pour remonter en haut de la page">
                 <h1 id="logo_title">Sensory Garden</h1>
-            </a>
+            </div>
         </div>
         <nav id="menu">
             <ul>
                 <li><a href="#">Forum</a></li>
-                <li><a href="index.html">Se déconnecter</a></li>
+                <li><a id="logout" href="index.html">Se déconnecter</a></li>
             </ul>
         </nav>
     </div>
 </header>
     <main id="document_Main">
-        <div id="menuUser">
+        <div id="menuUser" class="panel" role="navigation">
             <nav id="sideNav">
                 <ul>
                     <li>
                         <p><b>Profil</b></p>
                         <ul>
-                            <li class="sousMenu" id="userInfo">Données personnelles</li>
-                            <li class="sousMenu" id="changeMDP">Modifier le mot de passe</li>
+                            <li class="sousMenu target-li1 currentUserMenu" id="userInfo"><a href="#">Données personnelles</a></li>
+                            <li class="sousMenu target-li2" id="changeMDP"><a href="#">Modifier le mot de passe</a></li>
                         </ul>
                     </li>
                     <li>
                         <p class="underTitle"><b>Mes appareils</b></p>
                         <ul>
-                            <li class="sousMenu" id="showBox">Gérer mes box</li>
-                            <li class="sousMenu" id="showData">Mes données</li>
+                            <li class="sousMenu target-li3" id="addBox"><a href="#">Ajouter un Sensory Captor</a></li>
+                            <li class="sousMenu target-li4" id="showBox"><a href="#">Gérer mes Sensory Captor</a></li>
+                            <li class="sousMenu target-li5" id="showData"><a href="#">Mes données</a></li>
                         </ul>
                     </li>
                     <li>
                         <p class="underTitle"><b>Contact</b></p>
                         <ul>
-                            <li class="sousMenu"><a href="https://sensorygarden.be/#contact" target="_blank">Envoyer nous un message</a></li>
-                            <li class="sousMenu"><a href="https://sensorygarden.be/#map" target="_blank">Point de vente</a></li>
+                            <a href="https://sensorygarden.be/#contact" target="_blank"><li class="sousMenu">Envoyer nous un message</li></a>
+                            <a href="https://sensorygarden.be/#map" target="_blank"><li class="sousMenu">Point de vente</li></a>
                         </ul>
                     </li>
                 </ul>
             </nav>
         </div>
-        <div id="contentZone">
+        <div id="contentZone" class="push">
 
         </div>
     </main>
-<footer id="document_Footer">
-    <div id="linkFooter">
-        <ul>
-            <li>
-                <a href="https://github.com/EPHEC-Enovatech" target="_blank">
-                    <p id="linkGitHub">GitHub</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://trello.com/b/fCD5mNpZ/sensory-garden" target="_blank">
-                    <p id="linkTrello">Trello</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>EPHEC Projet Enovatech : SensoryGarden</p>
-</footer>
 </body>
 </html>

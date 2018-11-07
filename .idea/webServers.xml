@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2997b602-7712-4e0b-906e-c7e1fea06e85" name="dev" url="http://sensorygarden.be">
+        <fileTransfer host="sensorygarden.be" port="22" privateKey="$USER_HOME$/.ssh/id_rsa" rootFolder="/var/www/sensorygarden.be/html/dev" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
