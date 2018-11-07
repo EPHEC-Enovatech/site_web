@@ -171,6 +171,15 @@
     margin: 1em 0 1em 0;
 }
 
+.errorTitle{
+    font-weight: bold;
+    color: black;
+}
+
+.errorCanvasDiv {
+    color: red;
+}
+
 /*---------------------------------------------------------------------------*/
 /*addBox*/
 

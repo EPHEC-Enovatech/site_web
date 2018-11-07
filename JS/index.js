@@ -75,6 +75,7 @@ var connexionOpen = false;
 //Gère l'apparition/disparition de la fenètre de connection
 function connexionPopUp() {
 
+    $('#subError').hide();
     $('#connexion').fadeToggle();
 
     var page = $('#document_Header, #document_Main, #document_Footer');
@@ -93,6 +94,7 @@ function connexionPopUp() {
 
 //Toggle le mode inscription et connexion
 function toggleRegisterLogIn(mode) {
+    $('#subError').hide();
     if(mode === "logIn"){
         $('#subName').hide();
         $('#subSurname').hide();
@@ -234,6 +236,9 @@ $(function(){
             speed: 2500
         });
     }).listen();
+
+    //Cache l'erreur de la connection
+    $('#subError').hide();
 
     // Authentication event handle
     $("#formConnexion").submit(authenticate);

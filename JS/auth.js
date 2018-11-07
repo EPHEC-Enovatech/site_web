@@ -14,18 +14,19 @@ function authenticate(evt) {
     }).then(response => {
         return response.json()
     }).then(json => {
-        let payload = parseJWT(json.jwt)
-        setCookie('user-id', payload.sub, 1)
-        setCookie('token', json.jwt, 1)
+        let payload = parseJWT(json.jwt);
+        setCookie('user-id', payload.sub, 1);
+        setCookie('token', json.jwt, 1);
         window.location = "userPage.html"
     }).catch(error => {
-        console.error(error)
+        console.error(error);
+        $('#subError').removeClass().addClass("error").html("Impossible de vous connecter, vérifier vos identifiants").show();
     })
 }
 
 function setCookie(name, value, exp_day) {
-    let exp = new Date()
-    exp.setTime(exp.getTime() + (exp_day*24*60*60*1000))
+    let exp = new Date();
+    exp.setTime(exp.getTime() + (exp_day*24*60*60*1000));
     document.cookie = name + "=" + value + "; expires=" + exp.toUTCString() + ";"
 }
 
@@ -48,12 +49,33 @@ function signin(evt) {
     })
     .then(response => response.json())
     .then(json => {
-        if (json.status == "SUCCESS") {
-            // TODO: Afficher un message de succès à l'utilisateur et le rediriger vers le formulaire de connexion
-            console.log(json.message)
+        if (json.status === "SUCCESS") {
+            toggleRegisterLogIn("logIn");
+            $('#subError').removeClass().addClass("success").html(json.message).show();
         } else {
-            // TODO: Afficher l'erreur
-            console.log(json.message)
+            let msgError = "Impossible de terminer <wbr>l'inscription :<br />";
+            for(let item in json.data){
+                switch (item) {
+                    case "password_confirmation":
+                        msgError += '- Le mot de passe doit être identique dans les 2 champs<br />';
+                        break;
+                    case "password":
+                        msgError += "- Le mot de passe ne doit pas être vide<br />";
+                        break;
+                    case "prenom":
+                        msgError += "- Le prénom ne doit pas être vide<br />";
+                        break;
+                    case "nom":
+                        msgError += "- Le nom ne doit pas être vide<br />";
+                        break;
+                    case "email":
+                        msgError += "- Le mail ne doit pas être vide<br />";
+                        break;
+                    default:
+                        msgError += "- Vérifier les champs<br />"
+                }
+            }
+            $('#subError').removeClass().addClass("error").html(msgError).show();
         }
     })
 }
@@ -64,10 +86,10 @@ function getCookie(name) {
     let ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(cname) == 0) {
+        if (c.indexOf(cname) === 0) {
             return c.substring(cname.length, c.length);
         }
     }
@@ -80,7 +102,7 @@ function deleteCookie(name) {
 }
 
 function parseJWT(token) {
-    let base64Url = token.split('.')[1]
-    let base64 = base64Url.replace('-', '+').replace('_', '/')
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64))
 }

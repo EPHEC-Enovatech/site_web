@@ -17,6 +17,9 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+
+    max-height: 90vh;
+    overflow: auto;
 }
 
 #formConnexion {
@@ -95,6 +98,9 @@
     -ms-grid-rows: auto;
     grid-template-rows: auto;
     background-color: limegreen;
+
+    position: sticky;
+    top: 0;
 }
 
 #formConnexion h2 {
@@ -130,4 +136,26 @@
 
 #formConnexion a {
     margin: 0 0 0.5em auto;
+}
+
+#formConnexion #subError {
+    outline: 0;
+    background: #f2f2f2;
+    width: 90%;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+    display: inline-block;
+}
+
+.success {
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.error {
+    border: 1px solid red;
+    color: red;
 }

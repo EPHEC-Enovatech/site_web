@@ -14,14 +14,26 @@
 
         <p id="infoData">Aucun Sensory Captor de selectionné</p>
 
+        <div id="errorhumiditeDemo" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
         <div id="canvasHumiditeDemo">
             <canvas id="humiditeDemo"></canvas>
         </div>
 
+        <div id="errorhumiditeDemoSemaine" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
         <div id="canvasHumiditeDemoSemaine">
             <canvas id="humiditeDemoSemaine"></canvas>
         </div>
 
+        <div id="errorrecapDemo" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
         <div id="canvasRecapDemo">
             <canvas id="recapDemo"></canvas>
         </div>
@@ -32,10 +44,20 @@
 
     $(function(){
 
+        $('#errorhumiditeDemo').hide();
+        $('#errorhumiditeDemoSemaine').hide();
+        $('#errorrecapDemo').hide();
+        $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo').hide();
+
+
         $('#selectBox').on('change', function(){
             let selectedCaptor = $('#selectBox').val();
 
             if(selectedCaptor === "noData"){
+
+                $('#errorhumiditeDemo').hide();
+                $('#errorhumiditeDemoSemaine').hide();
+                $('#errorrecapDemo').hide();
 
                 //Cache les graphiques
                 $('#infoData').text("Veuillez sélectionner un Sensory Captor").addClass("errorData");
@@ -62,13 +84,30 @@
         });
     });
 
+    //Remets le canvas à zéros
+    function resetCanvas(idCanvaDiv, idCanva, title){
+        $('#' + idCanvaDiv).animate({ opacity: 0.0 }, 200, function(){
+            new Chart(document.getElementById(idCanva).getContext('2d'), 0);
+            $('#' + idCanvaDiv).hide().css('opacity', 1.0);
+        });
+
+        $('#error' + idCanva + " .errorTitle").text(title);
+        $('#error' + idCanva).show()
+    }
+
     //Rempli le seclect de box dans showData
     function selectData(response){
 
         if (response.responseJSON.status === "SUCCESS") {
+
+            let boxs = response.responseJSON.data;
             let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
-            select += "<option value=" + response.responseJSON.data.device_id + ">";
-            select += response.responseJSON.data.deviceName + "</option>";
+
+            for(item in boxs){
+                select += "<option value=" + boxs[item].device_id + ">";
+                select += boxs[item].deviceName + "</option>";
+            }
+
             $('#selectBox').html(select);
         }
 
@@ -77,26 +116,41 @@
     //Construit le graphique de démo de l'humidité
     function buildHumiditeDemo(response){
 
-        $('#canvasHumiditeDemo').show();
+        switch(response.status) {
+            case 404:
+                console.log("Pas de donnée disponible");
+                resetCanvas("canvasHumiditeDemo", "humiditeDemo", "Taux d'humidité dans le sol");
+                break;
+            case 401:
+                console.log("Vous n'êtes pas connecté");
+                break;
+            case 200:
+                $('#canvasHumiditeDemo').show();
+                $('#errorhumiditeDemo').hide();
 
-        let humidData = [];
-        let humidDate = [];
+                let humidData = [];
+                let humidDate = [];
 
-        let data = response.responseJSON.data;
-        data.forEach(function(item){
-            let date = moment(new Date(item.timestamp)).format('LT');
-            humidDate.push(date);
-            humidData.push(item.data);
-        });
+                let data = response.responseJSON.data;
+                data.forEach(function (item) {
+                    let date = moment(new Date(item.timestamp)).format('LT');
+                    humidDate.push(date);
+                    humidData.push(item.data);
+                });
 
-        let datasets = [{
-            label: "Humidité du sol le " + moment(response.responseJSON.data[0].timestamp).format('LL'),
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: humidData,
-        }];
-        buildGraph("humiditeDemo", "line", humidDate, datasets, "Taux d'humidité dans le sol");
-        buildFailBack("humiditeDemo", humidData, humidDate, ["Heure", "Taux d'humidité"],"Taux d'humidité dans le sol");
+                let datasets = [{
+                    label: "Humidité du sol le " + moment(response.responseJSON.data[0].timestamp).format('LL'),
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: humidData,
+                }];
+                buildGraph("humiditeDemo", "line", humidDate, datasets, "Taux d'humidité dans le sol");
+                buildFailBack("humiditeDemo", humidData, humidDate, ["Heure", "Taux d'humidité"], "Taux d'humidité dans le sol");
+                break;
+            default:
+                console.log("Erreur serveur");
+        }
+
     }
 
     //Construis le graphique démo de l'humidité par semaine
@@ -105,12 +159,14 @@
         switch(response.status){
             case 404:
                 console.log("Pas de donnée disponible");
+                resetCanvas("canvasHumiditeDemoSemaine", "humiditeDemoSemaine", "Humidité moyenne de la semaine");
                 break;
             case 401:
                 console.log("Vous n'êtes pas connecté");
                 break;
             case 200:
                 $('#canvasHumiditeDemoSemaine').show();
+                $('#errorhumiditeDemoSemaine').hide();
 
                 let weekDay = []; //Liste des jours
                 let dataWeekDay = []; //Moyenne pour chaque jour
@@ -195,6 +251,7 @@
     function buildRecapDemo(){
 
         $('#canvasRecapDemo').show();
+        $('#errorrecapDemo').hide();
 
         let datasets = [{
             label: "Toutes les données au moment X",

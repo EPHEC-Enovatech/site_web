@@ -77,7 +77,7 @@ $(function(){
     toggleSlideMenu();
 });
 
-
+//Permet d'appeler l'API en GET
 function callAPI(arg, func){
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
@@ -85,7 +85,26 @@ function callAPI(arg, func){
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         complete: func
     });
+}
 
+function callAPIPost(data, func){
+    var settings = {
+        "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.sensorygarden.be/devices/" + getCookie('user-id'),
+        "method": "POST",
+        "headers": {},
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": data,
+        "complete": func
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 }
 
 //Affiche les données personnelles de l'utilisateur
@@ -100,9 +119,16 @@ function showUserInfo(response, textStatus) {
 function showBox(response){
 
     if (response.responseJSON.status === "SUCCESS") {
-        let table = "<td>";
-        table += response.responseJSON.data.deviceName + "</td><td>";
-        table += response.responseJSON.data.device_id + "</td>";
+
+        let boxs = response.responseJSON.data;
+        let table = "";
+
+        for(item in boxs){
+            console.log(item);
+            table += "<tr><td>";
+            table += boxs[item].deviceName + "</td><td>";
+            table += boxs[item].device_id + "</td></tr>";
+        }
 
         $('#insertBox').html(table);
     }
