@@ -9,8 +9,8 @@
 
         </select>
     </div>
-    <hr>
     <div id="showDataBox">
+        <hr id="lineData">
 
         <p id="infoData">Aucun Sensory Captor de selectionné</p>
 
@@ -56,6 +56,8 @@
                 let today = moment(new Date()).format("DD-MM-YYYY");
                 let previousWeekDay = moment(new Date()).subtract(7, 'days').format("DD-MM-YYYY");
                 callAPI("records/" + selectedCaptor + "/humidite/" + previousWeekDay + "/" + today, buildAverageHumiditeDemo);
+
+                buildRecapDemo();
             }
         });
     });
@@ -94,6 +96,7 @@
         buildFailBack("humiditeDemo", humidData, humidDate, ["Heure", "Taux d'humidité"],"Taux d'humidité dans le sol");
     }
 
+    //Construis le graphique démo de l'humidité par semaine
     function buildAverageHumiditeDemo(response){
 
         switch(response.status){
@@ -183,6 +186,23 @@
             default:
                 console.log("Erreur serveur");
         }
+    }
+
+    //Construis le graphique démo récapitulatif
+    function buildRecapDemo(){
+
+        $('#canvasRecapDemo').show();
+
+        let datasets = [{
+            label: "Toutes les données au moment X",
+            backgroundColor: 'rgba(100, 199, 32, 0.5)',
+            borderColor: 'rgb(100, 199, 32)',
+            data: [14, 10, 8, 6, 1]
+        }];
+
+        let labels = ['Humidité du sol', 'Température', 'Luminosité', 'Qualité de l\'air', 'Pression'];
+
+        buildGraph("recapDemo", "radar", labels, datasets, "Récapitulatif");
     }
 
     //Construis les graphiques
