@@ -98,11 +98,15 @@ function showUserInfo(response, textStatus) {
 
 //Affiche les box de l'utilisateur dans showBox
 function showBox(response){
-    let table = "<td>";
-    table += response.responseJSON.data.deviceName + "</td><td>";
-    table += response.responseJSON.data.device_id + "</td>";
 
-    $('#insertBox').html(table);
+    if (response.status === "SUCCESS") {
+        let table = "<td>";
+        table += response.responseJSON.data.deviceName + "</td><td>";
+        table += response.responseJSON.data.device_id + "</td>";
+
+        $('#insertBox').html(table);
+    }
+
 }
 
 function getCookie(cname) {

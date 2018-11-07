@@ -65,10 +65,13 @@
     //Rempli le seclect de box dans showData
     function selectData(response){
 
-        let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
-        select += "<option value=" + response.responseJSON.data.device_id + ">";
-        select += response.responseJSON.data.deviceName + "</option>";
-        $('#selectBox').html(select);
+        if (response.status === "SUCCESS") {
+            let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
+            select += "<option value=" + response.responseJSON.data.device_id + ">";
+            select += response.responseJSON.data.deviceName + "</option>";
+            $('#selectBox').html(select);
+        }
+
     }
 
     //Construit le graphique de démo de l'humidité
