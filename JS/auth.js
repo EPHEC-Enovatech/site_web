@@ -49,9 +49,11 @@ function signin(evt) {
     .then(response => response.json())
     .then(json => {
         if (json.status == "SUCCESS") {
-
+            // TODO: Afficher un message de succès à l'utilisateur et le rediriger vers le formulaire de connexion
+            console.log(json.message)
         } else {
-            
+            // TODO: Afficher l'erreur
+            console.log(json.message)
         }
     })
 }
