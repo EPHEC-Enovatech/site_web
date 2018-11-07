@@ -125,6 +125,12 @@ hr {
     font-family: "Roboto", sans-serif;
 
     position: relative;
+
+    overflow-x: hidden;
+}
+
+#contentZone h1 {
+    text-align: center;
 }
 
 /*----------------------------------------------------------------------------------------------------------------*/

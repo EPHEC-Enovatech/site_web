@@ -24,7 +24,7 @@ function loadHTML(page){
 
 function toggleHoverMenu(li){
     $('.sousMenu').removeClass('currentUserMenu');
-    $('.' + li.target.classList[1]).addClass('currentUserMenu');
+    $('.' + li.classList[1]).addClass('currentUserMenu');
 }
 
 //Gère le menu latéral en repsonsive
@@ -47,9 +47,15 @@ function toggleSlideMenu(){
 $(function(){
 
     moment.locale("fr");
+    $('.sousMenu').on("click", function(e){
 
-    $('.sousMenu').on("click", function(){
-        loadHTML($(this).attr('id'));
+        if(e.target.hasAttribute("href")){
+            loadHTML(e.target.parentNode.id);
+            toggleHoverMenu(e.target.parentElement);
+        } else {
+            loadHTML($(this).attr('id'));
+            toggleHoverMenu(e.target);
+        }
     });
 
     $('#contentZone').load('userHTML/userInfo.html');
@@ -57,8 +63,6 @@ $(function(){
     $(window).on("resize", function(){
         toggleSlideMenu();
     });
-
-    $('.sousMenu').on("click", toggleHoverMenu);
 
     callAPI("users/1", showUserInfo);
 
