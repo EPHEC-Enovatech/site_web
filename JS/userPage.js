@@ -99,7 +99,7 @@ function showUserInfo(response, textStatus) {
 //Affiche les box de l'utilisateur dans showBox
 function showBox(response){
 
-    if (response.status === "SUCCESS") {
+    if (response.responseJSON.status === "SUCCESS") {
         let table = "<td>";
         table += response.responseJSON.data.deviceName + "</td><td>";
         table += response.responseJSON.data.device_id + "</td>";
