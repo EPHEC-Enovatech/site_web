@@ -77,6 +77,7 @@ $(function(){
     toggleSlideMenu();
 });
 
+
 function callAPI(arg, func){
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
@@ -84,6 +85,7 @@ function callAPI(arg, func){
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         complete: func
     });
+
 }
 
 //Affiche les données personnelles de l'utilisateur
@@ -101,4 +103,20 @@ function showBox(response){
     table += response.responseJSON.data.device_id + "</td>";
 
     $('#insertBox').html(table);
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }

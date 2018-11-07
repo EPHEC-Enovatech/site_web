@@ -1,14 +1,21 @@
-<h1>Gérer mes BOX</h1>
-<hr>
-<table>
-    <tr>
-        <th>
-            Box
-        </th>
-    </tr>
-    <tr>
-        <td>
-            Description Box
-        </td>
-    </tr>
-</table>
+<div id="showBoxDiv">
+    <h1>Gérer mes Sensory Captor</h1>
+    <hr>
+    <p>Retrouvez tous vos Sensory Captor dans ce tableau :</p>
+    <table>
+        <tr>
+            <th>
+                Nom
+            </th>
+            <th>
+                Identifiant
+            </th>
+        </tr>
+        <tr id="insertBox">
+
+        </tr>
+    </table>
+    <script>
+        callAPI("devices/1", showBox);
+    </script>
+</div>

@@ -1,9 +1,245 @@
-<h1>Le potager graphique</h1>
-<hr>
-<label for"selectBox">Selectionner votre BOX</label>
-<select name="selectBox">
-    <option>Box 1</option>
-    <option>Box 2</option>
-</select>
-<hr>
-<p>Insérer graphique ici</p>
+<div id="dataBox">
+    <h1>Le potager graphique</h1>
+    <hr>
+    <div id="selectZone">
+        <p>Vous avez acquis un Sensory Captor ? Selectionner le dans la liste ci dessous et commencez l'aventure !</p>
+        <br>
+        <label for="selectBox" class="labelForm">Sensory Captor :</label>
+        <select id="selectBox" name="selectBox" class="inputForm">
+
+        </select>
+    </div>
+    <div id="showDataBox">
+        <hr id="lineData">
+
+        <p id="infoData">Aucun Sensory Captor de selectionné</p>
+
+        <div id="canvasHumiditeDemo">
+            <canvas id="humiditeDemo"></canvas>
+        </div>
+
+        <div id="canvasHumiditeDemoSemaine">
+            <canvas id="humiditeDemoSemaine"></canvas>
+        </div>
+
+        <div id="canvasRecapDemo">
+            <canvas id="recapDemo"></canvas>
+        </div>
+    </div>
+</div>
+<script>
+    callAPI("devices/1", selectData);
+
+    $(function(){
+
+        $('#selectBox').on('change', function(){
+            let selectedCaptor = $('#selectBox').val();
+
+            if(selectedCaptor === "noData"){
+
+                //Cache les graphiques
+                $('#infoData').text("Veuillez sélectionner un Sensory Captor").addClass("errorData");
+                $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo').animate({ opacity: 0.0 }, 200, function(){
+                    new Chart(document.getElementById('humiditeDemo').getContext('2d'), 0);
+                    new Chart(document.getElementById('humiditeDemoSemaine').getContext('2d'), 0);
+                    new Chart(document.getElementById('recapDemo').getContext('2d'), 0);
+                    $('#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo').hide().css('opacity', 1.0);
+                });
+
+            } else {
+
+                $('#infoData').removeClass("errorData").text($('#selectBox option:selected').text());
+
+                //Appel l'API
+                callAPI("records/" + selectedCaptor + "/humidite/18-10-2018", buildHumiditeDemo);
+
+                let today = moment(new Date()).format("DD-MM-YYYY");
+                let previousWeekDay = moment(new Date()).subtract(7, 'days').format("DD-MM-YYYY");
+                callAPI("records/" + selectedCaptor + "/humidite/" + previousWeekDay + "/" + today, buildAverageHumiditeDemo);
+
+                buildRecapDemo();
+            }
+        });
+    });
+
+    //Rempli le seclect de box dans showData
+    function selectData(response){
+
+        let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
+        select += "<option value=" + response.responseJSON.data.device_id + ">";
+        select += response.responseJSON.data.deviceName + "</option>";
+        $('#selectBox').html(select);
+    }
+
+    //Construit le graphique de démo de l'humidité
+    function buildHumiditeDemo(response){
+
+        $('#canvasHumiditeDemo').show();
+
+        let humidData = [];
+        let humidDate = [];
+
+        let data = response.responseJSON.data;
+        data.forEach(function(item){
+            let date = moment(new Date(item.timestamp)).format('LT');
+            humidDate.push(date);
+            humidData.push(item.data);
+        });
+
+        let datasets = [{
+            label: "Humidité du sol le " + moment(response.responseJSON.data[0].timestamp).format('LL'),
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: humidData,
+        }];
+        buildGraph("humiditeDemo", "line", humidDate, datasets, "Taux d'humidité dans le sol");
+        buildFailBack("humiditeDemo", humidData, humidDate, ["Heure", "Taux d'humidité"],"Taux d'humidité dans le sol");
+    }
+
+    //Construis le graphique démo de l'humidité par semaine
+    function buildAverageHumiditeDemo(response){
+
+        switch(response.status){
+            case 404:
+                console.log("Pas de donnée disponible");
+                break;
+            case 401:
+                console.log("Vous n'êtes pas connecté");
+                break;
+            case 200:
+                $('#canvasHumiditeDemoSemaine').show();
+
+                let weekDay = []; //Liste des jours
+                let dataWeekDay = []; //Moyenne pour chaque jour
+
+                let previousWeekDay = moment(new Date()).subtract(7, 'days'); //Date de 7 jours avant today
+
+                let averageData = 0; //Addition de toutes les valeurs
+                let countAverage = 0; //Le nombre de valeurs aditionnée
+                let testDate = moment(previousWeekDay); //La date a tester
+
+                let data = response.responseJSON.data;
+                data.forEach(function(item){
+
+                    let itemDate = moment(item.timestamp); //La date de l'item
+                    let itemData = item.data; //Les data de l'item
+
+                    //Tant que la date de l'item >< la date a tester
+                    while(moment(itemDate).format("LL") !== moment(testDate).format("LL")){
+
+                        //Ajoute la date a tester dans les dates
+                        weekDay.push(moment(testDate).format("DD/MM"));
+
+                        //Remplir le tableau de Data
+                        if(countAverage === 0){
+                            dataWeekDay.push(0);
+                        } else {
+                            dataWeekDay.push((averageData/countAverage).toFixed(2));
+                        }
+                        averageData = 0;
+                        countAverage = 0;
+
+                        //Incrémente la date a tester
+                        testDate = moment(testDate).add(1, "days");
+
+                        //Si la date a tester est la dernière
+                        if(moment(itemDate).format("LL") === moment(previousWeekDay).format("LL")){
+                            break;
+                        }
+                    }
+
+                    //Ajoute la valeur de l'item
+                    averageData += itemData;
+                    countAverage ++;
+
+                    //Si l'item est le dernier élément de data
+                    if(item === data[data.length-1]){
+                        weekDay.push(moment(testDate).format("DD/MM"));
+                        if(countAverage === 0){
+                            dataWeekDay.push(0);
+                        } else {
+                            dataWeekDay.push((averageData/countAverage).toFixed(2));
+                        }
+                        averageData = 0;
+                        countAverage = 0;
+                    }
+                });
+
+                testDate = moment(testDate).add(1, "days");
+                while(moment(testDate).format("LL") !== moment(new Date()).format("LL")){
+                    //Ajoute la date a tester dans les dates
+                    weekDay.push(moment(testDate).format("DD/MM"));
+                    dataWeekDay.push(0);
+                    testDate = moment(testDate).add(1, "days");
+                }
+
+                let datasets = [{
+                    label: "Humidité moyenne du sol ",
+                    backgroundColor: 'rgba(20, 50, 199, 0.5)',
+                    borderColor: 'rgb(20, 50, 199)',
+                    data: dataWeekDay
+                }];
+                buildGraph("humiditeDemoSemaine", "bar", weekDay, datasets, "Humidité moyenne de la semaine");
+                buildFailBack("humiditeDemoSemaine", dataWeekDay, weekDay, ["Jour", "Humidité moyenne"], "Valeurs moyennes récupérées sur la semaine");
+
+                break;
+            default:
+                console.log("Erreur serveur");
+        }
+    }
+
+    //Construis le graphique démo récapitulatif
+    function buildRecapDemo(){
+
+        $('#canvasRecapDemo').show();
+
+        let datasets = [{
+            label: "Toutes les données au moment X",
+            backgroundColor: 'rgba(100, 199, 32, 0.5)',
+            borderColor: 'rgb(100, 199, 32)',
+            data: [14, 10, 8, 6, 1]
+        }];
+
+        let labels = ['Humidité du sol', 'Température', 'Luminosité', 'Qualité de l\'air', 'Pression'];
+
+        buildGraph("recapDemo", "radar", labels, datasets, "Récapitulatif");
+    }
+
+    //Construis les graphiques
+    function buildGraph(id, type, labels, datasets, title){
+        let ctx = document.getElementById(id).getContext('2d');
+        new Chart(ctx, {
+            type: type,
+            data : {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    }
+
+    //Construis les failback des canvas (accessibilité)
+    function buildFailBack(id, data, titreData, titreCol, legende){
+        let failBack = "<table><caption>" + legende + "</caption><tr>";
+
+        titreCol.forEach(function(item){
+            failBack += "<th>" + item + "</th>";
+        });
+
+        failBack += "</tr>";
+
+        for(item in titreData){
+            failBack += "<tr><td>" + titreData[item] + "</td><td>" + data[item] + "</td></tr>";
+        }
+        failBack += "</table>";
+
+        $('#' + id).html(failBack);
+    }
+</script>

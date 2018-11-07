@@ -38,7 +38,6 @@ function signin(evt) {
         password: evt.target.password.value,
         password_confirmation: evt.target.confirmPassword.value
     };
-
     fetch('https://api.sensorygarden.be/users/', {
         method: 'POST',
         mode: 'cors',
@@ -75,6 +74,7 @@ function getCookie(name) {
 
 function deleteCookie(name) {
     document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+
 }
 
 function parseJWT(token) {
