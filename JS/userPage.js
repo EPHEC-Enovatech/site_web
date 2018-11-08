@@ -87,13 +87,13 @@ function callAPI(arg, func){
     });
 }
 
-function callAPIPost(data, func){
+function callAPIMethod(method, data, endpoint, func){
     var settings = {
         "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         "async": true,
         "crossDomain": true,
-        "url": "https://api.sensorygarden.be/devices/" + getCookie('user-id'),
-        "method": "POST",
+        "url": "https://api.sensorygarden.be/" + endpoint,
+        "method": method,
         "headers": {},
         "processData": false,
         "contentType": false,
@@ -118,20 +118,21 @@ function showUserInfo(response, textStatus) {
 //Affiche les box de l'utilisateur dans showBox
 function showBox(response){
 
+    let table = "";
+
     if (response.responseJSON.status === "SUCCESS") {
 
         let boxs = response.responseJSON.data;
-        let table = "";
-
         for(item in boxs){
             console.log(item);
             table += "<tr><td>";
             table += boxs[item].deviceName + "</td><td>";
             table += boxs[item].device_id + "</td></tr>";
         }
-
-        $('#insertBox').html(table);
+    } else {
+        table += "<tr><td colspan='2'>Vous n'avez pas ajouté de Sensory Captor</td></tr>"
     }
+    $('#insertBox').html(table);
 
 }
 

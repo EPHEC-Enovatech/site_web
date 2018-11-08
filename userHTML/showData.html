@@ -98,19 +98,22 @@
     //Rempli le seclect de box dans showData
     function selectData(response){
 
+        let select = "";
+
         if (response.responseJSON.status === "SUCCESS") {
 
             let boxs = response.responseJSON.data;
-            let select = "<option value=\"noData\">Selectionner un Sensory Captor</option>";
+            select += "<option value=\"noData\">Selectionner un Sensory Captor</option>";
 
             for(item in boxs){
                 select += "<option value=" + boxs[item].device_id + ">";
                 select += boxs[item].deviceName + "</option>";
             }
-
-            $('#selectBox').html(select);
+        } else {
+            select += "<option value=''>Aucun Sensory Captor</option>";
+            $('#infoData').text("Aucun Sensory Captor disponible");
         }
-
+        $('#selectBox').html(select);
     }
 
     //Construit le graphique de démo de l'humidité

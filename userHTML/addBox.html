@@ -1,5 +1,5 @@
 <div>
-    <h1>Ajouter un Sensor</h1>
+    <h1>Ajouter un Sensory Captor</h1>
     <hr><br>
     <form action="#" id="addBoxForm">
         <div id="errorAddBox" class="errorBox"></div>
@@ -31,7 +31,9 @@
         formData.append("deviceName", evt.target.nomCaptor.value);
         formData.append("checksum", evt.target.verification.value);
 
-        callAPIPost(formData, getErrorAddBox);
+        let endpoint = "devices/" + getCookie('user-id');
+
+        callAPIMethod("POST", formData, endpoint, getErrorAddBox);
     }
 
     //Affiche les erreurs
