@@ -1,10 +1,18 @@
-<h1>Modification du mot de passe</h1>
-<hr>
-<p>Entrez votre adresse email, si elle existe nous vous enverrons un mail avec les instructions</p>
-<form action="#">
-    <fieldset>
-        <legend>Changer de mot de passe</legend>
-        <input type="email" name="changeMDP" required>
-        <input type="submit">
-    </fieldset>
-</form>
+<div id="changeMdp">
+    <h1>Modification du mot de passe</h1>
+    <hr>
+    <form id="formChangeMDP" action="#">
+        <header>
+            <h2>Formulaire de changement de mot de passe</h2>
+        </header>
+        <main>
+            <p>Remplissez le formulaire pour modifier votre mot de passe</p>
+            <input name="oldMdp" type="password" required placeholder="Ancien Mot de passe" class="inputForm">
+            <input name="newMDP" type="password" required placeholder="Nouveau mot de passe" class="inputForm">
+            <input name="newMDPCheck" type="password" required placeholder="Confirmer le mot de passe" class="inputForm">
+        </main>
+        <footer>
+            <input type="submit" value="Changer de mot de passe" class="inputForm submitForm">
+        </footer>
+    </form>
+</div>

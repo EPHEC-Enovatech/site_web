@@ -27,6 +27,7 @@
     <script src="JS/easing.js"></script>
     <script src="JS/cookie_hub.js" defer></script>
     <script src="JS/accessibility.js"></script>
+    <script src="JS/auth.js" defer></script>
     <script src="JS/index.js" defer></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
 </head>
@@ -169,6 +170,8 @@
                         <label for="mail">Adresse email *</label>
                         <input id="mail" name="mail" type="email" placeholder="Votre adresse mail" required>
 
+                        <label id="mail2">Email: <input type="email" name="mail2"></label>
+
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" placeholder="Écrivez votre message ici" required></textarea>
 
@@ -201,6 +204,7 @@
                 <a href="#" onclick="connexionPopUp()"><img id="closeConnexion" src="IMG/icon/close-white.svg" alt="Annuler"></a>
             </header>
             <main>
+                <div id="subError"></div>
                 <label for="subName" class="visuallyhidden">Nom</label>
                 <input id="subName" name="subName" type="text" placeholder="Nom" hidden>
                 <br>
@@ -239,7 +243,7 @@
                 </li>
             </ul>
         </div>
-        <p>EPHEC Projet Enovatech : SensoryGarden</p>
+        <p>EPHEC Projet Enovatech : Sensory Garden</p>
     </footer>
 </body>
 </html>

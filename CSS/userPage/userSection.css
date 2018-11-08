@@ -1,0 +1,205 @@
+.labelForm{
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+    display: inline-block;
+}
+
+.inputForm{
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.submitForm{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+.submitForm:hover{
+    background: #43A047;
+}
+
+/*---------------------------------------------------------------------------*/
+/*userInfo*/
+
+#userTitle h1 {
+    text-align: initial;
+}
+
+#userTitle {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 80% 20%;
+    grid-template-columns: 80% 20%;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+
+    max-width: 500px;
+    margin: auto;
+}
+
+#userPicture {
+    height: 70%;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#userInfoZone p {
+    display: inline-block;
+}
+
+#userInfoZone footer {
+    text-align: center;
+}
+
+#userInfoForm input {
+    width: 70%;
+}
+
+#userInfoForm label {
+    width: 20%;
+}
+
+#userInfoForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#errorUserInfo {
+    display: block;
+    width: 80%;
+    margin: 0 auto 1em auto;
+}
+
+/*---------------------------------------------------------------------------*/
+/*changeMDP*/
+
+#formChangeMDP {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#formChangeMDP input {
+    width: 90%;
+}
+
+#changeMdp h1 {
+    text-align: center;
+}
+
+/*---------------------------------------------------------------------------*/
+/*showBox*/
+
+#showBoxDiv {
+    text-align: center;
+}
+
+#showBoxDiv table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#showBoxDiv table th {
+    border: 1px solid black;
+    width: 50%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 1em;
+}
+
+#insertBox td {
+    border: 1px solid black;
+    width: 50%;
+    background: #f2f2f2;
+    padding: 1em;
+}
+
+/*---------------------------------------------------------------------------*/
+/*showData*/
+
+#dataBox {
+    text-align: center;
+}
+
+#selectZone label {
+    width: 40%;
+}
+
+#selectZone select {
+    width: 50%;
+    margin: 0.5em 0 0.5em 0;
+}
+
+.errorData {
+    color: red;
+    font-weight: bold;
+}
+
+#selectZone {
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+}
+
+#showDataBox {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo {
+    position: relative;
+    margin: auto;
+    height: 40vh;
+    max-width: 100vw;
+}
+
+#lineData {
+    margin: 1em 0 1em 0;
+}
+
+.errorTitle{
+    font-weight: bold;
+    color: black;
+}
+
+.errorCanvasDiv {
+    color: red;
+}
+
+/*---------------------------------------------------------------------------*/
+/*addBox*/
+
+#addBoxForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+
+}
+
+#addBoxForm label {
+    width: 40%;
+}
+
+#addBoxForm input {
+    width: 50%;
+}

@@ -1,7 +1,7 @@
 @media only screen and (max-width: 600px){
 
     #document_Main {
-        display: initial;
+        grid-template-columns: 100%;
     }
 
     #menuUser {
@@ -16,10 +16,98 @@
         position: absolute;
     }
 
-    #sideNav{
-        margin: 1em 0 0 0;
+    #mobile_menu_button_side {
+        display: inline-block;
+        height: 8vw;
+        width: auto;
+        margin: auto auto auto 1em;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
     }
 
+    #mobile_menu_button_side:hover {
+        opacity: 0.6;
+    }
+
+    #sideNav{
+        margin: 0;
+
+        border: 0;
+        border-radius: 0;
+        border-right: 1px solid black;
+
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+
+        padding: 1em 0.5em 1em 0.5em;
+
+        background-color: rgb(231 250 231);
+
+        font-family: "Roboto", sans-serif;
+
+        overflow: auto;
+
+        box-sizing: border-box;
+    }
+
+    .labelForm {
+        padding: 0.7em;
+    }
+
+    .inputForm {
+        padding: 0.7em;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*userInfo*/
+
+    #userInfoForm label {
+        width: 33%;
+    }
+
+    #userInfoForm input {
+        width: 55%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*changeMdp*/
+
+    #formChangeMDP input {
+        width: 100%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*addBox*/
+
+    #addBoxForm label {
+        width: 38%;
+    }
+
+    #addBoxForm input {
+        width: 50%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*showBox*/
+
+    #insertBox td {
+        padding: 0.5em;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*showData*/
+
+    #selectZone select {
+        width: 70vw;
+    }
+
+    #selectZone label {
+        width: 70vw;
+    }
+
+    /*-----------------------------------------------------------------*/
     /*Footer*/
     #document_Footer p {
         -ms-grid-column: 2;

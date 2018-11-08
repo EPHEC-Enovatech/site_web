@@ -123,3 +123,7 @@
     font-family: fall_is_comingregular;
     letter-spacing: 4px;
 }
+
+#mail2 {
+    display: none;
+}

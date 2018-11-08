@@ -75,6 +75,7 @@ var connexionOpen = false;
 //Gère l'apparition/disparition de la fenètre de connection
 function connexionPopUp() {
 
+    $('#subError').hide();
     $('#connexion').fadeToggle();
 
     var page = $('#document_Header, #document_Main, #document_Footer');
@@ -93,6 +94,7 @@ function connexionPopUp() {
 
 //Toggle le mode inscription et connexion
 function toggleRegisterLogIn(mode) {
+    $('#subError').hide();
     if(mode === "logIn"){
         $('#subName').hide();
         $('#subSurname').hide();
@@ -100,6 +102,7 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
         $('#buttonRegister').attr("value", "Se connecter");
         $('#formConnexion header h2').text("Connexion");
+        $('#formConnexion').off('submit').submit(authenticate);
         trapFocus(register);
     } else if (mode === "register"){
         $('#subName').show();
@@ -108,6 +111,7 @@ function toggleRegisterLogIn(mode) {
         $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
         $('#buttonRegister').attr("value","S'inscrire");
         $('#formConnexion header h2').text("Inscription");
+        $('#formConnexion').off('submit').submit(signin);
         trapFocus(register);
     }
 }
@@ -211,6 +215,9 @@ $(function(){
         }
     });
 
+    //Anti robot
+    $('#mail2').hide();
+
     //Prevent le default du lien "déjà inscrit ?"
     $('#register a').on("click", function(e){
         e.preventDefault()
@@ -230,16 +237,10 @@ $(function(){
         });
     }).listen();
 
+    //Cache l'erreur de la connection
+    $('#subError').hide();
+
     // Authentication event handle
-    $("#formConnexion").submit(evt => {
-        evt.preventDefault();
-        let form = $("#formConnexion")[0];
-        let data = { "auth": { "email": form.subMail.value, "password": form.password.value }};
-        $.post("https://api.sensorygarden.be/user_token", data).done(data => {
-            document.cookie = "token=" + data.jwt + ";";
-            document.cookie = "user_id=1;";
-            location.href = "log_success.html";
-        })
-    });
+    $("#formConnexion").submit(authenticate);
 
 });

@@ -1,9 +1,60 @@
-<h1>Bienvenue TrucMachin !</h1>
+<div id="userTitle">
+    <h1 id="userWelcome">Bienvenue TrucMachin !</h1>
+    <img id="userPicture" src="../IMG/avatar.png">
+</div>
 <hr>
-<h2>Vos informations</h2>
-<p>Nom :</p>
-<p>NAME_HERE</p>
-<p>Prenom :</p>
-<p>SURNAME_HERE</p>
-<p>Adresse email :</p>
-<p>MAIL_HERE</p>
+<div id="userInfoZone">
+    <form id="userInfoForm" action="#">
+        <header>
+            <h2>Vos informations</h2>
+        </header>
+        <main>
+            <div id="errorUserInfo" class="errorBox"></div>
+            <label for="userName" class="labelForm">Nom</label>
+            <input id="userName" name="userName" type="text" placeholder="Nom" class="inputForm"><br>
+            <label for="userSurname" class="labelForm">Prenom</label>
+            <input id="userSurname" name="userSurname" type="text" placeholder="Prenom" class="inputForm"><br>
+            <label for="userMail" class="labelForm">Email</label>
+            <input id="userMail" name="userMail" type="text" placeholder="Mail" class="inputForm" readonly><br>
+        </main>
+        <footer>
+            <input type="submit" value="Modifier" class="submitForm inputForm">
+        </footer>
+    </form>
+</div>
+<script>
+
+    $(function(){
+        callAPI("users/" + getCookie('user-id'), showUserInfo);
+        $('#errorUserInfo').hide();
+        $('#userInfoForm').on("submit", changeInfoUser);
+    });
+
+    function changeInfoUser(evt) {
+        evt.preventDefault();
+
+        let formData = new FormData();
+        formData.append("nom", evt.target.userName.value);
+        formData.append("prenom", evt.target.userSurname.value);
+
+        let endpoint = "users/" + getCookie('user-id');
+        callAPIMethod("PATCH", formData, endpoint, getErrorUserInfo);
+    }
+
+    function getErrorUserInfo(response){
+        let message = JSON.parse(response.responseText);
+        let errorUserInfo = $('#errorUserInfo');
+
+        errorUserInfo.removeClass().html(message.message).show();
+
+        switch (message.status) {
+            case "SUCCESS":
+                callAPI("users/" + getCookie('user-id'), showUserInfo);
+                errorUserInfo.addClass("errorBox success");
+                break;
+            case "ERROR":
+                errorUserInfo.addClass("errorBox error");
+                break;
+        }
+    }
+</script>
