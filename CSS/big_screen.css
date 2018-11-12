@@ -1,5 +1,9 @@
 @media only screen and (min-width: 750px) {
-    #letter {
+    #letter, #errorContactForm {
+        width: 70vw;
+    }
+
+    #contactButton {
         width: 70vw;
     }
 }
@@ -49,12 +53,17 @@
     /*----------------------------------------------------------------------------*/
     /*Contact*/
 
-    #letter {
+    #letter, #errorContactForm {
         width: 45vw;
     }
 
     #formContact {
         width: 60%;
+    }
+
+    #contactButton {
+        width: 45vw;
+        margin: auto;
     }
 
     /*----------------------------------------------------------------------------*/

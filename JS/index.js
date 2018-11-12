@@ -116,11 +116,35 @@ function toggleRegisterLogIn(mode) {
     }
 }
 
+//Gère l'envoi de mail de contact
+function sendMailContact(evt){
+    evt.preventDefault();
+
+    let formData = new FormData();
+    formData.append("nom", evt.target.formName.value);
+    formData.append("email", evt.target.mail.value);
+    formData.append("message", evt.target.message.value);
+
+    if(evt.target.mail2.value === ""){
+        callAPIMethod("POST", formData, "contact", function(data){
+            let response = JSON.parse(data.responseText);
+            if(response.status === "SUCCESS"){
+                $('#errorContactForm').text("Le mail a bien été envoyé !").addClass("success").show();
+            } else {
+                $('#errorContactForm').text("Impossible d'envoyer le mail").addClass("error").show();
+            }
+        });
+    }
+}
+
 //-----------------------------------------------------------------------------
 
 $(function(){
 
     copyHeightNavBar();
+
+    $('#errorContactForm').hide();
+    $('#formContact').on("submit", sendMailContact);
 
     //Ajoute la fonction pour toggle la class "current"
     $("#menu ul li a:not(.target-div5)").on("click", function(e){
