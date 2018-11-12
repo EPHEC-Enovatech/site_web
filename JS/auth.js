@@ -69,7 +69,11 @@ function signin(evt) {
                         msgError += "- Le nom ne doit pas être vide<br />";
                         break;
                     case "email":
-                        msgError += "- Le mail ne doit pas être vide<br />";
+                        if(json.data[item][0] === "has already been taken"){
+                            msgError += "- Cette adresse mail existe déjà (<a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>)<br />"
+                        } else {
+                            msgError += "- Le mail ne doit pas être vide<br />";
+                        }
                         break;
                     default:
                         msgError += "- Vérifier les champs<br />"
