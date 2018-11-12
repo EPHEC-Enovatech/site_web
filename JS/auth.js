@@ -106,3 +106,49 @@ function parseJWT(token) {
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64))
 }
+
+//Permet d'appeler l'API en GET
+function callAPI(arg, func){
+    $.ajax({
+        url: "https://api.sensorygarden.be/" + arg,
+        type: "GET",
+        beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
+        complete: func
+    });
+}
+
+function callAPIMethod(method, data, endpoint, func){
+    var settings = {
+        "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.sensorygarden.be/" + endpoint,
+        "method": method,
+        "headers": {},
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": data,
+        "complete": func
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+}
+
+//Récupère les infos passé dans l'URL
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};

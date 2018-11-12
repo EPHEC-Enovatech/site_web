@@ -79,6 +79,16 @@
     margin: 5vh auto 5vh auto;
 }
 
+#errorContactForm{
+    width: 90%;
+    height: auto;
+}
+
+#contactButton {
+    width: 90%;
+    margin: auto;
+}
+
 #addressZone {
     -ms-grid-column: 2;
     grid-column: 2;
@@ -126,4 +136,16 @@
 
 #mail2 {
     display: none;
+}
+
+#errorContactForm {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+    display: inline-block;
 }

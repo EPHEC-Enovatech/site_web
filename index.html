@@ -161,9 +161,11 @@
             <header>
                 <h2 id="contactTitle">Une question ou suggestion ? <wbr> Envoyer nous une lettre !</h2>
             </header>
-            <form id="formContact" action="#" method="post">
+            <form id="formContact" action="#">
+                <p id="errorContactForm"></p>
                 <div id="letter">
                     <div id="formData">
+
                         <label for="formName">Nom *</label>
                         <input id="formName" name="formName" type="text" placeholder="Votre nom" required>
 
@@ -187,8 +189,10 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Envoyer">
-                <input type="reset" value="Supprimer">
+                <div id="contactButton">
+                    <input type="submit" value="Envoyer">
+                    <input type="reset" value="Supprimer">
+                </div>
             </form>
         </section>
 
