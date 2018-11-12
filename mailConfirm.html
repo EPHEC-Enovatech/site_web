@@ -105,6 +105,27 @@
             background: #43A047;
         }
     </style>
+    <script src="JS/jquery-3.3.1.min.js"></script>
+    <script src="JS/auth.js"></script>
+    <script>
+        function confirmMail(){
+            let mail = getUrlParameter('email');
+            let formData = new FormData();
+            formData.append("email", mail);
+            let endPoint = "confirm";
+            callAPIMethod("PATCH", formData, endPoint, setMessageErrorConfirm);
+        }
+
+        function setMessageErrorConfirm(data){
+            let response = JSON.parse(data.responseText);
+            if (response.status === "SUCCESS") {
+                $('main p').text(response.message).css("color", "green");
+                $('footer a').text("Retour au site").attr("href", "index.html");
+            } else {
+                $('main p').text("Impossible de vérifier votre adresse email, réessayer plus tard...").css("color", "red");
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="imageFond"></div>
@@ -116,7 +137,7 @@
             <p>Merci d'avoir créé votre compte Sensory Garden !</p>
         </main>
         <footer>
-            <a href="#">Confirmer votre adresse mail</a>
+            <a href="#" onclick="confirmMail()">Confirmer votre adresse mail</a>
         </footer>
     </div>
 </body>
