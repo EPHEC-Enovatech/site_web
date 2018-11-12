@@ -25,8 +25,26 @@
         }
 
         html, body {
+            margin: 0;
+        }
+
+        body {
             box-sizing: border-box;
             height: 100vh;
+
+            overflow: hidden;
+        }
+
+        #imageFond{
+            filter: blur(3px);
+            height: 100vh;
+            background-origin: border-box;
+            background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+
+            background-position: bottom center;
         }
 
         #merciBox{
@@ -89,6 +107,7 @@
     </style>
 </head>
 <body>
+    <div id="imageFond"></div>
     <div id="merciBox">
         <header>
             <h2>Confirmation de l'email</h2>
