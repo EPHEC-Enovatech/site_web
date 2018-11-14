@@ -147,6 +147,7 @@
 #selectZone select {
     width: 50%;
     margin: 0.5em 0 0.5em 0;
+    -webkit-appearance: none;
 }
 
 .errorData {
