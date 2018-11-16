@@ -140,30 +140,18 @@
     text-align: center;
 }
 
-#selectZone label {
-    width: 40%;
-}
-
-#selectZone select {
-    width: 50%;
-    margin: 0.5em 0 0.5em 0;
-    -webkit-appearance: none;
-}
-
 .errorData {
     color: red;
     font-weight: bold;
 }
 
 #selectZone {
-    max-width: 500px;
     text-align: center;
     margin: auto;
 }
 
 #showDataBox {
     text-align: center;
-    max-width: 500px;
     margin: auto;
 }
 
@@ -174,7 +162,7 @@
     max-width: 100vw;
 }
 
-#lineData {
+.lineData {
     margin: 1em 0 1em 0;
 }
 
@@ -186,6 +174,37 @@
 .errorCanvasDiv {
     color: red;
 }
+
+.allGraphInfo {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 50%;
+}
+
+.textGraphInfo {
+    font-size: 0.8em;
+    padding: 1em;
+}
+
+#showDataBox hr {
+    opacity: 0.2;
+}
+
+.centerTextBlock {
+    display: flex;
+    align-items: center;
+}
+
+/*Inverse graph du centre*/
+.invertText {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.invertGraph {
+     grid-column: 2;
+     grid-row: 1;
+ }
 
 /*---------------------------------------------------------------------------*/
 /*addBox*/
@@ -203,4 +222,15 @@
 
 #addBoxForm input {
     width: 50%;
+}
+
+/*Grands écrans*/
+@media only screen and (min-width: 750px) {
+    #showDataBox, #selectZone {
+        max-width: 800px;
+    }
+
+    #canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo {
+        height: 30vh;
+    }
 }

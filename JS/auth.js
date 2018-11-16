@@ -1,4 +1,7 @@
-
+/**
+ * Authentifie l'utilisateur
+ * @param evt le sender de l'event
+ */
 function authenticate(evt) {
     evt.preventDefault();
     let form = $("#formConnexion")[0];
@@ -24,12 +27,22 @@ function authenticate(evt) {
     })
 }
 
+/**
+ * Mets en place un cookie
+ * @param name le nom
+ * @param value la valeur
+ * @param exp_day la date d'expiration
+ */
 function setCookie(name, value, exp_day) {
     let exp = new Date();
     exp.setTime(exp.getTime() + (exp_day*24*60*60*1000));
     document.cookie = name + "=" + value + "; expires=" + exp.toUTCString() + ";"
 }
 
+/**
+ * Se logger
+ * @param evt le sender de l'event
+ */
 function signin(evt) {
     evt.preventDefault();
     let data = {
@@ -84,6 +97,11 @@ function signin(evt) {
     })
 }
 
+/**
+ * Récupérer un cookie
+ * @param name le nom du cookie
+ * @returns {string} la valeur du cookie
+ */
 function getCookie(name) {
     let cname = name + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -100,18 +118,31 @@ function getCookie(name) {
     return "";
 }
 
+/**
+ * Supprime un cookie
+ * @param name le nom du cookie à supprimer
+ */
 function deleteCookie(name) {
     document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;"
 
 }
 
+/**
+ * Parse le token JSON
+ * @param token le token à parser
+ * @returns {any} le token parser
+ */
 function parseJWT(token) {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64))
 }
 
-//Permet d'appeler l'API en GET
+/**
+ * Permet d'appeler l'API en GET
+ * @param arg la fin l'endpoint
+ * @param func la function à executer à la fin de la requète (pour traitement, premier argument = donnée reçues)
+ */
 function callAPI(arg, func){
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
@@ -121,6 +152,13 @@ function callAPI(arg, func){
     });
 }
 
+/**
+ * Permet d'appeler l'API en OST, PATCH, DELETE
+ * @param method POST, PATCH, DELETE
+ * @param data les données a envoyer
+ * @param endpoint l'endpoint
+ * @param func la function à executer à la fin de la requète (pour traitement, premier argument = donnée reçues)
+ */
 function callAPIMethod(method, data, endpoint, func){
     var settings = {
         "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
@@ -141,7 +179,11 @@ function callAPIMethod(method, data, endpoint, func){
     });
 }
 
-//Récupère les infos passé dans l'URL
+/**
+ * Récupère les infos passé dans l'URL
+ * @param sParam le paramètre à récupérer
+ * @returns {*} la valeur
+ */
 function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
@@ -155,4 +197,4 @@ function getUrlParameter(sParam) {
             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
         }
     }
-};
+}

@@ -23,6 +23,7 @@ html, body {
     box-sizing: border-box;
 
     overflow: hidden;
+    min-height: 100vh;
 }
 
 #document_Header {
