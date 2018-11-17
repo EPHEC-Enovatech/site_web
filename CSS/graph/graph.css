@@ -85,6 +85,10 @@ body {
     margin: 0;
 }
 
+#graphController #multiDateLabel {
+    background-color: darkgray;
+}
+
 #graphController input:not([type=radio]), #graphController select, #radioButtonDate{
     outline: 0;
     background: #f2f2f2;

@@ -17,7 +17,6 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
     switch(response.status) {
         case 404:
             console.log("Pas de donnée disponible");
-            //resetCanvas("canvasHumiditeDemo", "humiditeDemo", "Taux d'humidité dans le sol");
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
@@ -46,10 +45,11 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
 
             if(actionGraph === "draw"){
                 buildGraph(idCanvas, "line", humidDate, datasets, titleGraph);
-                buildFailBack(idCanvas, humidData, humidDate, errorLabel, titleGraph);
             } else if(actionGraph === "upDate"){
-                updateGraph(idCanvas, humidDate, humidData);
+                let labelData = label + " " + moment(response.responseJSON.data[0].timestamp).format('LL');
+                updateGraph(idCanvas, humidDate, humidData, labelData, titleGraph);
             }
+            buildFailBack(idCanvas, humidData, humidDate, errorLabel, titleGraph);
             break;
         default:
             console.log("Erreur serveur");
@@ -132,7 +132,7 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
             }
 
             let datasets = [{
-                label: label,
+                label: label + " " + moment(startDate).format("LL") + " au " + moment(endDate).subtract(1, "d").format("LL"),
                 backgroundColor: 'rgba(20, 50, 199, 0.5)',
                 borderColor: 'rgb(20, 50, 199)',
                 data: dataWeekDay
@@ -140,10 +140,16 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
 
             if(actionGraph === "draw"){
                 buildGraph(idCanvas, "bar", weekDay, datasets, titleGraph, changeGraphClick);
-                buildFailBack(idCanvas, dataWeekDay, weekDay, errorLabel, "Valeurs moyennes récupérées sur la semaine");
             } else if (actionGraph === "upDate"){
-                updateGraph(idCanvas, weekDay, dataWeekDay);
+                let labelData;
+                if(moment(startDate).format("LL") === moment(endDate).subtract(1, "d").format("LL")){
+                    labelData = label + " " + moment(startDate).format("LL");
+                } else {
+                    labelData = label + " " + moment(startDate).format("LL") + " au " + moment(endDate).subtract(1, "d").format("LL");
+                }
+                updateGraph(idCanvas, weekDay, dataWeekDay, labelData, titleGraph);
             }
+            buildFailBack(idCanvas, dataWeekDay, weekDay, errorLabel, "Valeurs moyennes récupérées sur la semaine");
             break;
         default:
             console.log("Erreur serveur")
@@ -151,12 +157,65 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
 }
 
 /**
- * Construis le graphique démo récapitulatif
+ * Construis le graphique récapitulatif
+ * @param response la réponse de l'API
+ * @param actionGraph draw / upDate
+ * @param idCanvasDiv l'id de la div contenant le canvas
+ * @param idCanvas l'id du canvas
+ * @param titleGraph le titre du graphique
+ * @param idError l'id de l'erreur
+ * @param label le label des données
+ * @param errorLabel le label de l'erreur
  */
-function buildRecap(){
+function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
+    idError, label, errorLabel){
 
-    $('#canvasRecapDemo').show();
-    $('#errorrecapDemo').hide();
+    switch(response.status) {
+        case 404:
+            console.log("Pas de donnée disponible");
+            resetCanvas(idCanvasDiv, idCanvas, titleGraph);
+            break;
+        case 401:
+            console.log("Vous n'êtes pas connecté");
+            break;
+        case 200:
+            $('#' + idCanvasDiv).show();
+            $('#' + idError).hide();
+
+            let temperatureData = 0;
+            let humiditeData = 0;
+            let humiditeSolData = 0;
+            let luminositeData = 0;
+            let qualiteAirData = 0;
+
+            let countForAverage = [0, 0, 0, 0, 0];
+
+            const data = response.responseJSON.data;
+            data.forEach(function (item) {
+                let date = moment(new Date(item.timestamp)).format('LT');
+                humidDate.push(date);
+                humidData.push(item.data);
+            });
+
+            let labelData = ["Humidité", "Qualité de l'air", "Tepérature", "Humidité du sol", "Luminosité"];
+            let finalData = [humiditeData, qualiteAirData, temperatureData, humiditeSolData, luminositeData];
+            let datasets = [{
+                label: label + " " + moment(response.responseJSON.data[0].timestamp).format('LL'),
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: finalData,
+            }];
+
+            if(actionGraph === "draw"){
+                buildGraph(idCanvas, "line", labelData, datasets, titleGraph);
+                buildFailBack(idCanvas, finalData, labelData, errorLabel, titleGraph);
+            } else if(actionGraph === "upDate"){
+                updateGraph(idCanvas, labelData, finalData);
+            }
+            break;
+        default:
+            console.log("Erreur serveur");
+    }
 
     let datasets = [{
         label: "Toutes les données au moment X",
@@ -208,10 +267,12 @@ function changeGraphClick(evt){
     if (!bar.length) return; //return if not clicked on bar
     let dateBar = bar[0]._model.label;
     let dateGraph = dateBar.replace(/\//g, "-");
-    let endpoint = "records/" + $('#selectBoxGraph').val() + "/" + ($('#selectCaptorGraph').val()).toLowerCase() + "/" + dateGraph + "-2018";
+    let captor = ($('#selectCaptorGraph').val()).toLowerCase();
+    let endpoint = "records/" + $('#selectBoxGraph').val() + "/" + captor + "/" + dateGraph + "-2018";
+    let titleLabelData = titreGraphFr[captor.toLowerCase()];
 
-    callAPIForGraph(endpoint, buildSimpleGraph, "upDate", "divCanvasDetail", "graphCanvasDetail", "Taux d'humidité dans le sol",
-        "errorgraphCanvasDetail", "Humidité du sol le ", ["Heure", "Taux d'humidité"]);
+    callAPIForGraph(endpoint, buildSimpleGraph, "upDate", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
+        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData]);
 }
 
 /**
@@ -270,13 +331,22 @@ function destroyAllCanvas(){
  * @param id l'id du canvas du graphiques
  * @param label les nouveaux labels
  * @param data les nouvelles données
+ * @param labelData le nouveau label pour les données
  */
-function updateGraph(id, label, data) {
+function updateGraph(id, label, data, labelData, titreGraph) {
 
     let chart = charts[id];
 
     chart.config.data.labels = label;
     chart.data.datasets[0].data = data;
+
+    if(labelData !== undefined){
+        chart.data.datasets[0].label = labelData;
+    }
+
+    if(titreGraph !== undefined){
+        chart.options.title.text = titreGraph;
+    }
 
     chart.update();
 }
