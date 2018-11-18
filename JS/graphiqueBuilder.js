@@ -10,9 +10,10 @@ var charts = {};
  * @param idError l'id de l'endroit au afficher l'erreur
  * @param label le label de la légende du graph
  * @param errorLabel les labels pour l'accessibilité
+ * @param labelYData le label de l'axe Y
  */
 function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
-                          idError, label, errorLabel, labelYData){
+                          idError, label, errorLabel, labelYData, typeData){
 
     switch(response.status) {
         case 404:
@@ -41,16 +42,20 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
 
             let datasets = [{
                 label: label + " " + moment(response.responseJSON.data[0].timestamp).format('LL'),
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(0, 0, 0)',
+                borderWidth: 1,
+                pointBackgroundColor: colorGraph(typeData, humidData),
+                pointBorderColor: 'rgb(0, 0, 0)',
+                pointRadius: 5,
                 data: humidData,
+
             }];
 
             if(actionGraph === "draw"){
                 buildGraph(idCanvas, "line", humidDate, datasets, titleGraph, labelYData);
             } else if(actionGraph === "upDate"){
                 let labelData = label + " " + moment(response.responseJSON.data[0].timestamp).format('LL');
-                updateGraph(idCanvas, humidDate, humidData, labelData, titleGraph, labelYData);
+                updateGraph(idCanvas, humidDate, humidData, labelData, titleGraph, labelYData, typeData, "line");
             }
             buildFailBack(idCanvas, humidData, humidDate, errorLabel, titleGraph);
             break;
@@ -70,10 +75,12 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
  * @param idError l'id de la zone pour les erreurs
  * @param label le label des données
  * @param errorLabel le label pour la table accessibilité
+ * @param labelYData le label de l'axe Y
+ * @param typeData le type de données (capteur)
  * @param startDate la date de début
  * @param endDate la date de fin
  */
-function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, startDate, endDate){
+function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, typeData, startDate, endDate){
     
     switch (response.status) {
         case 404:
@@ -139,8 +146,9 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
 
             let datasets = [{
                 label: label + " " + moment(startDate).format("L") + " au " + moment(endDate).subtract(1, "d").format("L"),
-                backgroundColor: 'rgba(20, 50, 199, 0.5)',
-                borderColor: 'rgb(20, 50, 199)',
+                backgroundColor: colorGraph(typeData, dataWeekDay),
+                borderColor: 'rgb(0, 0, 0)',
+                borderWidth: 1,
                 data: dataWeekDay
             }];
 
@@ -153,7 +161,7 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
                 } else {
                     labelData = label + " " + moment(startDate).format("L") + " au " + moment(endDate).subtract(1, "d").format("L");
                 }
-                updateGraph(idCanvas, weekDay, dataWeekDay, labelData, titleGraph, labelYData);
+                updateGraph(idCanvas, weekDay, dataWeekDay, labelData, titleGraph, labelYData, typeData, "bar");
             }
             buildFailBack(idCanvas, dataWeekDay, weekDay, errorLabel, "Valeurs moyennes récupérées sur la semaine");
             break;
@@ -172,9 +180,10 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
  * @param idError l'id de l'erreur
  * @param label le label des données
  * @param errorLabel le label de l'erreur
+ * @param labelYData le label de l'axe Y
  */
 function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
-    idError, label, errorLabel, labelYData){
+    idError, label, errorLabel, labelYData, typeData){
 
     switch(response.status) {
         case 404:
@@ -241,7 +250,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
             if(actionGraph === "draw"){
                 buildGraph(idCanvas, "radar", labelData, datasets, titleGraph, labelYData);
             } else if(actionGraph === "upDate"){
-                updateGraph(idCanvas, labelData, finalData);
+                updateGraph(idCanvas, labelData, finalData, typeData, "radar");
             }
             buildFailBack(idCanvas, finalData, labelData, errorLabel, titleGraph);
             break;
@@ -257,6 +266,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
  * @param labels les labels des données []
  * @param datasets les données []
  * @param title le titre du graphique
+ * @param labelYData le label de l'axxe Y
  * @param func la function a appelé lors d'un onClick
  */
 function buildGraph(id, type, labels, datasets, title, labelYData, func){
@@ -337,10 +347,14 @@ function changeGraphClick(evt){
     let dateGraph = dateBar.replace(/\//g, "-");
     let captor = ($('#selectCaptorGraph').val()).toLowerCase();
     let endpoint = "records/" + $('#selectBoxGraph').val() + "/" + captor + "/" + dateGraph + "-2018";
-    let titleLabelData = titreGraphFr[captor.toLowerCase()];
+
+    let typeData = captor.toLowerCase();
+    let titleLabelData = titreGraphFr[typeData];
+    let titleLabelDataAverage = titreGraphMoyenneFr[typeData];
+    let labelYData = labelY[typeData];
 
     callAPIForGraph(endpoint, buildSimpleGraph, "upDate", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
-        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData]);
+        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData, typeData);
 }
 
 /**
@@ -401,8 +415,11 @@ function destroyAllCanvas(){
  * @param data les nouvelles données
  * @param labelData le nouveau label pour les données
  * @param titreGraph le titre du graphique
+ * @param labelYData le label de l'axe Y
+ * @param typeData le type de données (capteur)
+ * @param typeGraph le type de graphique
  */
-function updateGraph(id, label, data, labelData, titreGraph, labelYData) {
+function updateGraph(id, label, data, labelData, titreGraph, labelYData, typeData, typeGraph) {
 
     let chart = charts[id];
 
@@ -412,14 +429,56 @@ function updateGraph(id, label, data, labelData, titreGraph, labelYData) {
     if(labelData !== undefined){
         chart.data.datasets[0].label = labelData;
     }
-
     if(titreGraph !== undefined){
         chart.options.title.text = titreGraph;
     }
-
     if(labelYData !== undefined){
         chart.options.scales.yAxes[0].scaleLabel.labelString = labelYData;
     }
 
+    if(typeData !== undefined && data !== undefined) {
+        if (typeGraph === "line") {
+            console.log("hello");
+            chart.data.datasets[0].pointBackgroundColor = colorGraph(typeData, data);
+        } else if (typeGraph === "bar") {
+            chart.data.datasets[0].backgroundColor = colorGraph(typeData, data);
+        } else if (typeGraph === "radar") {
+
+        }
+    }
+
     chart.update();
+}
+
+/**
+ * Renvoie les couleurs du graphique en fonction des valeurs
+ * @param capteur le nom du capteur
+ * @param data les données
+ * @returns {Array} les couleurs
+ */
+function colorGraph(capteur, data){
+    let green = 'rgba(46, 204, 64, 0.5)';
+    let red = 'rgba(255, 65, 54, 0.5)';
+
+    const minMaxData = {
+        "humidite": [40, 60],
+        "qualite_air": [0, 400],
+        "temperature": [15, 25],
+        "humidite_terre": [700, 900],
+        "luminosite": [0, 1000],
+        "pression": [1012, 1014]
+    };
+
+    let interval = minMaxData[capteur];
+    let color = [];
+
+    for(let i = 0; i < data.length; i++){
+        if(data[i] < interval[0] || data[i] > interval[1]) {
+            color.push(red);
+        } else {
+            color.push(green);
+        }
+    }
+
+    return color;
 }
