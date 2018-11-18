@@ -441,7 +441,7 @@ function updateGraph(id, label, data, labelData, titreGraph, labelYData, typeDat
             console.log("hello");
             chart.data.datasets[0].pointBackgroundColor = colorGraph(typeData, data);
         } else if (typeGraph === "bar") {
-            chart.data.datasets[0].backgroundColor = colorGraph(typeData, data);
+            chart.data.datasets[0].backgroundColor = colorGraph(typeData, data, true);
         } else if (typeGraph === "radar") {
 
         }
@@ -456,7 +456,7 @@ function updateGraph(id, label, data, labelData, titreGraph, labelYData, typeDat
  * @param data les données
  * @returns {Array} les couleurs
  */
-function colorGraph(capteur, data){
+function colorGraph(capteur, data, daltonien = false){
     let green = 'rgba(46, 204, 64, 0.5)';
     let red = 'rgba(255, 65, 54, 0.5)';
 
@@ -472,11 +472,34 @@ function colorGraph(capteur, data){
     let interval = minMaxData[capteur];
     let color = [];
 
-    for(let i = 0; i < data.length; i++){
-        if(data[i] < interval[0] || data[i] > interval[1]) {
-            color.push(red);
-        } else {
-            color.push(green);
+    if(daltonien){
+
+        // Create a temporary canvas and fill it with a grid pattern
+        let patternCanvas = document.createElement("canvas"), patternContext = patternCanvas.getContext("2d");
+        patternCanvas.width = 10;
+        patternCanvas.height = 10;
+        patternContext.beginPath();
+        patternContext.fillStyle = "red";
+        patternContext.fillRect(0, 0, 10, 10);
+        patternContext.strokeRect(0.5, 0.5, 10, 10);
+        patternContext.stroke();
+        let redPattern = patternContext.createPattern(patternCanvas, "repeat");
+
+        for(let i = 0; i < data.length; i++){
+
+            if(data[i] < interval[0] || data[i] > interval[1]) {
+                color.push(redPattern);
+            } else {
+                color.push(green);
+            }
+        }
+    } else {
+        for(let i = 0; i < data.length; i++){
+            if(data[i] < interval[0] || data[i] > interval[1]) {
+                color.push(red);
+            } else {
+                color.push(green);
+            }
         }
     }
 
