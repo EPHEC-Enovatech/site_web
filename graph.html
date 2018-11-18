@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CSS/navBar.css">
     <link rel="stylesheet" href="CSS/navBar_mobile.css">
     <link rel="stylesheet" href="CSS/graph/graph.css">
+    <link rel="stylesheet" href="CSS/graph/graph_mobile.css">
     <link rel="stylesheet" href="CSS/graph/datepicker.min.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
@@ -37,6 +38,7 @@
     </div>
 </header>
 <main id="document_Main">
+    <button id="showSettings" type="button">Réglages</button>
     <div id="graphZone">
         <div id="errorgraphCanvas" class="errorCanvasDiv">
             <p class="errorTitle"></p>
@@ -83,6 +85,7 @@
                 <label for="selectCaptorGraph" class="labelInput">Le capteur :</label><br>
                 <select id="selectCaptorGraph" name="selectCaptorGraph"></select>
             </div>
+            <button id="closeController" type="button">Fermer</button>
         </form>
     </div>
 </main>

@@ -12,7 +12,7 @@ var charts = {};
  * @param errorLabel les labels pour l'accessibilité
  */
 function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
-                          idError, label, errorLabel){
+                          idError, label, errorLabel, labelYData){
 
     switch(response.status) {
         case 404:
@@ -47,10 +47,10 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
             }];
 
             if(actionGraph === "draw"){
-                buildGraph(idCanvas, "line", humidDate, datasets, titleGraph);
+                buildGraph(idCanvas, "line", humidDate, datasets, titleGraph, labelYData);
             } else if(actionGraph === "upDate"){
                 let labelData = label + " " + moment(response.responseJSON.data[0].timestamp).format('LL');
-                updateGraph(idCanvas, humidDate, humidData, labelData, titleGraph);
+                updateGraph(idCanvas, humidDate, humidData, labelData, titleGraph, labelYData);
             }
             buildFailBack(idCanvas, humidData, humidDate, errorLabel, titleGraph);
             break;
@@ -73,7 +73,7 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
  * @param startDate la date de début
  * @param endDate la date de fin
  */
-function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, startDate, endDate){
+function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, startDate, endDate){
     
     switch (response.status) {
         case 404:
@@ -138,22 +138,22 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
             }
 
             let datasets = [{
-                label: label + " " + moment(startDate).format("LL") + " au " + moment(endDate).subtract(1, "d").format("LL"),
+                label: label + " " + moment(startDate).format("L") + " au " + moment(endDate).subtract(1, "d").format("L"),
                 backgroundColor: 'rgba(20, 50, 199, 0.5)',
                 borderColor: 'rgb(20, 50, 199)',
                 data: dataWeekDay
             }];
 
             if(actionGraph === "draw"){
-                buildGraph(idCanvas, "bar", weekDay, datasets, titleGraph, changeGraphClick);
+                buildGraph(idCanvas, "bar", weekDay, datasets, titleGraph, labelYData, changeGraphClick);
             } else if (actionGraph === "upDate"){
                 let labelData;
                 if(moment(startDate).format("LL") === moment(endDate).subtract(1, "d").format("LL")){
                     labelData = label + " " + moment(startDate).format("LL");
                 } else {
-                    labelData = label + " " + moment(startDate).format("LL") + " au " + moment(endDate).subtract(1, "d").format("LL");
+                    labelData = label + " " + moment(startDate).format("L") + " au " + moment(endDate).subtract(1, "d").format("L");
                 }
-                updateGraph(idCanvas, weekDay, dataWeekDay, labelData, titleGraph);
+                updateGraph(idCanvas, weekDay, dataWeekDay, labelData, titleGraph, labelYData);
             }
             buildFailBack(idCanvas, dataWeekDay, weekDay, errorLabel, "Valeurs moyennes récupérées sur la semaine");
             break;
@@ -174,7 +174,7 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
  * @param errorLabel le label de l'erreur
  */
 function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
-    idError, label, errorLabel){
+    idError, label, errorLabel, labelYData){
 
     switch(response.status) {
         case 404:
@@ -200,7 +200,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
 
             const data = response.responseJSON.data;
             data.forEach(function (item) {
-                switch (data.sensor_id) {
+                switch (item.sensor_id) {
                     case 2:
                         dataCaptor[0] += item.data;
                         countForAverage[0] ++;
@@ -239,7 +239,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
             }];
 
             if(actionGraph === "draw"){
-                buildGraph(idCanvas, "radar", labelData, datasets, titleGraph);
+                buildGraph(idCanvas, "radar", labelData, datasets, titleGraph, labelYData);
             } else if(actionGraph === "upDate"){
                 updateGraph(idCanvas, labelData, finalData);
             }
@@ -248,17 +248,6 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
         default:
             console.log("Erreur serveur");
     }
-
-    let datasets = [{
-        label: "Toutes les données au moment X",
-        backgroundColor: 'rgba(100, 199, 32, 0.5)',
-        borderColor: 'rgb(100, 199, 32)',
-        data: [14, 10, 8, 6, 1]
-    }];
-
-    let labels = ['Humidité du sol', 'Température', 'Luminosité', 'Qualité de l\'air', 'Pression'];
-
-    buildGraph(idCanvas, "radar", labels, datasets, "Récapitulatif");
 }
 
 /**
@@ -270,7 +259,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
  * @param title le titre du graphique
  * @param func la function a appelé lors d'un onClick
  */
-function buildGraph(id, type, labels, datasets, title, func){
+function buildGraph(id, type, labels, datasets, title, labelYData, func){
     let ctx = document.getElementById(id).getContext('2d');
     charts[id] = (new Chart(ctx, {
         type: type,
@@ -286,6 +275,14 @@ function buildGraph(id, type, labels, datasets, title, func){
             responsive: true,
             maintainAspectRatio: false,
             onClick: func,
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: labelYData
+                    }
+                }]
+            }
         }
     }));
 }
@@ -317,6 +314,14 @@ function buildEmptyGraph(id, type, func){
             responsive: true,
             maintainAspectRatio: false,
             onClick: func,
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'value'
+                    }
+                }]
+            }
         }
     }));
 }
@@ -397,7 +402,7 @@ function destroyAllCanvas(){
  * @param labelData le nouveau label pour les données
  * @param titreGraph le titre du graphique
  */
-function updateGraph(id, label, data, labelData, titreGraph) {
+function updateGraph(id, label, data, labelData, titreGraph, labelYData) {
 
     let chart = charts[id];
 
@@ -410,6 +415,10 @@ function updateGraph(id, label, data, labelData, titreGraph) {
 
     if(titreGraph !== undefined){
         chart.options.title.text = titreGraph;
+    }
+
+    if(labelYData !== undefined){
+        chart.options.scales.yAxes[0].scaleLabel.labelString = labelYData;
     }
 
     chart.update();

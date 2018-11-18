@@ -1,0 +1,59 @@
+@media only screen and (max-width: 600px){
+    #document_Main {
+        display: block;
+        grid-template-columns: none;
+        grid-template-rows: none;
+    }
+
+    #graphController {
+        border: none;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 999999;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    #graphZone {
+        height: 100%;
+    }
+
+    #formController {
+        margin: auto;
+    }
+
+    #closeController, #showSettings {
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+        text-transform: uppercase;
+        background: #4CAF50;
+        color: #FFFFFF;
+        padding: 0.8em;
+        display: inline-block;
+        width: 85%;
+        margin: 0;
+        outline: 0;
+        border: 0;
+        font-size: 1em;
+    }
+
+    #showSettings {
+        width: 100%;
+    }
+
+    #graphController #selectCaptorGraph {
+        margin: 0 0 1em;
+    }
+
+    #closeController:hover, #showSettings:hover {
+        background: #43A047;
+    }
+
+
+}
+

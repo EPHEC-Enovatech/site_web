@@ -7,11 +7,35 @@ function calculateSizeMain(){
     $('#document_Main').css('height', "calc(100vh - " + tailleHeader + "px - 2em)");
 }
 
+//Gère le controlleur en repsonsive
+function responsiveMode(){
+    if(window.innerWidth <= 600){
+        $('#graphController').hide();
+        $('#closeController').on("click", function(){
+            $('#graphController').hide();
+        }).show();
+        $('#showSettings').on("click", function(){
+            $('#graphController').show();
+        }).show();
+    } else {
+        $('#graphController').show();
+        $('#closeController, #showSettings').hide();
+    }
+}
+
 $(function(){
     moment.locale("fr");
     calculateSizeMain();
+    responsiveMode();
 
     $('#errorgraphCanvas, #errorgraphCanvasDetail').hide();
+
+    $("#logout").click((e) => {
+        e.preventDefault();
+        deleteCookie('token');
+        deleteCookie('user-id');
+        window.location = e.target.href;
+    });
 
     $('#dateDebut').datepicker({
         autoHide: true,
@@ -41,6 +65,7 @@ $(function(){
 
     $(window).on("resize", function(){
         calculateSizeMain();
+        responsiveMode();
     });
 });
 
@@ -58,13 +83,13 @@ $(function(){
  * @param dateAPIDebut la date de début
  * @param endDate la date de fin
  */
-function callAPIForGraph(arg, func, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, dateAPIDebut, endDate){
+function callAPIForGraph(arg, func, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, dateAPIDebut, endDate){
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
         type: "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         complete: function(data){
-            func(data, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, dateAPIDebut, endDate);
+            func(data, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, dateAPIDebut, endDate);
         }
     });
 }
@@ -91,12 +116,14 @@ function displayGraphDate(){
     let captor = ($('#selectCaptorGraph').val()).toLowerCase();
 
     let titleLabelData = titreGraphFr[captor.toLowerCase()];
+    let titleLabelDataAverage = titreGraphMoyenneFr[captor.toLowerCase()];
+    let labelYData = labelY[captor.toLowerCase()];
 
     callAPIForGraph("records/" + selectedCaptor + "/" + captor + "/" + dateAPI, buildSimpleGraph, "upDate", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
-        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData]);
+        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData);
 
-    callAPIForGraph("records/" + selectedCaptor + "/" + captor + "/" + dateAPI + "/" + dateAPIFin, buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelData,
-        "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], dateAPIDebut, moment(endDate).add(1, "d"));
+    callAPIForGraph("records/" + selectedCaptor + "/" + captor + "/" + dateAPI + "/" + dateAPIFin, buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelDataAverage,
+        "errorgraphCanvas", titleLabelDataAverage + " du", ["Heure", titleLabelDataAverage], labelYData, dateAPIDebut, moment(endDate).add(1, "d"));
 }
 
 /**
@@ -132,16 +159,18 @@ function initGraph() {
     let beforeToday = moment(today).subtract(6, "d");
     let captor = $('#selectBoxGraph').val();
 
+    let titleLabelDataAvergae = titreGraphMoyenneFr["humidite"];
     let titleLabelData = titreGraphFr["humidite"];
+    let labelYData = labelY["humidite"];
 
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).format("DD-MM-YYYY"), buildSimpleGraph, "draw", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
-        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData]);
+        "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData);
 
-    /*callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).subtract(1, "d").format("DD-MM-YYYY"), buildRecap, "draw", "divCanvas", "graphCanvas", titleLabelData,
+    /*callAPIForGraph("records/" + captor + "/all/" + moment(today).subtract(1, "d").format("DD-MM-YYYY"), buildRecap, "draw", "divCanvas", "graphCanvas", titleLabelData,
         "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));*/
 
-    callAPIForGraph("records/" + captor + "/Humidite/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "draw", "divCanvas", "graphCanvas", titleLabelData,
-        "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));
+    callAPIForGraph("records/" + captor + "/Humidite/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "draw", "divCanvas", "graphCanvas", titleLabelDataAvergae,
+        "errorgraphCanvas", titleLabelDataAvergae + " du", ["Heure", titleLabelDataAvergae], labelYData, beforeToday, moment(today).add(1, "d"));
 }
 
 /**
@@ -168,6 +197,45 @@ const titreGraphFr = {
     "humidite_terre": "Taux d'humidité du sol",
     "luminosite": "Luminosité",
     "pression": "Pression"
+};
+
+/**
+ * Liste titre pour les graphiques
+ * @type {{Humidite: string, Qualite_air: string, Temperature: string, Humidite_terre: string, Luminosite: string, Pression: string}}
+ */
+const titreGraphMoyenneFr = {
+    "humidite": "Taux d'humidité moyen dans l'air",
+    "qualite_air": "Qualité de l'air moyenne",
+    "temperature": "Température moyenne",
+    "humidite_terre": "Taux d'humidité moyen du sol",
+    "luminosite": "Luminosité moyenne",
+    "pression": "Pression moyenne"
+};
+
+/**
+ * Liste des labels pour l'axes Y
+ * @type {{humidite: string, qualite_air: string, temperature: string, humidite_terre: string, luminosite: string, pression: string}}
+ */
+const labelY = {
+    "humidite": "Humidité de l'air (%)",
+    "qualite_air": "Qualité de l'air (AQI)",
+    "temperature": "Température (°C)",
+    "humidite_terre": "Humidité du sol (um)",
+    "luminosite": "Luminosité (Lux)",
+    "pression": "Pression (Pa)"
+};
+
+/**
+ * Interval de valeurs OK
+ * @type {{humidite: string, qualite_air: string, temperature: string, humidite_terre: string, luminosite: string, pression: string}}
+ */
+const minMaxData = {
+    "humidite": [40, 60],
+    "qualite_air": [0, 400],
+    "temperature": [15, 25],
+    "humidite_terre": [700, 900],
+    "luminosite": [0, 1000],
+    "pression": [1012, 1014]
 };
 
 /**
@@ -205,13 +273,15 @@ function switchOptionDate(sender) {
         let dateDebut = moment($('#dateDebut').datepicker('getDate'));
         let captor = ($('#selectCaptorGraph').val()).toLowerCase();
         let titleLabelData = titreGraphFr[captor.toLowerCase()];
+        let titleLabelDataAverage = titreGraphMoyenneFr[captor.toLowerCase()];
+        let labelYData = labelY[captor.toLowerCase()];
 
         if(dateDebut > beforeToday){
             callAPIForGraph("records/" + captorBox + "/" + captor + "/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelData,
-                "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));
+                "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], labelYData, beforeToday, moment(today).add(1, "d"));
         } else {
-            callAPIForGraph("records/" + captorBox + "/" + captor + "/" + moment(dateDebut).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelData,
-                "errorgraphCanvas", titleLabelData + " le", ["Heure", titleLabelData], dateDebut, moment(today).add(1, "d"));
+            callAPIForGraph("records/" + captorBox + "/" + captor + "/" + moment(dateDebut).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelDataAverage,
+                "errorgraphCanvas", titleLabelDataAverage + " le", ["Heure", titleLabelDataAverage], labelYData, dateDebut, moment(today).add(1, "d"));
         }
 
 
