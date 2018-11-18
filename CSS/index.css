@@ -136,3 +136,33 @@ hr {
     height: auto;
     display: inline-block;
 }
+
+/*----------------------------------------------------------------------------------------------------------------*/
+/*Dialogue cookies*/
+
+#dialCookies{
+    font-family: "Roboto", sans-serif;
+    position: fixed;
+    bottom: 0;
+    background-color: #f2f2f2;
+    margin: 1em;
+    padding: 0.5em;
+    text-align: center;
+    border: 1px solid;
+}
+
+#dialCookies button {
+    outline: 0;
+    width: 90%;
+    border: 0;
+    padding: 1em;
+    font-size: 1em;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+#dialCookies button:hover {
+    background: #43A047;
+    cursor: pointer;
+}

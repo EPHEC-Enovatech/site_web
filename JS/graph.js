@@ -137,6 +137,9 @@ function initGraph() {
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).format("DD-MM-YYYY"), buildSimpleGraph, "draw", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
         "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData]);
 
+    /*callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).subtract(1, "d").format("DD-MM-YYYY"), buildRecap, "draw", "divCanvas", "graphCanvas", titleLabelData,
+        "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));*/
+
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "draw", "divCanvas", "graphCanvas", titleLabelData,
         "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));
 }

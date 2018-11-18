@@ -17,6 +17,9 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
     switch(response.status) {
         case 404:
             console.log("Pas de donnée disponible");
+            if(charts[idCanvas] === undefined){
+                buildEmptyGraph(idCanvas, "line");
+            }
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
@@ -75,6 +78,9 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
     switch (response.status) {
         case 404:
             console.log("Pas de donnée disponible");
+            if(charts[idCanvas] === undefined){
+                buildEmptyGraph(idCanvas, "line", changeGraphClick);
+            }
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
@@ -173,6 +179,9 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
     switch(response.status) {
         case 404:
             console.log("Pas de donnée disponible");
+            if(charts[idCanvas] === undefined){
+                buildEmptyGraph(idCanvas, "radar");
+            }
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
@@ -182,23 +191,46 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
             $('#' + idCanvasDiv).show();
             $('#' + idError).hide();
 
-            let temperatureData = 0;
-            let humiditeData = 0;
-            let humiditeSolData = 0;
-            let luminositeData = 0;
-            let qualiteAirData = 0;
-
+            /**
+             * Ordre capteur : humidite, qualiteAir, temperature, humiditeSol, luminosite
+             * @type {number[]}
+             */
+            let dataCaptor = [0, 0, 0, 0, 0];
             let countForAverage = [0, 0, 0, 0, 0];
 
             const data = response.responseJSON.data;
             data.forEach(function (item) {
-                let date = moment(new Date(item.timestamp)).format('LT');
-                humidDate.push(date);
-                humidData.push(item.data);
+                switch (data.sensor_id) {
+                    case 2:
+                        dataCaptor[0] += item.data;
+                        countForAverage[0] ++;
+                        break;
+                    case 3:
+                        dataCaptor[1] += item.data;
+                        countForAverage[1] ++;
+                        break;
+                    case 4:
+                        dataCaptor[2] += item.data;
+                        countForAverage[2] ++;
+                        break;
+                    case 5:
+                        dataCaptor[3] += item.data;
+                        countForAverage[3] ++;
+                        break;
+                    case 6:
+                        dataCaptor[4] += item.data;
+                        countForAverage[4] ++;
+                        break;
+                }
             });
 
+            let finalData = [];
+            for(let i = 0; i < dataCaptor.length; i++){
+                dataCaptor[i] = dataCaptor[i]/countForAverage[i];
+                finalData.push(dataCaptor[i]);
+            }
+
             let labelData = ["Humidité", "Qualité de l'air", "Tepérature", "Humidité du sol", "Luminosité"];
-            let finalData = [humiditeData, qualiteAirData, temperatureData, humiditeSolData, luminositeData];
             let datasets = [{
                 label: label + " " + moment(response.responseJSON.data[0].timestamp).format('LL'),
                 backgroundColor: 'rgb(255, 99, 132)',
@@ -207,11 +239,11 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
             }];
 
             if(actionGraph === "draw"){
-                buildGraph(idCanvas, "line", labelData, datasets, titleGraph);
-                buildFailBack(idCanvas, finalData, labelData, errorLabel, titleGraph);
+                buildGraph(idCanvas, "radar", labelData, datasets, titleGraph);
             } else if(actionGraph === "upDate"){
                 updateGraph(idCanvas, labelData, finalData);
             }
+            buildFailBack(idCanvas, finalData, labelData, errorLabel, titleGraph);
             break;
         default:
             console.log("Erreur serveur");
@@ -226,7 +258,7 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
 
     let labels = ['Humidité du sol', 'Température', 'Luminosité', 'Qualité de l\'air', 'Pression'];
 
-    buildGraph("recapDemo", "radar", labels, datasets, "Récapitulatif");
+    buildGraph(idCanvas, "radar", labels, datasets, "Récapitulatif");
 }
 
 /**
@@ -250,6 +282,37 @@ function buildGraph(id, type, labels, datasets, title, func){
             title: {
                 display: true,
                 text: title
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            onClick: func,
+        }
+    }));
+}
+
+/**
+ * Construis les graphiques
+ * @param id l'id du canvas
+ * @param type le type de graphique (line, bar, radar)
+ * @param func la function a appelé lors d'un onClick
+ */
+function buildEmptyGraph(id, type, func){
+    let ctx = document.getElementById(id).getContext('2d');
+    charts[id] = (new Chart(ctx, {
+        type: type,
+        data : {
+            labels: [0, 0, 0, 0, 0],
+            datasets: [{
+                label: "Pas de donnée",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0,0,0,0,0],
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Pas de donnée"
             },
             responsive: true,
             maintainAspectRatio: false,
@@ -332,6 +395,7 @@ function destroyAllCanvas(){
  * @param label les nouveaux labels
  * @param data les nouvelles données
  * @param labelData le nouveau label pour les données
+ * @param titreGraph le titre du graphique
  */
 function updateGraph(id, label, data, labelData, titreGraph) {
 

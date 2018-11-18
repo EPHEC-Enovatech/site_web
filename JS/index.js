@@ -183,6 +183,10 @@ $(function(){
         }
     });
 
+    $('#dialCookies button').on("click", function(){
+        $('#dialCookies').hide();
+    });
+
     $('#closeConnexion').on("click", function() {
         $('#formConnexion').trigger("reset");
     });
