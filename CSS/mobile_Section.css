@@ -187,6 +187,16 @@
     }
 
     /*-------------------------------------------------------------------*/
+    /*PopUp MDP oublié*/
+
+    #MDPoublie header h2 {
+        font-size: 8vw;
+    }
+
+    #MDPoublie {
+        width: 90vw;
+    }
+
 }
 
 @media screen and (orientation:landscape) and (max-height: 350px) {

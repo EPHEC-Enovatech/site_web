@@ -166,3 +166,91 @@ hr {
     background: #43A047;
     cursor: pointer;
 }
+
+/*----------------------------------------------------------------------------------------------------------------*/
+/*Reset MDP*/
+
+#MDPoublie {
+    display: none;
+    border: 1px solid black;
+    margin: auto;
+    position: fixed;
+    background-color: white;
+    width: 40vw;
+    height: auto;
+    z-index: 10001;
+    font-family: "Roboto", sans-serif;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-height: 90vh;
+    text-align: center;
+}
+
+#MDPoublie header {
+    background-color: limegreen;
+    position: sticky;
+    top: 0;
+
+    margin: 0;
+    padding: 0.5em;
+    color: white;
+    text-align: center;
+    font-family: "fall_is_comingregular", sans-serif;
+}
+
+#MDPoublie header h2 {
+    font-size: 4vw;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+#MDPoublie main {
+    text-align: center;
+    padding: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#MDPoublie footer {
+    margin-bottom: 1em;
+}
+
+#MDPoublie footer input {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    color: #FFFFFF;
+    padding: 0.5em;
+    display: inline-block;
+    font-size: 1em;
+    border: none;
+    width: 40%;
+}
+
+#MDPoublie footer input:hover {
+    background: #43A047;
+}
+
+#email {
+    padding: 1em;
+    background-color: #f2f2f2;
+    border: 0;
+    font-size: 1em;
+    display: inline-block;
+    margin: 0.5em 0 1em;
+}
+
+#forgotMDP {
+    text-decoration: none;
+    color: #4CAF50;
+    font-size: 0.8em;
+    display: inline-block;
+    width: 90%;
+    text-align: right;
+}

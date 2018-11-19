@@ -220,6 +220,7 @@
                 <br>
                 <label for="password" class="visuallyhidden">Mot de passe</label>
                 <input id="password" name="password" type="password" placeholder="Mot de passe" required>
+                <a id="forgotMDP" href="#">Mot de passe oublié ?</a>
                 <br>
                 <label for="confirmPassword" class="visuallyhidden">Confirmer le mot de passe</label>
                 <input id="confirmPassword" name="confirmPassword" type="password" hidden placeholder="Confirmer le mot de passe">
@@ -240,6 +241,23 @@
             En cliquant sur ”J’accepte”, vous acceptez l’utilisation des cookies. Si vous supprimez ou désactivez nos cookies, vous pourriez rencontrer des interruptions ou des problèmes d’accès au site.
         </p>
         <button type="button">J'accepte</button>
+    </div>
+
+    <div id="MDPoublie" role="dialog" hidden>
+        <form id="formMDPoublie">
+            <header>
+                <h2>Réinitialisez votre mot de passe</h2>
+            </header>
+            <main>
+                <label for="email">Entrez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe</label><br>
+                <div id="subErrorMDPoublie" class="error"></div>
+                <input type="email" name="email" id="email" placeholder="Adresse mail" required>
+            </main>
+            <footer>
+                <input id="submitMDPoublie" type="submit" value="Envoyer">
+                <input id="resetMDPoublie" type="reset" value="Annuler">
+            </footer>
+        </form>
     </div>
 
     <footer id="document_Footer">
