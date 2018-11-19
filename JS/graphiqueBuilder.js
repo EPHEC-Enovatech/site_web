@@ -11,6 +11,7 @@ var charts = {};
  * @param label le label de la légende du graph
  * @param errorLabel les labels pour l'accessibilité
  * @param labelYData le label de l'axe Y
+ * @param typeData le type de donnée (capteur)
  */
 function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
                           idError, label, errorLabel, labelYData, typeData){
@@ -181,6 +182,7 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
  * @param label le label des données
  * @param errorLabel le label de l'erreur
  * @param labelYData le label de l'axe Y
+ * @param typeData le type de données (capteur)
  */
 function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
     idError, label, errorLabel, labelYData, typeData){
@@ -242,8 +244,8 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
             let labelData = ["Humidité", "Qualité de l'air", "Tepérature", "Humidité du sol", "Luminosité"];
             let datasets = [{
                 label: label + " " + moment(response.responseJSON.data[0].timestamp).format('LL'),
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                //backgroundColor: 'rgb(255, 99, 132)',
+                //borderColor: 'rgb(255, 99, 132)',
                 data: finalData,
             }];
 
@@ -311,10 +313,13 @@ function buildEmptyGraph(id, type, func){
             labels: [0, 0, 0, 0, 0],
             datasets: [{
                 label: "Pas de donnée",
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(0, 0, 0)',
+                borderWidth: 1,
+                pointBorderColor: 'rgb(0, 0, 0)',
+                pointRadius: 5,
                 data: [0,0,0,0,0],
-            }]
+
+            }],
         },
         options: {
             title: {
@@ -438,10 +443,9 @@ function updateGraph(id, label, data, labelData, titreGraph, labelYData, typeDat
 
     if(typeData !== undefined && data !== undefined) {
         if (typeGraph === "line") {
-            console.log("hello");
             chart.data.datasets[0].pointBackgroundColor = colorGraph(typeData, data);
         } else if (typeGraph === "bar") {
-            chart.data.datasets[0].backgroundColor = colorGraph(typeData, data, true);
+            chart.data.datasets[0].backgroundColor = colorGraph(typeData, data);
         } else if (typeGraph === "radar") {
 
         }
@@ -454,6 +458,7 @@ function updateGraph(id, label, data, labelData, titreGraph, labelYData, typeDat
  * Renvoie les couleurs du graphique en fonction des valeurs
  * @param capteur le nom du capteur
  * @param data les données
+ * @param daltonien true pour activer le mode daltonien
  * @returns {Array} les couleurs
  */
 function colorGraph(capteur, data, daltonien = false){
