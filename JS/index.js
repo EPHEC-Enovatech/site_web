@@ -138,7 +138,6 @@ function sendMailContact(evt){
 //Gestion retour mot de passe oublié
 function MDPoublie(response) {
     let data = JSON.parse(response.responseText);
-    console.log(data);
     if(data.status === "ERROR"){
         $('#subErrorMDPoublie').removeClass().addClass("error").html(data.message).show();
     } else {

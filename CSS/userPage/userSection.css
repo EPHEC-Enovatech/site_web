@@ -86,17 +86,17 @@
 /*---------------------------------------------------------------------------*/
 /*changeMDP*/
 
-#formChangeMDP {
+#formChangeMDPUser {
     text-align: center;
     max-width: 500px;
     margin: auto;
 }
 
-#formChangeMDP input {
+#formChangeMDPUser input {
     width: 90%;
 }
 
-#changeMdp h1 {
+#formChangeMDPUser h1 {
     text-align: center;
 }
 
