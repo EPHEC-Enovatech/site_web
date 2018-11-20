@@ -1,7 +1,12 @@
+:root {
+    --main-color: white;
+    --main-bg-color: #418545;
+}
+
 .labelForm{
     text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
     padding: 1em;
     display: inline-block;
 }
@@ -20,8 +25,8 @@
 .submitForm{
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
 }
 
 .submitForm:hover{
@@ -100,6 +105,13 @@
     text-align: center;
 }
 
+#errorMDPchangeUser {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 90%;
+    margin: auto auto 1em auto;
+}
+
 /*---------------------------------------------------------------------------*/
 /*showBox*/
 
@@ -121,8 +133,8 @@
     width: 50%;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
     padding: 1em;
 }
 
@@ -205,6 +217,20 @@
      grid-column: 2;
      grid-row: 1;
  }
+
+#tableDemo {
+    border-collapse: collapse;
+    margin: auto;
+}
+#tableDemo th{
+    border: 1px solid rgb(100, 199, 32);
+    padding: 0.35em 0.8em;
+}
+#tableDemo td{
+    border: 1px solid rgb(100, 199, 32);
+    padding: 0.35em 0.8em;
+}
+
 
 /*---------------------------------------------------------------------------*/
 /*addBox*/

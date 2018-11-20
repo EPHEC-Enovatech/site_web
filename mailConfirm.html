@@ -7,6 +7,12 @@
     <title>Confirmation de l'adresse mail</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
+
+        :root {
+            --main-color: white;
+            --main-bg-color: #418545;
+        }
+
         /*Fonts*/
         @font-face {
             font-family: 'fall_is_coming';
@@ -62,13 +68,14 @@
         }
 
         #merciBox header {
-            background-color: limegreen;
+            background-color: var(--main-color);
             position: sticky;
             top: 0;
 
             margin: 0;
             padding: 0.5em;
-            color: white;
+            color: var(--main-bg-color);
+            border: 1px solid var(--main-bg-color);
             text-align: center;
             font-family: "fall_is_comingregular", sans-serif;
         }
@@ -92,14 +99,16 @@
             text-decoration: none;
             font-family: "Roboto", sans-serif;
             text-transform: uppercase;
-            background: #4CAF50;
-            color: #FFFFFF;
+            border: 1px solid var(--main-bg-color);
+            background: var(--main-color);
+            color: var(--main-bg-color);
             padding: 0.5em;
             display: inline-block;
         }
 
         #merciBox footer a:hover {
-            background: #43A047;
+            background: var(--main-bg-color);
+            color: var(--main-color);
         }
     </style>
     <script src="JS/jquery-3.3.1.min.js"></script>

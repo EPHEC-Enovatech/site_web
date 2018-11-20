@@ -1,3 +1,8 @@
+:root {
+    --main-color: white;
+    --main-bg-color: #418545;
+}
+
 #connexion {
     position: fixed;
     background-color: white;
@@ -59,12 +64,14 @@
 #formConnexion input[type=submit] {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
-    background: #4CAF50;
-    color: #FFFFFF;
+    background: var(--main-color);
+    color: var(--main-bg-color);
+    border: 1px solid var(--main-bg-color);
 }
 
 #formConnexion input[type=submit]:hover {
-    background: #43A047;
+    background: var(--main-bg-color);
+    color: var(--main-color);
 }
 
 #formConnexion p {
@@ -72,7 +79,7 @@
     font-size: 0.8em;
 }
 #formConnexion p a {
-    color: #4CAF50;
+    color: var(--main-bg-color);
     text-decoration: none;
 }
 
@@ -98,14 +105,16 @@
     grid-template-columns: 33.33% 33.33% 33.33%;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
-    background-color: limegreen;
+    background-color: var(--main-color);
+
+    border-bottom: 1px solid var(--main-bg-color);
 
     position: sticky;
     top: 0;
 }
 
 #formConnexion h2 {
-    color: white;
+    color: var(--main-bg-color);
     font-family: 'fall_is_comingregular', sans-serif;
     font-size: 5vw;
 

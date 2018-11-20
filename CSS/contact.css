@@ -43,7 +43,7 @@
 #contact form input[type=submit] {
     margin-right: 2%;
     text-transform: uppercase;
-    background: #4CAF50;
+    background: #317534;
     color: #FFFFFF;
 }
 
@@ -53,7 +53,7 @@
 
 #contact form input[type=reset] {
     text-transform: uppercase;
-    background: #FF6347;
+    background: #C63600;
     color: #FFFFFF;
 }
 
