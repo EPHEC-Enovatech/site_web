@@ -45,21 +45,52 @@
         <div class="allGraphInfo">
             <div>
                 <div id="canvasRecapDemo">
-                    <canvas id="recapDemo"></canvas>
+                    <table id="tableDemo">
+                        <caption>Demo tableau des dernières valeurs</caption>
+                        <tr>
+                            <th>Capteur</th>
+                            <th>valeur</th>
+                        </tr>
+                        <tr>
+                            <td>Humidité de l'air</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>Luminosité</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Qualité de l'air</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Humidité du sol</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Pression</td>
+                            <td>1013</td>
+                        </tr>
+                        <tr>
+                            <td>Température</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                    <!--<canvas id="recapDemo"></canvas>-->
                 </div>
             </div>
             <div class="centerTextBlock">
                 <div class="textGraphInfo">
-                    <p>Ce graphique montre toutes les dernières valeurs obtenue.</p>
+                    <p>Ce tableau montre toutes les dernières valeurs obtenues.</p>
                     <p>Il propose une vue d’ensemble de ce qui est mesuré par votre sensory captor.</p>
-                    <p>Grâce à ce graphique vous gardez rapidement un œil sur toutes les valeurs récupérées.</p>
+                    <p>Grâce à ce tableau vous gardez rapidement un œil sur toutes les valeurs récupérées.</p>
                     <p>Vous pouvez détecter une erreur ou anomalie beaucoup plus vite. </p>
                 </div>
             </div>
         </div>
     </div>
     <hr class="lineData">
-    <p>En cliquant dans l’onglet « mes données », vous aurez accès à différentes options très utiles.</p>
+    <p>En cliquant dans l’onglet « Mes données », vous aurez accès à différentes options très utiles.</p>
 </div>
 <script>
 
@@ -89,7 +120,7 @@
 
         //------------------------------------------------------------------------
 
-        let datasetsDemo3 = [{
+        /*let datasetsDemo3 = [{
             label: "Demo",
             backgroundColor: 'rgba(100, 199, 32, 0.5)',
             borderColor: 'rgb(100, 199, 32)',
@@ -97,6 +128,6 @@
         }];
         let dataLabelDemo3 = ["Humidité", "Qualité de l'air", "Humidité sol", "Luminosité", "Température"];
         buildGraph("recapDemo", "radar", dataLabelDemo3, datasetsDemo3, "Demo des données");
-        buildFailBack("recapDemo", [14, 8, 6, 1, 12], dataLabelDemo3, ["Catpeur", "Données moyenne"], "Demo des données");
+        buildFailBack("recapDemo", [14, 8, 6, 1, 12], dataLabelDemo3, ["Catpeur", "Données moyenne"], "Demo des données");*/
     });
 </script>
