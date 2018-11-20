@@ -197,9 +197,13 @@ $(function(){
         }
     });
 
-    $('#dialCookies button').on("click", function(){
-        $('#dialCookies').hide();
-    });
+    if(getCookie("I'm a cookies !") === ""){
+        $('#dialCookies button').on("click", function(){
+            $('#dialCookies').hide();
+            setCookie("I'm a cookie !", "Les cookies ont été accepté", 1);
+        });
+        $('#dialCookies').show();
+    }
 
     $('#closeConnexion').on("click", function() {
         $('#formConnexion').trigger("reset");

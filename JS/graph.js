@@ -134,6 +134,9 @@ function displayGraphDate(){
 
     callAPIForGraph("records/" + selectedCaptor + "/" + captor + "/" + dateAPI + "/" + dateAPIFin, buildAverageGraphWeek, "upDate", "divCanvas", "graphCanvas", titleLabelDataAverage,
         "errorgraphCanvas", titleLabelDataAverage + " du", ["Heure", titleLabelDataAverage], labelYData, typeData, dateAPIDebut, moment(endDate).add(1, "d"));
+
+    callAPIForGraph("records/" + selectedCaptor + "/all/" + dateAPI, buildTableRecap, "upDate", "divCanvasRecap", "tableRecap", "Les dernières données du " + dateAPI,
+        "errorgraphCanvasRecap");
 }
 
 /**
@@ -177,7 +180,7 @@ function initGraph() {
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).format("DD-MM-YYYY"), buildSimpleGraph, "draw", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
         "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData, typeData);
 
-    callAPIForGraph("records/" + captor + "/all/" + moment(today).format("DD-MM-YYYY"), buildTableRecap, "draw", "divCanvasRecap", "tableRecap", "Tableau récapitulatif",
+    callAPIForGraph("records/" + captor + "/all/" + moment(today).format("DD-MM-YYYY"), buildTableRecap, "draw", "divCanvasRecap", "tableRecap", "Les dernières données du " + moment(today).format("DD-MM-YYYY"),
         "errorgraphCanvasRecap");
 
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "draw", "divCanvas", "graphCanvas", titleLabelDataAverage,

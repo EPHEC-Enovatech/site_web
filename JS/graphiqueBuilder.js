@@ -186,7 +186,12 @@ function buildTableRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGrap
     switch(response.status) {
         case 404:
             console.log("Pas de donnée disponible");
-            resetCanvas(idCanvasDiv, idCanvas, titleGraph);
+            $('#' + idCanvasDiv).animate({ opacity: 0.0 }, 200, function(){
+                $('#' + idCanvasDiv).hide().css('opacity', 1.0);
+            });
+
+            $('#error' + idCanvas + " .errorTitle").text(titleGraph);
+            $('#error' + idCanvas).show();
             break;
         case 401:
             console.log("Vous n'êtes pas connecté");
