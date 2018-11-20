@@ -7,6 +7,16 @@ function calculateSizeMain(){
     $('#document_Main').css('height', "calc(100vh - " + tailleHeader + "px - 2em)");
 }
 
+/**
+ * Centre le chargement au milieu de la zone de graphique
+ */
+function centerLoading() {
+    let largeur = $('#graphZone').width()/2;
+    let hauteur = ($('#document_Main').height()/2)+32;
+
+    $('#loadingDiv').css("top", hauteur + "px").css("left", largeur + "px");
+}
+
 //Gère le controlleur en repsonsive
 function responsiveMode(){
     if(window.innerWidth <= 600){
@@ -67,12 +77,14 @@ $(function(){
 
     $('input:radio[name=chooseTypeDate]').on("change", switchOptionDate);
 
+    centerLoading();
     callAPIForGraph("devices/" + getCookie('user-id'), fillSelectData);
     callAPIForGraph("sensors", fillSelectCaptor);
 
     $(window).on("resize", function(){
         calculateSizeMain();
         responsiveMode();
+        centerLoading();
     });
 });
 
@@ -93,14 +105,38 @@ $(function(){
  * @param endDate la date de fin
  */
 function callAPIForGraph(arg, func, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, typeData, dateAPIDebut, endDate){
+    setLoading(1);
+
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
         type: "GET",
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         complete: function(data){
             func(data, actionGraph, idCanvasDiv, idCanvas, titleGraph, idError, label, errorLabel, labelYData, typeData, dateAPIDebut, endDate);
+            setLoading();
         }
     });
+}
+
+/**
+ * La file de loading
+ * @type {number}
+ */
+let countCall = 0;
+
+/**
+ * Gère l'affichage du loading
+ * @param nombre si >0 ajoute des loadings dans la file, si <0 supprime des loadings
+ */
+function setLoading(nombre = 0){
+    let loading = $('#loadingDiv');
+    if(nombre > 0){
+        loading.show();
+        countCall += nombre;
+    } else {
+        countCall -= 1;
+    }
+    if (countCall === 0) loading.hide();
 }
 
 /**
@@ -168,6 +204,7 @@ function fillSelectData(response){
  * Initialise les graphiques
  */
 function initGraph() {
+    centerLoading();
     let today = moment(new Date());
     let beforeToday = moment(today).subtract(6, "d");
     let captor = $('#selectBoxGraph').val();

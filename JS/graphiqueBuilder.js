@@ -190,8 +190,8 @@ function buildTableRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGrap
                 $('#' + idCanvasDiv).hide().css('opacity', 1.0);
             });
 
-            $('#error' + idCanvas + " .errorTitle").text(titleGraph);
-            $('#error' + idCanvas).show();
+            $('#' + idError + " .errorTitle").text(titleGraph);
+            $('#' + idError).show();
             break;
         case 401:
             console.log("Vous n'êtes pas connecté");
@@ -249,7 +249,7 @@ function buildTableRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGrap
                     table += "<td><div><span></span><p>" + dataCaptor[i] + "</p><img src=" + img + "></div></td></tr>";
                     //table += "<td><div><span></span><p>" + dataCaptor[i] + "</p><span class='check " + img + "'></span></div></td></tr>";
                 } else {
-                    table += "<td>" + "Pas de données" + "<img src='./IMG/graph/error.svg'></td></tr>";
+                    table += "<td><div><span></span><p>Pas de données</p><img src='./IMG/graph/error.svg'></div></td></tr>";
                 }
             }
             $("#" + idCanvas).html(table);
