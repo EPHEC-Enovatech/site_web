@@ -221,6 +221,7 @@
 #tableDemo {
     border-collapse: collapse;
     margin: auto;
+    font-size: 0.9em;
 }
 #tableDemo th{
     border: 1px solid rgb(100, 199, 32);
@@ -229,6 +230,12 @@
 #tableDemo td{
     border: 1px solid rgb(100, 199, 32);
     padding: 0.35em 0.8em;
+}
+
+#canvasRecapDemo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 

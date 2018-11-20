@@ -14,12 +14,17 @@ function responsiveMode(){
         $('#closeController').on("click", function(){
             $('#graphController').hide();
         }).show();
-        $('#showSettings').on("click", function(){
+        let buttonSettings = $('#showSettings');
+        buttonSettings.on("click", function(){
             $('#graphController').show();
         }).show();
+        $('#graphZone').css("height", "calc(100% - " + buttonSettings.css("height") + ")");
+        console.log()
+
     } else {
         $('#graphController').show();
         $('#closeController, #showSettings').hide();
+        $('#graphZone').css("height", "auto");
     }
 }
 
@@ -42,7 +47,8 @@ $(function(){
         autoPick: true,
         language: 'fr-FR',
         format: 'dd/mm/yyyy',
-        weekday: 1
+        weekday: 1,
+        zIndex: 999999
     });
 
     $('#dateFin').datepicker({
@@ -51,7 +57,8 @@ $(function(){
         date: new Date((new Date()).valueOf() + 1000*3600*24),
         language: 'fr-FR',
         format: 'dd/mm/yyyy',
-        weekday: 1
+        weekday: 1,
+        zIndex: 999999
     }).prop('disabled', true);
 
     $('#dateDebut, #dateFin').on("change", displayGraphDate);
@@ -170,8 +177,8 @@ function initGraph() {
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(today).format("DD-MM-YYYY"), buildSimpleGraph, "draw", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
         "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData, typeData);
 
-    /*callAPIForGraph("records/" + captor + "/all/" + moment(today).subtract(1, "d").format("DD-MM-YYYY"), buildRecap, "draw", "divCanvas", "graphCanvas", titleLabelData,
-        "errorgraphCanvas", titleLabelData + " du", ["Heure", titleLabelData], beforeToday, moment(today).add(1, "d"));*/
+    callAPIForGraph("records/" + captor + "/all/" + moment(today).format("DD-MM-YYYY"), buildTableRecap, "draw", "divCanvasRecap", "tableRecap", "Tableau récapitulatif",
+        "errorgraphCanvasRecap");
 
     callAPIForGraph("records/" + captor + "/Humidite/" + moment(beforeToday).format("DD-MM-YYYY") + "/" + moment(today).format("DD-MM-YYYY"), buildAverageGraphWeek, "draw", "divCanvas", "graphCanvas", titleLabelDataAverage,
         "errorgraphCanvas", titleLabelDataAverage + " du", ["Heure", titleLabelDataAverage], labelYData, typeData, beforeToday, moment(today).add(1, "d"));

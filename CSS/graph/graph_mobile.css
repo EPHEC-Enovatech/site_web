@@ -15,12 +15,13 @@
         right: 0;
         left: 0;
         bottom: 0;
-        z-index: 999999;
+        z-index: 99999;
         background-color: rgba(255, 255, 255, 0.7);
     }
 
     #graphZone {
         height: 100%;
+        grid-template-rows: 40vh 40vh 60vh;
     }
 
     #formController {

@@ -172,27 +172,20 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
 }
 
 /**
- * Construis le graphique récapitulatif
+ * Construis la table des dernières données
  * @param response la réponse de l'API
  * @param actionGraph draw / upDate
  * @param idCanvasDiv l'id de la div contenant le canvas
  * @param idCanvas l'id du canvas
  * @param titleGraph le titre du graphique
  * @param idError l'id de l'erreur
- * @param label le label des données
- * @param errorLabel le label de l'erreur
- * @param labelYData le label de l'axe Y
- * @param typeData le type de données (capteur)
  */
-function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
-    idError, label, errorLabel, labelYData, typeData){
+function buildTableRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
+                    idError){
 
     switch(response.status) {
         case 404:
             console.log("Pas de donnée disponible");
-            if(charts[idCanvas] === undefined){
-                buildEmptyGraph(idCanvas, "radar");
-            }
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
@@ -206,55 +199,55 @@ function buildRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGraph,
              * Ordre capteur : humidite, qualiteAir, temperature, humiditeSol, luminosite
              * @type {number[]}
              */
-            let dataCaptor = [0, 0, 0, 0, 0];
-            let countForAverage = [0, 0, 0, 0, 0];
+            let dataCaptor = [undefined, undefined, undefined, undefined, undefined, undefined];
+            const labelTable = ["Humidité", "Qualité de l'air", "Température", "Humidité du sol", "Luminosité", "Pression"];
 
             const data = response.responseJSON.data;
             data.forEach(function (item) {
                 switch (item.sensor_id) {
                     case 2:
-                        dataCaptor[0] += item.data;
-                        countForAverage[0] ++;
+                        dataCaptor[0] = item.data;
                         break;
                     case 3:
-                        dataCaptor[1] += item.data;
-                        countForAverage[1] ++;
+                        dataCaptor[1] = item.data;
                         break;
                     case 4:
-                        dataCaptor[2] += item.data;
-                        countForAverage[2] ++;
+                        dataCaptor[2] = item.data;
                         break;
                     case 5:
-                        dataCaptor[3] += item.data;
-                        countForAverage[3] ++;
+                        dataCaptor[3] = item.data;
                         break;
                     case 6:
-                        dataCaptor[4] += item.data;
-                        countForAverage[4] ++;
+                        dataCaptor[4] = item.data;
+                        break;
+                    case 7:
+                        dataCaptor[5] = item.data;
                         break;
                 }
             });
 
-            let finalData = [];
-            for(let i = 0; i < dataCaptor.length; i++){
-                dataCaptor[i] = dataCaptor[i]/countForAverage[i];
-                finalData.push(dataCaptor[i]);
-            }
+            const listCapteur = ["humidite", "qualite_air", "temperature", "humidite_terre", "luminosite", "pression"];
 
-            let labelData = ["Humidité", "Qualité de l'air", "Tepérature", "Humidité du sol", "Luminosité"];
-            let datasets = [{
-                label: label + " " + moment(response.responseJSON.data[0].timestamp).format('LL'),
-                //backgroundColor: 'rgb(255, 99, 132)',
-                //borderColor: 'rgb(255, 99, 132)',
-                data: finalData,
-            }];
-
-            if(actionGraph === "draw"){
-                buildGraph(idCanvas, "radar", labelData, datasets, titleGraph, labelYData);
-            } else if(actionGraph === "upDate"){
-                updateGraph(idCanvas, labelData, finalData, typeData, "radar");
+            let table = "<caption>" + titleGraph + "</caption>";
+            for(let i = 0; i < labelTable.length; i++){
+                let img = "";
+                table += "<tr><th class='data_" + i + "'>" + labelTable[i] + "</th>";
+                if(dataCaptor[i] !== undefined){
+                    let colorTable = colorGraph(listCapteur[i], [dataCaptor[i]]);
+                    if(colorTable[0] === 'rgba(46, 204, 64, 0.5)'){ //OK
+                        img = "./IMG/graph/success.svg";
+                        //img = "greenBox";
+                    } else {
+                        img = "./IMG/graph/error.svg";
+                        //img = "redBox"
+                    }
+                    table += "<td><div><span></span><p>" + dataCaptor[i] + "</p><img src=" + img + "></div></td></tr>";
+                    //table += "<td><div><span></span><p>" + dataCaptor[i] + "</p><span class='check " + img + "'></span></div></td></tr>";
+                } else {
+                    table += "<td>" + "Pas de données" + "<img src='./IMG/graph/error.svg'></td></tr>";
+                }
             }
-            buildFailBack(idCanvas, finalData, labelData, errorLabel, titleGraph);
+            $("#" + idCanvas).html(table);
             break;
         default:
             console.log("Erreur serveur");
@@ -400,7 +393,7 @@ function resetCanvas(idCanvasDiv, idCanvas, title){
     });
 
     $('#error' + idCanvas + " .errorTitle").text(title);
-    $('#error' + idCanvas).show()
+    $('#error' + idCanvas).show();
 }
 
 /**

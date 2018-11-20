@@ -132,12 +132,15 @@
     grid-column: 3;
     -ms-grid-row: 1;
     grid-row: 1;
+
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 #closeConnexion {
     height: 2em;
-    margin-right: 0.5em;
-    margin-top: 0.75em;
+    margin: auto 0.5em auto auto;
 }
 
 #formConnexion main {

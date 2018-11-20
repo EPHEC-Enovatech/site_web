@@ -70,15 +70,19 @@ function initMap() {
 }
 
 //True si la fenètre de connection est ouverte
-var connexionOpen = false;
+let connexionOpen = false;
 
 //Gère l'apparition/disparition de la fenètre de connection
 function connexionPopUp() {
 
-    $('#subError').hide();
-    $('#connexion').fadeToggle();
+    let connexion = $('#connexion');
 
-    var page = $('#document_Header, #document_Main, #document_Footer');
+    if(connexionOpen) connexion.show();
+
+    $('#subError').hide();
+    connexion.fadeToggle();
+
+    let page = $('#document_Header, #document_Main, #document_Footer');
     if(connexionOpen){
         page.css('filter', 'none');
         $('html, body').removeClass('disableScroll');
@@ -89,7 +93,6 @@ function connexionPopUp() {
         connexionOpen = true;
         trapFocus(register);
     }
-
 }
 
 //Toggle le mode inscription et connexion
@@ -269,6 +272,7 @@ copyHeightNavBar();
 //#menu ul li a:not(.target-div5)
 $('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
     if(connexionOpen){
+        $('#MDPoublie').hide();
         connexionPopUp();
     }
 });

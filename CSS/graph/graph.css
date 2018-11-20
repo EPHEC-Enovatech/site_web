@@ -34,8 +34,7 @@ html, body {
     grid-template-columns: calc(65vw - 1em) calc(35vw - 1em);
     grid-template-rows: auto;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 
     font-family: "Roboto", sans-serif;
 }
@@ -49,21 +48,77 @@ html, body {
 
 #graphZone {
     box-sizing: border-box;
-    /*display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 50% 50%;*/
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    flex: 50%;
+    flex: 50%;*/
+    display: grid;
+    grid-template-rows: 40vh 40vh 40vh;
+    overflow: auto;
 }
 
-#divCanvas, #divCanvasDetail {
+#divCanvas, #divCanvasDetail, #divCanvasRecap {
     box-sizing: border-box;
     position: relative;
     margin: auto;
     height: 90%;
     width: 90%;
+    display: flex;
+    flex: 1;
+}
+
+#divCanvasRecap {
+    height: auto;
+}
+
+#tableRecap {
+    border-collapse: collapse;
+    margin: auto auto 1em auto;
+    width: 90%;
+}
+
+#tableRecap td, #tableRecap th {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: center;
+    width: 50%;
+    font-size: 0.8em;
+    color: rgb(121, 121, 121);
+}
+
+#tableRecap th {
+    font-size: 0.9em;
+}
+
+#tableRecap caption {
+    padding: 1em;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: rgb(110, 110, 110)
+}
+
+#tableRecap td div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#tableRecap td span, #tableRecap td img {
+    width: 2em;
+    height: 2em;
+}
+
+.check {
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.greenBox {
+    background-color: rgba(46, 204, 64, 0.5);
+}
+
+.redBox {
+    background-color: rgba(255, 65, 54, 0.5);
 }
 
 /*------------------------------------------------------------------------*/

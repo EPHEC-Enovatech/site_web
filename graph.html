@@ -40,6 +40,7 @@
 <main id="document_Main">
     <button id="showSettings" type="button">Réglages</button>
     <div id="graphZone">
+        <!--Graph batonnet-->
         <div id="errorgraphCanvas" class="errorCanvasDiv">
             <p class="errorTitle"></p>
             <p>Aucune donnée disponible</p>
@@ -48,12 +49,24 @@
             <canvas id="graphCanvas"></canvas>
         </div>
 
+        <!--Graph points-->
         <div id="errorgraphCanvasDetail" class="errorCanvasDiv">
             <p class="errorTitle"></p>
             <p>Aucune donnée disponible</p>
         </div>
         <div id="divCanvasDetail">
             <canvas id="graphCanvasDetail"></canvas>
+        </div>
+
+        <!--Tableau récap-->
+        <div id="errorgraphCanvasRecap" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
+        <div id="divCanvasRecap">
+            <table id="tableRecap">
+
+            </table>
         </div>
     </div>
     <div id="graphController">
