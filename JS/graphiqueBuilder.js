@@ -304,39 +304,15 @@ function buildGraph(id, type, labels, datasets, title, labelYData, func){
  * @param func la function a appelé lors d'un onClick
  */
 function buildEmptyGraph(id, type, func){
-    let ctx = document.getElementById(id).getContext('2d');
-    charts[id] = (new Chart(ctx, {
-        type: type,
-        data : {
-            labels: [0, 0, 0, 0, 0],
-            datasets: [{
-                label: "Pas de donnée",
-                borderColor: 'rgb(0, 0, 0)',
-                borderWidth: 1,
-                pointBorderColor: 'rgb(0, 0, 0)',
-                pointRadius: 5,
-                data: [0,0,0,0,0],
+    buildGraph(id, type, ["a", "b", "c", "d", "e"], [{
+        label: "Pas de donnée",
+        borderColor: 'rgb(0, 0, 0)',
+        borderWidth: 1,
+        pointBorderColor: 'rgb(0, 0, 0)',
+        pointRadius: 5,
+        data: [0,0,0,0,0],
 
-            }],
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Pas de donnée"
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: func,
-            scales: {
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'value'
-                    }
-                }]
-            }
-        }
-    }));
+    }], "Pas de donnée", 'value', func);
 }
 
 /**
@@ -348,8 +324,10 @@ function changeGraphClick(evt){
     if (!bar.length) return; //return if not clicked on bar
     let dateBar = bar[0]._model.label;
     let dateGraph = dateBar.replace(/\//g, "-");
+
+    let selectedCaptor = $('#selectBoxGraph').val();
     let captor = ($('#selectCaptorGraph').val()).toLowerCase();
-    let endpoint = "records/" + $('#selectBoxGraph').val() + "/" + captor + "/" + dateGraph + "-2018";
+    let endpoint = "records/" + selectedCaptor + "/" + captor + "/" + dateGraph + "-2018";
 
     let typeData = captor.toLowerCase();
     let titleLabelData = titreGraphFr[typeData];
@@ -358,6 +336,9 @@ function changeGraphClick(evt){
 
     callAPIForGraph(endpoint, buildSimpleGraph, "upDate", "divCanvasDetail", "graphCanvasDetail", titleLabelData,
         "errorgraphCanvasDetail", titleLabelData + " le", ["Heure", titleLabelData], labelYData, typeData);
+
+    callAPIForGraph("records/" + selectedCaptor + "/all/" + dateGraph + "-2018", buildTableRecap, "upDate", "divCanvasRecap", "tableRecap", "Les dernières données du " + dateGraph + "-2018",
+        "errorgraphCanvasRecap");
 }
 
 /**

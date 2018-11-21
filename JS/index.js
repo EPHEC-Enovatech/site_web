@@ -197,10 +197,11 @@ $(function(){
         }
     });
 
-    if(getCookie("I'm a cookies !") === ""){
+    //Test si les cookies ont été accepté
+    if(getCookie("cookies_enabled") === ""){
         $('#dialCookies button').on("click", function(){
             $('#dialCookies').hide();
-            setCookie("I'm a cookie !", "Les cookies ont été accepté", 1);
+            setCookie("cookies_enabled", "Les cookies ont été accepté", 1);
         });
         $('#dialCookies').show();
     }
