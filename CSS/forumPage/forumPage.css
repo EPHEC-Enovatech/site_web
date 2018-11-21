@@ -29,19 +29,6 @@ html, body {
     position: relative;
 }
 
-/*-----------------------------------------------------------------------------*/
-/*Main*/
-
-#document_Main {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-rows: auto;
-    grid-template-rows: auto;
-    -ms-grid-columns: 30% 70%;
-    grid-template-columns: 30% 70%;
-}
-
-/*-----------------------------------------------------------------------------*/
 /*SideNav*/
 
 #sideNav{
@@ -111,26 +98,100 @@ hr {
 #menuUser {
     overflow: auto;
 }
+/*-----------------------------------------------------------------------------*/
+/*Main*/
+
+#document_Main {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    -ms-grid-columns: 30% 70%;
+    grid-template-columns: 30% 70%;
+}
 
 /*-----------------------------------------------------------------------------*/
 /*Zone de contenu*/
-
-#contentZone {
-    border: 1px solid black;
-    margin: 1em;
-    border-radius: 0 10px 10px 0;
+#publications{
     overflow: auto;
-    padding: 1em;
-
-    font-family: "Roboto", sans-serif;
-
-    position: relative;
-
-    overflow-x: hidden;
 }
 
-#contentZone h1 {
+.listPubli {
+    font-family:sans-serif;
+    margin:0;
+    padding:20px 0 0;
+}
+.listPubli > li {
+    display:block;
+    background-color: #eee;
+    padding:1vw;
+    margin: 1vw;
+    box-shadow: inset 0 1px 0 #fff;
+    border-radius: 1vw;
+}
+
+.listPubli > li > div {
+    display: inline-grid;
+    height: 100%;
+    padding: 1vw;
+}
+.auteur{
+    width: 18%;
     text-align: center;
+}
+.publication{
+    border-left: solid 2px white;
+    width: 72%;
+
+}
+.avatar{
+    border-radius: 50%;
+    height: 5vw;
+    width: 5vw;
+    margin: 0 25%;
+}
+.date{
+    text-align: right;
+
+}
+#header_forum{
+    display: flex;
+}
+#createPost{
+    display: flex;
+    border-radius: 0.3vw;
+    margin: 1vw;
+    font-size: 1vw;
+    box-shadow: 0.1vw 0.1vw #43A047;
+    background-color: #e7fae7;
+    padding: 1vw;
+    text-decoration: none;
+    color: black;
+    width: auto;
+    flex-direction: row;
+}
+#createPost:hover {
+    background-color: #cacaca;
+    box-shadow: 0.1vw 0.1vw #e7fae7;
+}
+#filterCat {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+.select2-container{
+    padding: 0.5vw 0vw 0vw 2vw;
+    margin: 1vw;
+}
+.select-index {
+    z-index: 5;
+}
+.listPubli .select2-container--default .select2-selection--multiple {
+     border: none;
+}
+.listPubli .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: none;
 }
 
 /*----------------------------------------------------------------------------------------------------------------*/
@@ -222,4 +283,44 @@ hr {
 .error {
     border: 1px solid red;
     color: red;
+}
+
+/*----------------------------------------------------------------*/
+/* Créer une publication */
+
+#publi_block {
+    width: 90%;
+    margin: 2% 5%;
+    text-align: center;
+
+}
+#titleEditor {
+    width: 100%;
+    font-size: 1.5vw;
+    height: 1.8vw;
+}
+.CodeMirror{
+    text-align: left;
+}
+#publi_block h2 {
+    font-size: 2vw;
+}
+#publi_block input[type=submit] {
+    border-radius: 0.3vw;
+    margin: 1vw;
+    font-size: 1vw;
+    box-shadow: 0.1vw 0.1vw #43A047;
+    background-color: #e7fae7;
+    padding: 1vw;
+    text-decoration: none;
+    color: black;
+    width: auto;
+}
+#publi_block input[type=submit]:hover {
+    background-color: #cacaca;
+    box-shadow: 0.1vw 0.1vw #e7fae7;
+}
+.select2-container{
+    margin: 1vw 0;
+
 }
