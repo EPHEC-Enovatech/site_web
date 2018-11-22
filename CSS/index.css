@@ -285,3 +285,26 @@ hr {
     padding: 1em;
     margin: 0 0 1em;
 }
+
+#document_Header {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes changeColorToWhite {
+    from {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    to {
+        background-color: rgba(255, 255, 255, 1);
+    }
+}
+
+@keyframes changeColorToTransparent {
+    from {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    to {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+}

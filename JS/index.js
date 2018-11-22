@@ -24,9 +24,15 @@ function goToByScroll(id){
 
 //Gère la surbrillance de la barre de navigation
 function change($div){
-    $('#menu ul li a').removeClass('current');
-    $('.target-div'+$div).addClass('current');
-    //console.log("event + " + $div);
+    if($div === -1){
+        $('#document_Header').css("animation-name", "changeColorToWhite");
+    } else if ($div === -2){
+        $('#document_Header').css("animation-name", "changeColorToTransparent");
+    } else {
+        $('#menu ul li a').removeClass('current');
+        $('.target-div'+$div).addClass('current');
+        console.log($div);
+    }
 }
 
 //Toggle la class current
@@ -49,7 +55,6 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
         },
         offset: offsetScroll
     });
-
     scrollWaypoint.push(waypoint);
 }
 
@@ -157,6 +162,8 @@ $(function(){
 
     copyHeightNavBar();
 
+    $('#document_Header').css("background-color", 'rgba(255, 255, 255, 0.7)');
+
     $('#errorContactForm').hide();
     $('#formContact').on("submit", sendMailContact);
 
@@ -229,85 +236,88 @@ $(function(){
         $('#connexion').hide();
     });
 
-//Si internet explorer
-// noinspection RegExpRedundantEscape
-if ((window.navigator.userAgent.indexOf("MSIE ")) > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-    $("mobile_menu_button").css('top', '1em');
-}
-
-createWaypointScroll('presentation', 'up', '-20%', 2);
-createWaypointScroll('presentation', 'down', '20%', 2);
-
-createWaypointScroll('intro', 'up', '-20%', 1);
-createWaypointScroll('intro', 'down', '20%', 1);
-
-createWaypointScroll('team', 'up', '-20%', 3);
-createWaypointScroll('team', 'down', '20%', 3);
-
-createWaypointScroll('contact', 'up', '-20%', 4);
-createWaypointScroll('contact', 'down', '20%', 4);
-
-copyHeightNavBar();
-
-/*$("#js-rotating").Morphext({
-    // Animation de animate.css
-    animation: "bounceIn",
-    // Séparateur
-    separator: ",",
-    // Délais entre chaque mot
-    speed: 2500,
-    complete: function () {
-        // CallBack
+    //Si internet explorer
+    // noinspection RegExpRedundantEscape
+    if ((window.navigator.userAgent.indexOf("MSIE ")) > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        $("mobile_menu_button").css('top', '1em');
     }
-});*/
 
-//Chaque fois que la fenêtre est redimensionnée
-$(window).on("resize", function(){
+    createWaypointScroll('presentation', 'up', '-20%', 2);
+    createWaypointScroll('presentation', 'down', '20%', 2);
 
-if(window.innerWidth > 600){
-    $('#menu').show();
-    $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
-} else {
-    $('#menu').hide();
-    $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
-}
-copyHeightNavBar();
-});
+    createWaypointScroll('intro', 'up', '-20%', 1);
+    createWaypointScroll('intro', 'down', '20%', 1);
 
-//#menu ul li a:not(.target-div5)
-$('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
-    if(connexionOpen){
-        $('#MDPoublie').hide();
-        connexionPopUp();
-    }
-});
+    createWaypointScroll('team', 'up', '-20%', 3);
+    createWaypointScroll('team', 'down', '20%', 3);
 
-//Anti robot
-$('#mail2').hide();
+    createWaypointScroll('contact', 'up', '-20%', 4);
+    createWaypointScroll('contact', 'down', '20%', 4);
 
-//Prevent le default du lien "déjà inscrit ?"
-$('#register a').on("click", function(e){
-    e.preventDefault()
-});
+    createWaypointScroll('presentation', 'up', '96%', -2);
+    createWaypointScroll('presentation', 'down', '96%', -1);
 
-//Easter Egg - private joke
-// noinspection JSUnusedLocalSymbols
-var egg = new Egg("c,o,o,k,i,e,s", function() {
-    console.log("COOKIES !");
-    $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
-    $('#logo_title').text("COOKIES HUB");
-    $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
-    $("#js-rotating").Morphext({
+    copyHeightNavBar();
+
+    /*$("#js-rotating").Morphext({
+        // Animation de animate.css
         animation: "bounceIn",
+        // Séparateur
         separator: ",",
-        speed: 2500
+        // Délais entre chaque mot
+        speed: 2500,
+        complete: function () {
+            // CallBack
+        }
+    });*/
+
+    //Chaque fois que la fenêtre est redimensionnée
+    $(window).on("resize", function(){
+
+        if(window.innerWidth > 600){
+            $('#menu').show();
+            $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
+        } else {
+            $('#menu').hide();
+            $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
+        }
+        copyHeightNavBar();
     });
-}).listen();
 
-//Cache l'erreur de la connection
-$('#subError').hide();
+    //#menu ul li a:not(.target-div5)
+    $('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
+        if(connexionOpen){
+            $('#MDPoublie').hide();
+            connexionPopUp();
+        }
+    });
 
-// Authentication event handle
-$("#formConnexion").submit(authenticate);
+    //Anti robot
+    $('#mail2').hide();
+
+    //Prevent le default du lien "déjà inscrit ?"
+    $('#register a').on("click", function(e){
+        e.preventDefault()
+    });
+
+    //Easter Egg - private joke
+    // noinspection JSUnusedLocalSymbols
+    var egg = new Egg("c,o,o,k,i,e,s", function() {
+        console.log("COOKIES !");
+        $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
+        $('#logo_title').text("COOKIES HUB");
+        $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
+        $("#js-rotating").Morphext({
+            animation: "bounceIn",
+            separator: ",",
+            speed: 2500
+        });
+    }).listen();
+
+    //Cache l'erreur de la connection
+    $('#subError').hide();
+
+    // Authentication event handle
+    $("#formConnexion").submit(authenticate);
 
 });
