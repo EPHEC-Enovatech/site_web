@@ -1,10 +1,53 @@
-<h1>Modification du mot de passe</h1>
-<hr>
-<p>Entrez votre adresse email, si elle existe nous vous enverrons un mail avec les instructions</p>
-<form action="#">
-    <fieldset>
-        <legend>Changer de mot de passe</legend>
-        <input type="email" name="changeMDP" required>
-        <input type="submit">
-    </fieldset>
-</form>
+<div id="changeMdp">
+    <h1>Modification du mot de passe</h1>
+    <hr>
+    <form id="formChangeMDPUser" action="#">
+        <header>
+            <h2>Formulaire de changement de mot de passe</h2>
+        </header>
+        <main>
+            <p>Remplissez le formulaire pour modifier votre mot de passe</p>
+            <div id="errorMDPchangeUser" class="error"></div>
+            <input name="oldMdp" type="password" required placeholder="Ancien Mot de passe" class="inputForm">
+            <input name="newMDP" type="password" required placeholder="Nouveau mot de passe" class="inputForm">
+            <input name="newMDPCheck" type="password" required placeholder="Confirmer le mot de passe" class="inputForm">
+        </main>
+        <footer>
+            <input id="submitChangeMDPUser" type="submit" value="Changer de mot de passe" class="inputForm submitForm">
+        </footer>
+    </form>
+</div>
+<script>
+    $(function(){
+        $('#errorMDPchangeUser').hide();
+        $('#formChangeMDPUser').on("submit", function(evt){
+            evt.preventDefault();
+
+            let oldMdp = evt.target.oldMdp.value;
+            let newMDP = evt.target.newMDP.value;
+            let newMDPCheck = evt.target.newMDPCheck.value;
+
+            let formData = new FormData();
+            formData.append("old_password", oldMdp);
+            formData.append("password", newMDP);
+            formData.append("password_confirmation", newMDPCheck);
+
+            let endPoint = "reset/" + getCookie('user-id');
+            callAPIMethod("PATCH", formData, endPoint, changeMDPUser);
+        });
+    });
+
+    /**
+     * Affiche les erreurs
+     * @param response la réponse de l'API
+     */
+    function changeMDPUser(response) {
+        let data = JSON.parse(response.responseText);
+        if(data.status === "ERROR"){
+            $('#errorMDPchangeUser').removeClass().addClass("error").html(data.message).show();
+        } else {
+            $('#errorMDPchangeUser').removeClass().addClass("success").html(data.message).show();
+            $('#formChangeMDPUser').trigger("reset");
+        }
+    }
+</script>

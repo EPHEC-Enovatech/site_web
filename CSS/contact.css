@@ -43,7 +43,7 @@
 #contact form input[type=submit] {
     margin-right: 2%;
     text-transform: uppercase;
-    background: #4CAF50;
+    background: #317534;
     color: #FFFFFF;
 }
 
@@ -53,7 +53,7 @@
 
 #contact form input[type=reset] {
     text-transform: uppercase;
-    background: #FF6347;
+    background: #C63600;
     color: #FFFFFF;
 }
 
@@ -77,6 +77,16 @@
     grid-template-rows: auto auto;
 
     margin: 5vh auto 5vh auto;
+}
+
+#errorContactForm{
+    width: 90%;
+    height: auto;
+}
+
+#contactButton {
+    width: 90%;
+    margin: auto;
 }
 
 #addressZone {
@@ -122,4 +132,20 @@
     margin: 0 auto 0.3em auto;
     font-family: fall_is_comingregular;
     letter-spacing: 4px;
+}
+
+#mail2 {
+    display: none;
+}
+
+#errorContactForm {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+    display: inline-block;
 }

@@ -1,9 +1,132 @@
-<h1>Le potager graphique</h1>
-<hr>
-<label for"selectBox">Selectionner votre BOX</label>
-<select name="selectBox">
-    <option>Box 1</option>
-    <option>Box 2</option>
-</select>
-<hr>
-<p>Insérer graphique ici</p>
+<div id="dataBox">
+    <h1>Le potager graphique</h1>
+    <hr>
+    <div id="selectZone">
+        <p>Vous avez acquis un Sensory Captor ? Bravo !</p>
+        <p>Maintenant à vous d’utiliser les données récupérées par celui-ci : ci-dessous vous trouverez 3 graphiques représentant différentes informations.</p>
+    </div>
+    <div id="showDataBox">
+        <hr class="lineData">
+
+        <div class="allGraphInfo">
+            <div>
+                <div id="canvasHumiditeDemo">
+                    <canvas id="humiditeDemo"></canvas>
+                </div>
+            </div>
+            <div class="centerTextBlock">
+                <div class="textGraphInfo">
+                    <p>Ce graphique montre toutes les données récupérées quotidiennement.</p>
+                    <p>Il met en évidence l’évolution des données durant toute une journée et permet de constater les changements.</p>
+                    <p>Grâce à cela vous découvrirez les moments dans la journée ou la plante a le plus besoin de vous !</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="lineData">
+
+        <div class="allGraphInfo">
+            <div class="invertGraph">
+                <div id="canvasHumiditeDemoSemaine">
+                    <canvas id="humiditeDemoSemaine"></canvas>
+                </div>
+            </div>
+            <div class="centerTextBlock invertText">
+                <div class="textGraphInfo">
+                    <p>Ce graphique montre les moyennes des valeurs obtenues pour les sept derniers jours.</p>
+                    <p>Il met en avant les jours ou la plante reçoit des données plus ou moins élevées.</p>
+                    <p>Grâce à ce graphique, vous comparez les jours de la semaine et êtes attentif aux jours les plus critiques.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="lineData">
+
+        <div class="allGraphInfo">
+            <div>
+                <div id="canvasRecapDemo">
+                    <table id="tableDemo">
+                        <tr>
+                            <th>Capteur</th>
+                            <th>valeur</th>
+                        </tr>
+                        <tr>
+                            <td>Humidité de l'air</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>Luminosité</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Qualité de l'air</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Humidité du sol</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>Pression</td>
+                            <td>1013</td>
+                        </tr>
+                        <tr>
+                            <td>Température</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                    <!--<canvas id="recapDemo"></canvas>-->
+                </div>
+            </div>
+            <div class="centerTextBlock">
+                <div class="textGraphInfo">
+                    <p>Ce tableau montre toutes les dernières valeurs obtenues.</p>
+                    <p>Il propose une vue d’ensemble de ce qui est mesuré par votre sensory captor.</p>
+                    <p>Grâce à ce tableau vous gardez rapidement un œil sur toutes les valeurs récupérées.</p>
+                    <p>Vous pouvez détecter une erreur ou anomalie beaucoup plus vite. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="lineData">
+    <p>En cliquant dans l’onglet « Mes données », vous aurez accès à différentes options très utiles.</p>
+</div>
+<script>
+
+    $(function(){
+
+        let datasetsDemo1 = [{
+            label: "Demo",
+            backgroundColor: 'rgba(100, 199, 32, 0.5)',
+            borderColor: 'rgb(100, 199, 32)',
+            data: [14, 10, 8, 6, 1, 10, 22, 3 ,12, 8, 11, 15]
+        }];
+        let dataLabelDemo1 = ["1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11h", "12h"];
+        buildGraph("humiditeDemo", "line", dataLabelDemo1, datasetsDemo1, "Demo de l'humidité");
+        buildFailBack("humiditeDemo", [14, 10, 8, 6, 1, 10, 22, 3 ,12, 8, 11, 15], dataLabelDemo1, ["Heures", "Données"], "Demo de l'humidité par heure pour 1 jour");
+
+        //------------------------------------------------------------------------
+
+        let datasetsDemo2 = [{
+            label: "Demo",
+            backgroundColor: 'rgba(100, 199, 32, 0.5)',
+            borderColor: 'rgb(100, 199, 32)',
+            data: [14, 10, 8, 6, 1]
+        }];
+        let dataLabelDemo2 = ["Jour 1", "Jour 2", "Jour 3", "Jour 4", "Jour 5"];
+        buildGraph("humiditeDemoSemaine", "bar", dataLabelDemo2, datasetsDemo2, "Demo de l'humidité 12 heures");
+        buildFailBack("humiditeDemoSemaine", [14, 10, 8, 6, 1], dataLabelDemo2, ["Jour", "Données"], "Demo de l'humidité moyenne par jour");
+
+        //------------------------------------------------------------------------
+
+        /*let datasetsDemo3 = [{
+            label: "Demo",
+            backgroundColor: 'rgba(100, 199, 32, 0.5)',
+            borderColor: 'rgb(100, 199, 32)',
+            data: [14, 10, 8, 6, 1, 12]
+        }];
+        let dataLabelDemo3 = ["Humidité", "Qualité de l'air", "Humidité sol", "Luminosité", "Température"];
+        buildGraph("recapDemo", "radar", dataLabelDemo3, datasetsDemo3, "Demo des données");
+        buildFailBack("recapDemo", [14, 8, 6, 1, 12], dataLabelDemo3, ["Catpeur", "Données moyenne"], "Demo des données");*/
+    });
+</script>

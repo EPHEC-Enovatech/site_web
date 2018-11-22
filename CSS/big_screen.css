@@ -1,25 +1,14 @@
 @media only screen and (min-width: 750px) {
-    #letter {
+    #letter, #errorContactForm {
+        width: 70vw;
+    }
+
+    #contactButton {
         width: 70vw;
     }
 }
 
 @media screen and (min-width: 1400px) {
-
-    /*----------------------------------------------------------------------------*/
-    /*Menu - Header*/
-
-    #logo_title {
-        font-size: 3.5vw;
-    }
-
-    #logo {
-        height: 2.4vw;
-    }
-
-    #menu {
-        font-size: 0.8vw;
-    }
 
     /*----------------------------------------------------------------------------*/
     /*Intro*/
@@ -49,12 +38,17 @@
     /*----------------------------------------------------------------------------*/
     /*Contact*/
 
-    #letter {
+    #letter, #errorContactForm {
         width: 45vw;
     }
 
     #formContact {
         width: 60%;
+    }
+
+    #contactButton {
+        width: 45vw;
+        margin: auto;
     }
 
     /*----------------------------------------------------------------------------*/

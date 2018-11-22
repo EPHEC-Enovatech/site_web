@@ -1,0 +1,55 @@
+<div>
+    <h1>Ajouter un Sensory Captor</h1>
+    <hr><br>
+    <form action="#" id="addBoxForm">
+        <div id="errorAddBox" class="errorBox"></div>
+        <p>Entrez ci dessous le numéro du sensory captor noté sur celui-ci.</p>
+        <label for="numCaptor" class="labelForm">Numéro</label>
+        <input type="text" name="numCaptor" id="numCaptor" class="inputForm" required><br>
+        <p>Entrez ci-dessous le code de vérification noté à coté du numéro.</p>
+        <label for="verification" class="labelForm">Vérification</label>
+        <input type="number" name="verification" id="verification" min="0" max="97" step="1" class="inputForm" required><br>
+        <p>Donnez un nom à votre Sensory Captor !</p>
+        <label for="nomCaptor" class="labelForm">Nom</label>
+        <input type="text" name="nomCaptor" id="nomCaptor" class="inputForm" required><br>
+        <input type="submit" value="Enregistrer" class="submitForm inputForm">
+        </form>
+</div>
+<script>
+
+    $(function(){
+        $('#addBoxForm').on("submit", addSensoryCaptor);
+        $('#errorAddBox').hide();
+    });
+
+    //Ajoute un Sensory Captor
+    function addSensoryCaptor(evt) {
+        evt.preventDefault();
+
+        let formData = new FormData();
+        formData.append("device_id", evt.target.numCaptor.value);
+        formData.append("deviceName", evt.target.nomCaptor.value);
+        formData.append("checksum", evt.target.verification.value);
+
+        let endpoint = "devices/" + getCookie('user-id');
+
+        callAPIMethod("POST", formData, endpoint, getErrorAddBox);
+    }
+
+    //Affiche les erreurs
+    function getErrorAddBox(response) {
+        let message = JSON.parse(response.responseText);
+        let errorAddBox = $('#errorAddBox');
+
+        errorAddBox.removeClass().html(message.message).show();
+
+        switch (message.status) {
+            case "SUCCESS":
+                errorAddBox.addClass("errorBox success");
+                break;
+            case "ERROR":
+                errorAddBox.addClass("errorBox error");
+                break;
+        }
+    }
+</script>

@@ -70,14 +70,19 @@ function initMap() {
 }
 
 //True si la fenètre de connection est ouverte
-var connexionOpen = false;
+let connexionOpen = false;
 
 //Gère l'apparition/disparition de la fenètre de connection
 function connexionPopUp() {
 
-    $('#connexion').fadeToggle();
+    let connexion = $('#connexion');
 
-    var page = $('#document_Header, #document_Main, #document_Footer');
+    if(connexionOpen) connexion.show();
+
+    $('#subError').hide();
+    connexion.fadeToggle();
+
+    let page = $('#document_Header, #document_Main, #document_Footer');
     if(connexionOpen){
         page.css('filter', 'none');
         $('html, body').removeClass('disableScroll');
@@ -88,28 +93,62 @@ function connexionPopUp() {
         connexionOpen = true;
         trapFocus(register);
     }
-
 }
 
 //Toggle le mode inscription et connexion
 function toggleRegisterLogIn(mode) {
+    $('#subError').hide();
     if(mode === "logIn"){
-        $('#subName').hide();
-        $('#subSurname').hide();
-        $('#confirmPassword').hide();
+        $('#subName, #subSurname, #confirmPassword').hide();
+        $('#forgotMDP').show();
         $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
         $('#buttonRegister').attr("value", "Se connecter");
         $('#formConnexion header h2').text("Connexion");
+        $('#formConnexion').off('submit').submit(authenticate);
         trapFocus(register);
     } else if (mode === "register"){
-        $('#subName').show();
-        $('#subSurname').show();
-        $('#confirmPassword').show();
+        $('#subName, #subSurname, #confirmPassword').show();
+        $('#forgotMDP').hide();
         $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
         $('#buttonRegister').attr("value","S'inscrire");
         $('#formConnexion header h2').text("Inscription");
+        $('#formConnexion').off('submit').submit(signin);
         trapFocus(register);
     }
+}
+
+//Gère l'envoi de mail de contact
+function sendMailContact(evt){
+    evt.preventDefault();
+
+    let formData = new FormData();
+    formData.append("nom", evt.target.formName.value);
+    formData.append("email", evt.target.mail.value);
+    formData.append("message", evt.target.message.value);
+
+    if(evt.target.mail2.value === ""){
+        callAPIMethod("POST", formData, "contact", function(data){
+            let response = JSON.parse(data.responseText);
+            if(response.status === "SUCCESS"){
+                $('#errorContactForm').text("Le mail a bien été envoyé !").addClass("success").show();
+            } else {
+                $('#errorContactForm').text("Impossible d'envoyer le mail").addClass("error").show();
+            }
+        });
+    }
+}
+
+//Gestion retour mot de passe oublié
+function MDPoublie(response) {
+    let data = JSON.parse(response.responseText);
+    if(data.status === "ERROR"){
+        $('#subErrorMDPoublie').removeClass().addClass("error").html(data.message).show();
+    } else {
+        $('#subErrorMDPoublie').removeClass().addClass("success").html(data.message).show();
+        $('#submitMDPoublie').hide();
+        $('#resetMDPoublie').val("Retour");
+    }
+
 }
 
 //-----------------------------------------------------------------------------
@@ -117,6 +156,9 @@ function toggleRegisterLogIn(mode) {
 $(function(){
 
     copyHeightNavBar();
+
+    $('#errorContactForm').hide();
+    $('#formContact').on("submit", sendMailContact);
 
     //Ajoute la fonction pour toggle la class "current"
     $("#menu ul li a:not(.target-div5)").on("click", function(e){
@@ -155,91 +197,117 @@ $(function(){
         }
     });
 
+    //Test si les cookies ont été accepté
+    if(getCookie("cookies_enabled") === ""){
+        $('#dialCookies button').on("click", function(){
+            $('#dialCookies').hide();
+            setCookie("cookies_enabled", "Les cookies ont été accepté", 1);
+        });
+        $('#dialCookies').show();
+    }
+
     $('#closeConnexion').on("click", function() {
         $('#formConnexion').trigger("reset");
     });
 
-    //Si internet explorer
-    // noinspection RegExpRedundantEscape
-    if ((window.navigator.userAgent.indexOf("MSIE ")) > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-        $("mobile_menu_button").css('top', '1em');
-    }
-
-    createWaypointScroll('presentation', 'up', '-20%', 2);
-    createWaypointScroll('presentation', 'down', '20%', 2);
-
-    createWaypointScroll('intro', 'up', '-20%', 1);
-    createWaypointScroll('intro', 'down', '20%', 1);
-
-    createWaypointScroll('team', 'up', '-20%', 3);
-    createWaypointScroll('team', 'down', '20%', 3);
-
-    createWaypointScroll('contact', 'up', '-20%', 4);
-    createWaypointScroll('contact', 'down', '20%', 4);
-
-    copyHeightNavBar();
-
-    $("#js-rotating").Morphext({
-        // Animation de animate.css
-        animation: "bounceIn",
-        // Séparateur
-        separator: ",",
-        // Délais entre chaque mot
-        speed: 2500,
-        complete: function () {
-            // CallBack
-        }
-    });
-
-    //Chaque fois que la fenêtre est redimensionnée
-    $(window).on("resize", function(){
-
-        if(window.innerWidth > 600){
-            $('#menu').show();
-            $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
-        } else {
-            $('#menu').hide();
-            $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
-        }
-        copyHeightNavBar();
-    });
-
-    //#menu ul li a:not(.target-div5)
-    $('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
-        if(connexionOpen){
-            connexionPopUp();
-        }
-    });
-
-    //Prevent le default du lien "déjà inscrit ?"
-    $('#register a').on("click", function(e){
-        e.preventDefault()
-    });
-
-    //Easter Egg - private joke
-    // noinspection JSUnusedLocalSymbols
-    var egg = new Egg("c,o,o,k,i,e,s", function() {
-        console.log("COOKIES !");
-        $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
-        $('#logo_title').text("COOKIES HUB");
-        $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
-        $("#js-rotating").Morphext({
-            animation: "bounceIn",
-            separator: ",",
-            speed: 2500
-        });
-    }).listen();
-
-    // Authentication event handle
-    $("#formConnexion").submit(evt => {
+    //Gère le formulaire de MDP oublié
+    $('#formMDPoublie').on("submit", function(evt){
         evt.preventDefault();
-        let form = $("#formConnexion")[0];
-        let data = { "auth": { "email": form.subMail.value, "password": form.password.value }};
-        $.post("https://api.sensorygarden.be/user_token", data).done(data => {
-            document.cookie = "token=" + data.jwt + ";";
-            document.cookie = "user_id=1;";
-            location.href = "log_success.html";
-        })
+        let mail = evt.target.email.value;
+        let formData = new FormData();
+        formData.append("email", mail);
+        let endPoint = "reset/";
+        callAPIMethod("POST", formData, endPoint, MDPoublie);
+    }).on("reset", function(){
+        $('#MDPoublie').hide();
+        $('#connexion').show();
     });
+    $('#subErrorMDPoublie').hide();
+
+    $('#forgotMDP').on("click", function(){
+        $('#MDPoublie').show();
+        $('#connexion').hide();
+    });
+
+//Si internet explorer
+// noinspection RegExpRedundantEscape
+if ((window.navigator.userAgent.indexOf("MSIE ")) > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+    $("mobile_menu_button").css('top', '1em');
+}
+
+createWaypointScroll('presentation', 'up', '-20%', 2);
+createWaypointScroll('presentation', 'down', '20%', 2);
+
+createWaypointScroll('intro', 'up', '-20%', 1);
+createWaypointScroll('intro', 'down', '20%', 1);
+
+createWaypointScroll('team', 'up', '-20%', 3);
+createWaypointScroll('team', 'down', '20%', 3);
+
+createWaypointScroll('contact', 'up', '-20%', 4);
+createWaypointScroll('contact', 'down', '20%', 4);
+
+copyHeightNavBar();
+
+/*$("#js-rotating").Morphext({
+    // Animation de animate.css
+    animation: "bounceIn",
+    // Séparateur
+    separator: ",",
+    // Délais entre chaque mot
+    speed: 2500,
+    complete: function () {
+        // CallBack
+    }
+});*/
+
+//Chaque fois que la fenêtre est redimensionnée
+$(window).on("resize", function(){
+
+if(window.innerWidth > 600){
+    $('#menu').show();
+    $('#contact #contactTitle').text("Une question ou suggestion ? Envoyer nous une lettre !");
+} else {
+    $('#menu').hide();
+    $('#contact #contactTitle').text("Une question ou suggestion ? Contactez nous !");
+}
+copyHeightNavBar();
+});
+
+//#menu ul li a:not(.target-div5)
+$('#document_Main, #document_Footer, #document_Header #headers_menu #menu li a:not(.target-div5)').on("click", function() {
+    if(connexionOpen){
+        $('#MDPoublie').hide();
+        connexionPopUp();
+    }
+});
+
+//Anti robot
+$('#mail2').hide();
+
+//Prevent le default du lien "déjà inscrit ?"
+$('#register a').on("click", function(e){
+    e.preventDefault()
+});
+
+//Easter Egg - private joke
+// noinspection JSUnusedLocalSymbols
+var egg = new Egg("c,o,o,k,i,e,s", function() {
+    console.log("COOKIES !");
+    $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
+    $('#logo_title').text("COOKIES HUB");
+    $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
+    $("#js-rotating").Morphext({
+        animation: "bounceIn",
+        separator: ",",
+        speed: 2500
+    });
+}).listen();
+
+//Cache l'erreur de la connection
+$('#subError').hide();
+
+// Authentication event handle
+$("#formConnexion").submit(authenticate);
 
 });

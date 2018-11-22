@@ -27,6 +27,7 @@
     <script src="JS/easing.js"></script>
     <script src="JS/cookie_hub.js" defer></script>
     <script src="JS/accessibility.js"></script>
+    <script src="JS/auth.js" defer></script>
     <script src="JS/index.js" defer></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
 </head>
@@ -58,7 +59,8 @@
         <section id="allIntroElement">
             <div id="startPageHeader"></div>
             <div id="intro" class="div1">
-                <h1>SensoryGarden, le potager <span id="js-rotating">connecté, accessible à tous, trop Cool</span></h1>
+                <!--<h1>SensoryGarden, le potager <span id="js-rotating">connecté, accessible à tous, trop Cool</span></h1>-->
+                <h1>Feel the sense of your garden</h1>
                 <a href="#presentation" onclick="goToByScroll('presentation');change(2)">Découvrir Sensory Garden</a>
             </div>
         </section>
@@ -160,14 +162,18 @@
             <header>
                 <h2 id="contactTitle">Une question ou suggestion ? <wbr> Envoyer nous une lettre !</h2>
             </header>
-            <form id="formContact" action="#" method="post">
+            <form id="formContact" action="#">
+                <p id="errorContactForm"></p>
                 <div id="letter">
                     <div id="formData">
+
                         <label for="formName">Nom *</label>
                         <input id="formName" name="formName" type="text" placeholder="Votre nom" required>
 
                         <label for="mail">Adresse email *</label>
                         <input id="mail" name="mail" type="email" placeholder="Votre adresse mail" required>
+
+                        <label id="mail2">Email: <input type="email" name="mail2"></label>
 
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" placeholder="Écrivez votre message ici" required></textarea>
@@ -184,8 +190,10 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Envoyer">
-                <input type="reset" value="Supprimer">
+                <div id="contactButton">
+                    <input type="submit" value="Envoyer">
+                    <input type="reset" value="Supprimer">
+                </div>
             </form>
         </section>
 
@@ -201,6 +209,7 @@
                 <a href="#" onclick="connexionPopUp()"><img id="closeConnexion" src="IMG/icon/close-white.svg" alt="Annuler"></a>
             </header>
             <main>
+                <div id="subError"></div>
                 <label for="subName" class="visuallyhidden">Nom</label>
                 <input id="subName" name="subName" type="text" placeholder="Nom" hidden>
                 <br>
@@ -212,6 +221,7 @@
                 <br>
                 <label for="password" class="visuallyhidden">Mot de passe</label>
                 <input id="password" name="password" type="password" placeholder="Mot de passe" required>
+                <a id="forgotMDP" href="#">Mot de passe oublié ?</a>
                 <br>
                 <label for="confirmPassword" class="visuallyhidden">Confirmer le mot de passe</label>
                 <input id="confirmPassword" name="confirmPassword" type="password" hidden placeholder="Confirmer le mot de passe">
@@ -220,6 +230,33 @@
             <footer>
                 <input id="buttonRegister" type="submit" value="Se connecter">
                 <p id="register">Pas encore inscrit ? <a href="#" onclick="toggleRegisterLogIn('register')">S'inscrire</a></p>
+            </footer>
+        </form>
+    </div>
+
+    <div id="dialCookies" role="dialog">
+        <p>
+            Nous utilisons les cookies afin de fournir les services et fonctionnalités proposés sur notre site et afin d’améliorer l’expérience de nos utilisateurs. Les cookies sont des données qui sont téléchargés ou stockés sur votre ordinateur ou sur tout autre appareil.
+        </p>
+        <p>
+            En cliquant sur ”J’accepte”, vous acceptez l’utilisation des cookies. Si vous supprimez ou désactivez nos cookies, vous pourriez rencontrer des interruptions ou des problèmes d’accès au site.
+        </p>
+        <button type="button">J'accepte</button>
+    </div>
+
+    <div id="MDPoublie" role="dialog" hidden>
+        <form id="formMDPoublie">
+            <header>
+                <h2>Réinitialisez votre mot de passe</h2>
+            </header>
+            <main>
+                <label for="email">Entrez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe</label><br>
+                <div id="subErrorMDPoublie" class="error"></div>
+                <input type="email" name="email" id="email" placeholder="Adresse mail" required>
+            </main>
+            <footer>
+                <input id="submitMDPoublie" type="submit" value="Envoyer">
+                <input id="resetMDPoublie" type="reset" value="Annuler">
             </footer>
         </form>
     </div>
@@ -239,7 +276,7 @@
                 </li>
             </ul>
         </div>
-        <p>EPHEC Projet Enovatech : SensoryGarden</p>
+        <p>EPHEC Projet Enovatech : Sensory Garden</p>
     </footer>
 </body>
 </html>
