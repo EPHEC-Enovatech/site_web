@@ -9,6 +9,14 @@ $(document).ready(function() {
     $('#filterCat').on('change', function (e) {
         callAPI("posts", listPublication);
     });
+    $(window).on("resize", function(){
+        toggleSlideMenu();
+    });
+    $('#mobile_menu_button_side').on("click", function(){
+        toggleSlideMenu();
+    });
+    calculateSizeMain();
+    toggleSlideMenu();
 
 });
 
@@ -88,4 +96,27 @@ function listPublication(response) {
 
     });
     $('.catPubli').select2();
+}
+function toggleSlideMenu(){
+    if(window.innerWidth <= 600){
+        $('#menuUser').show().css("max-height", "100vh").css("height", "100vh");
+        $('#sideNav').css("height", window.innerHeight).css("max-height", window.innerHeight);
+        $('.menu-link').show().bigSlide({
+            menu: '#menuUser',
+            easyClose: true,
+        });
+    } else {
+        $('#sideNav').css("height", "auto");
+        $('#menuUser').css("position", "initial").css("left", 0).css("width", "auto").css("height", "auto");
+        $('.menu-link').hide();
+        calculateSizeMain();
+    }
+}
+function calculateSizeMain(){
+    let tailleHeader = parseFloat((($('#document_Header').css('height')).split("px"))[0]);
+
+    $('#document_Main').css('height', "calc(100vh - " + tailleHeader + "px)");
+    $('#menuUser').css('max-height', "calc(100vh - " + tailleHeader + "px)");
+    $('#contentZone').css('max-height', "calc(100vh - " + tailleHeader + "px)");
+    $('#sideNav').css('max-height', "calc(100vh - " + tailleHeader + "px)");
 }
