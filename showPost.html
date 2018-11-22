@@ -19,13 +19,13 @@
     <script src="JS/jPages.js"></script>
     <script src="JS/bigSlide.min.js"></script>
     <script src="JS/auth.js"></script>
-    <script src="JS/forumPage.js"></script>
+    <script src="JS/showPost.js"></script>
 </head>
 <body>
 <header id="document_Header" class="push">
     <div id="headers_menu">
         <div id="menu_left">
-            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu">
+            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu" hidden>
             <div>
                 <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden. Cliquez pour remonter en haut de la page">
                 <h1 id="logo_title">Sensory Garden</h1>
@@ -33,40 +33,22 @@
         </div>
         <nav id="menu">
             <ul>
-                <li><a href="userPage.html">Profil</a></li>
+                <li><a href="forumPage.html">Forum</a></li>
                 <li><a id="logout" href="index.html">Se déconnecter</a></li>
             </ul>
         </nav>
     </div>
 </header>
-    <main id="document_Main" class="push">
-        <div id="menuUser" class="panel" role="navigation">
-            <nav id="sideNav">
-                <ul>
+<main class="push">
 
-                    <li class="sousMenu target-li1 currentUserMenu" id="userInfo"><a href="#">Dernieres publications</a></li>
-                    <li class="sousMenu target-li2" id="changeMDP"><a href="#">FAQ</a></li>
-                    <li class="sousMenu"><a href="https://sensorygarden.be/#contact" target="_blank">Envoyer nous un message</a></li>
-                    <li class="sousMenu"><a href="https://sensorygarden.be/#map" target="_blank">Point de vente</a></li>
+    <div id="publications">
+        <div id="pageHelp">
+            <ul class="listPubli" id="paginationList">
 
-                </ul>
-            </nav>
+            </ul>
+            <div class="holder"></div>
         </div>
-
-        <div class="" id="publications">
-            <div id="header_forum">
-                    <select class="cat" id="filterCat" name="states[]" multiple="multiple" style="width: 75%">
-
-                    </select>
-                <a href="createPost.html" id="goToCreatePost"><button type="button" id="createPost">Créer un poste</button></a>
-            </div>
-            <div class="scrollable">
-                <ul class="listPubli" id="paginationList">
-
-                </ul>
-                <div class="holder"></div>
-            </div>
-        </div>
-    </main>
+    </div>
+</main>
 </body>
 </html>
