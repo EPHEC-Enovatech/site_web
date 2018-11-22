@@ -374,7 +374,6 @@ function buildFailBack(id, data, titreData, titreCol, legende){
  */
 function resetCanvas(idCanvasDiv, idCanvas, title){
     $('#' + idCanvasDiv).animate({ opacity: 0.0 }, 200, function(){
-        new Chart(document.getElementById(idCanvas).getContext('2d'), 0);
         $('#' + idCanvasDiv).hide().css('opacity', 1.0);
     });
 

@@ -249,6 +249,7 @@ hr {
 
 #disconnectBox header {
     background-color: limegreen;
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     margin: 0;

@@ -1,6 +1,7 @@
 @media only screen and (max-width: 600px){
 
     #document_Main {
+        -ms-grid-columns: 100%;
         grid-template-columns: 100%;
     }
 
@@ -48,6 +49,8 @@
         font-family: "Roboto", sans-serif;
 
         overflow: auto;
+
+        -webkit-box-sizing: border-box;
 
         box-sizing: border-box;
     }

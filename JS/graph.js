@@ -130,11 +130,17 @@ let countCall = 0;
  */
 function setLoading(nombre = 0){
     let loading = $('#loadingDiv');
-    if(nombre > 0){
-        loading.show();
-        countCall += nombre;
-    } else {
-        countCall -= 1;
+
+    //Test la connexion internet
+    let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    connection = connection !== undefined ? connection.rtt : true;
+    if(connection > 60 || connection){
+        if(nombre > 0){
+            loading.show();
+            countCall += nombre;
+        } else {
+            countCall -= 1;
+        }
     }
     if (countCall === 0) loading.hide();
 }
