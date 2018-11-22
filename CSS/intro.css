@@ -12,11 +12,12 @@
     opacity: 0.90;
 
     background-origin: border-box;
-    //background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
-    //background-repeat: no-repeat;
-    //background-attachment: fixed;
-    //background-size: cover;
-    //background-position: bottom center;
+    background-image: url("../IMG/fond_big2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    background-position: bottom center;
 
 }
 
@@ -40,17 +41,25 @@
 #intro h1 {
     color: var(--main-bg-color);
     font-size: 5em;
-    margin: 20vh 2vw 0 2vw;
+    /*margin: 20vh 2vw 0 2vw;*/
     text-shadow: 1px 0 black;
     opacity: 1;
+
+
+    padding: 0.2em;
+    margin: 23vh 4vw 0 4vw;
+    background-color: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    border: 1px solid var(--main-bg-color);
+
 }
 
 #intro a {
     text-decoration: none;
     color: var(--main-bg-color);
-    background-color: var(--main-color);;
+    /*background-color: var(--main-color);*/
     padding: 1em;
-    border: 1px solid var(--main-bg-color);
+    /*border: 1px solid var(--main-bg-color);*/
     border-radius: 5px;
 
     position: absolute;
@@ -62,6 +71,12 @@
     /*Pas de retour à la ligne*/
     white-space: nowrap;
     opacity: 1;
+
+
+    font-weight: bold;
+    border: 2px solid var(--main-bg-color);
+    background-color: rgba(255, 255, 255, 0.7);
+
 }
 
 #intro a:hover {

@@ -249,7 +249,7 @@ createWaypointScroll('contact', 'down', '20%', 4);
 
 copyHeightNavBar();
 
-$("#js-rotating").Morphext({
+/*$("#js-rotating").Morphext({
     // Animation de animate.css
     animation: "bounceIn",
     // Séparateur
@@ -259,7 +259,7 @@ $("#js-rotating").Morphext({
     complete: function () {
         // CallBack
     }
-});
+});*/
 
 //Chaque fois que la fenêtre est redimensionnée
 $(window).on("resize", function(){
