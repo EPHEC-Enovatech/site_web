@@ -18,6 +18,8 @@ $(document).ready(function() {
     calculateSizeMain();
     toggleSlideMenu();
 
+
+
 });
 
 function selectCategorie(response) {
@@ -55,7 +57,7 @@ function listPublication(response) {
         for(item in publication){
             let arrCategories = publication[item].categories;
 
-            list += "<li> <div class=\"auteur\"> <h3 class=\"name\"><bdi>" + "" + "</bdi></h3>";
+            list += "<li id='"+publication[item].id+"'><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + "" + "</bdi></h3>";
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
             list += "<div class=\"publication\"> <h3 class=\"object\">" + publication[item].postTitle + "</h3>";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";
@@ -89,6 +91,9 @@ function listPublication(response) {
 
     });
     $('.catPubli').select2();
+    $('.listPubli > li').on('click', function () {
+        window.location.href = "showPost.html?post_id="+$(this).attr('id');
+    })
 }
 function toggleSlideMenu(){
     if(window.innerWidth <= 600){

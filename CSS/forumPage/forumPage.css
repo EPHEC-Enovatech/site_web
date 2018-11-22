@@ -126,10 +126,15 @@ hr {
     display:block;
     background-color: #eee;
     padding:1vw;
+    text-decoration: none;
     margin: 1vw;
     -webkit-box-shadow: inset 0 1px 0 #fff;
     box-shadow: inset 0 1px 0 #fff;
     border-radius: 1vw;
+}
+.listPubli > li:hover {
+    cursor: pointer;
+
 }
 
 .listPubli > li > div {
