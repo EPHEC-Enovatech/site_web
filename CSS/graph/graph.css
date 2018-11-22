@@ -30,7 +30,6 @@ html, body {
     border: 1px solid black;
     border-radius: 10px;
     margin: 1em;
-
     display: -ms-grid;
 
     display: grid;
@@ -62,6 +61,7 @@ html, body {
 }
 
 #divCanvas, #divCanvasDetail, #divCanvasRecap {
+
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;

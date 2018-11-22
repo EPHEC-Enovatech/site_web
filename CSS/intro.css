@@ -12,12 +12,11 @@
     opacity: 0.90;
 
     background-origin: border-box;
-    background-image: url("../IMG/planteAntenne.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-
-    background-position: bottom center;
+    //background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
+    //background-repeat: no-repeat;
+    //background-attachment: fixed;
+    //background-size: cover;
+    //background-position: bottom center;
 
 }
 
