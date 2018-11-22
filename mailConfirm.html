@@ -115,9 +115,9 @@
     <script src="JS/auth.js"></script>
     <script>
         function confirmMail(){
-            let mail = getUrlParameter('email');
+            let token = getUrlParameter('token');
             let formData = new FormData();
-            formData.append("email", mail);
+            formData.append("token", token);
             let endPoint = "confirm";
             callAPIMethod("PATCH", formData, endPoint, setMessageErrorConfirm);
         }
