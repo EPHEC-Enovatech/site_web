@@ -92,7 +92,6 @@ function listPublication(response) {
     });
     $('.catPubli').select2();
     $('.listPubli > li').on('click', function () {
-        console.log('test');
         window.location.href = "showPost.html?post_id="+$(this).attr('id');
     })
 }
