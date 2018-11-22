@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
+    <meta name="theme-color" content="#32cd32">
+    <title>Forum</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="CSS/jPages.css">
+    <link rel="stylesheet" href="CSS/navBar.css">
+    <link rel="stylesheet" href="CSS/navBar_mobile.css">
+    <link rel="stylesheet" href="CSS/forumPage/forumPage.css">
+    <link rel="stylesheet" href="CSS/userPage/userSection.css">
+    <link rel="stylesheet" href="CSS/userPage/userPage_mobile.css">
+    <script src="JS/jquery-3.3.1.min.js"></script>
+    <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/select2.min.js"></script>
+    <script src="JS/jPages.js"></script>
+    <script src="JS/bigSlide.min.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/userPage.js"></script>
+    <script src="JS/forumPage.js"></script>
+</head>
+<body>
+<header id="document_Header" class="push">
+    <div id="headers_menu">
+        <div id="menu_left">
+            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu">
+            <div>
+                <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden. Cliquez pour remonter en haut de la page">
+                <h1 id="logo_title">Sensory Garden</h1>
+            </div>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#">Profil</a></li>
+                <li><a id="logout" href="index.html">Se déconnecter</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    <main id="document_Main" class="push">
+        <div id="menuUser" class="panel" role="navigation">
+            <nav id="sideNav">
+                <ul>
+
+                    <li class="sousMenu target-li1 currentUserMenu" id="userInfo"><a href="#">Dernieres publications</a></li>
+                    <li class="sousMenu target-li2" id="changeMDP"><a href="#">FAQ</a></li>
+                    <li class="sousMenu"><a href="https://sensorygarden.be/#contact" target="_blank">Envoyer nous un message</a></li>
+                    <li class="sousMenu"><a href="https://sensorygarden.be/#map" target="_blank">Point de vente</a></li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div class="" id="publications">
+            <div id="header_forum">
+                    <select class="cat" id="filterCat" name="states[]" multiple="multiple" style="width: 75%">
+
+                    </select>
+                <button type="submit" formaction="createPost.html" id="createPost">Créer un poste</button>
+            </div>
+            <div id="pageHelp">
+                <ul class="listPubli" id="paginationList">
+
+                </ul>
+                <div class="holder"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
