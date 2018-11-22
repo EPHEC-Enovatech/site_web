@@ -77,39 +77,11 @@ $(function(){
     toggleSlideMenu();
 });
 
-//Permet d'appeler l'API en GET
-function callAPI(arg, func){
-    $.ajax({
-        url: "https://api.sensorygarden.be/" + arg,
-        type: "GET",
-        beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
-        complete: func
-    });
-}
-
-function callAPIMethod(method, data, endpoint, func){
-    var settings = {
-        "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.sensorygarden.be/" + endpoint,
-        "method": method,
-        "headers": {},
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": data,
-        "complete": func
-    };
-
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-    });
-}
-
 //Affiche les données personnelles de l'utilisateur
 function showUserInfo(response, textStatus) {
-    $('#userWelcome').html(response.responseJSON.data.prenom + " " + response.responseJSON.data.nom);
+    let nomUser =  response.responseJSON.data.prenom + " " + response.responseJSON.data.nom;
+    $('title').html("Profil " + nomUser);
+    $('#userWelcome').html(nomUser);
     $('#userName').val(response.responseJSON.data.nom);
     $('#userSurname').val(response.responseJSON.data.prenom);
     $('#userMail').val(response.responseJSON.data.email);
@@ -150,4 +122,10 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+//Quand le cookies expire
+function cookiesExpireTime() {
+    $('#disconnectBox').show();
+    $('#document_Main, #document_Header').css('filter', 'blur(3px');
 }
