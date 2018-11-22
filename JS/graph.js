@@ -133,8 +133,7 @@ function setLoading(nombre = 0){
 
     //Test la connexion internet
     let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    connection = connection !== undefined ? connection.rtt : true;
-    if(connection > 60 || connection){
+    if(connection = connection !== undefined ? connection.rtt > 60 : true){
         if(nombre > 0){
             loading.show();
             countCall += nombre;
