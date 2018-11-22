@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="SensoryGarden proprose d'allier jardinage et technologie. Nous proposons également une aide précieuse grâce au forum">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
     <meta name="theme-color" content="#32cd32">
 
@@ -220,6 +221,7 @@
                 <br>
                 <label for="password" class="visuallyhidden">Mot de passe</label>
                 <input id="password" name="password" type="password" placeholder="Mot de passe" required>
+                <a id="forgotMDP" href="#">Mot de passe oublié ?</a>
                 <br>
                 <label for="confirmPassword" class="visuallyhidden">Confirmer le mot de passe</label>
                 <input id="confirmPassword" name="confirmPassword" type="password" hidden placeholder="Confirmer le mot de passe">
@@ -228,6 +230,33 @@
             <footer>
                 <input id="buttonRegister" type="submit" value="Se connecter">
                 <p id="register">Pas encore inscrit ? <a href="#" onclick="toggleRegisterLogIn('register')">S'inscrire</a></p>
+            </footer>
+        </form>
+    </div>
+
+    <div id="dialCookies" role="dialog">
+        <p>
+            Nous utilisons les cookies afin de fournir les services et fonctionnalités proposés sur notre site et afin d’améliorer l’expérience de nos utilisateurs. Les cookies sont des données qui sont téléchargés ou stockés sur votre ordinateur ou sur tout autre appareil.
+        </p>
+        <p>
+            En cliquant sur ”J’accepte”, vous acceptez l’utilisation des cookies. Si vous supprimez ou désactivez nos cookies, vous pourriez rencontrer des interruptions ou des problèmes d’accès au site.
+        </p>
+        <button type="button">J'accepte</button>
+    </div>
+
+    <div id="MDPoublie" role="dialog" hidden>
+        <form id="formMDPoublie">
+            <header>
+                <h2>Réinitialisez votre mot de passe</h2>
+            </header>
+            <main>
+                <label for="email">Entrez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe</label><br>
+                <div id="subErrorMDPoublie" class="error"></div>
+                <input type="email" name="email" id="email" placeholder="Adresse mail" required>
+            </main>
+            <footer>
+                <input id="submitMDPoublie" type="submit" value="Envoyer">
+                <input id="resetMDPoublie" type="reset" value="Annuler">
             </footer>
         </form>
     </div>

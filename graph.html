@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
+    <meta name="theme-color" content="#32cd32">
+    <title>Mes données</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/navBar.css">
+    <link rel="stylesheet" href="CSS/navBar_mobile.css">
+    <link rel="stylesheet" href="CSS/graph/graph.css">
+    <link rel="stylesheet" href="CSS/graph/graph_mobile.css">
+    <link rel="stylesheet" href="CSS/graph/datepicker.min.css">
+    <script src="JS/jquery-3.3.1.min.js"></script>
+    <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/Chart.bundle.min.js"></script>
+    <script src="JS/graphiqueBuilder.js"></script>
+    <script src="JS/graph.js"></script>
+    <script src="JS/datepicker.min.js"></script>
+    <script src="JS/datepicker.fr-FR.js"></script>
+</head>
+<body>
+<header id="document_Header">
+    <div id="headers_menu">
+        <div id="menu_left">
+            <div>
+                <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden">
+                <h1 id="logo_title">Sensory Garden</h1>
+            </div>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#">Forum</a></li>
+                <li><a id="logout" href="index.html">Se déconnecter</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main id="document_Main">
+    <button id="showSettings" type="button">Réglages</button>
+    <div id="graphZone">
+        <div id="loadingDiv" class="lds-ripple"><div></div><div></div></div>
+        <!--Graph batonnet-->
+        <div id="errorgraphCanvas" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
+        <div id="divCanvas">
+            <canvas id="graphCanvas"></canvas>
+        </div>
+
+        <!--Graph points-->
+        <div id="errorgraphCanvasDetail" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
+        <div id="divCanvasDetail">
+            <canvas id="graphCanvasDetail"></canvas>
+        </div>
+
+        <!--Tableau récap-->
+        <div id="errorgraphCanvasRecap" class="errorCanvasDiv">
+            <p class="errorTitle"></p>
+            <p>Aucune donnée disponible</p>
+        </div>
+        <div id="divCanvasRecap">
+            <table id="tableRecap">
+
+            </table>
+        </div>
+    </div>
+    <div id="graphController">
+        <form id="formController" action="#">
+            <label for="dateDebut" class="labelInput">Choisissez une date</label>
+            <input id="dateDebut" name="dateDebut" data-toggle="datepicker">
+            <div id="selectInterval">
+                <label id="multiDateLabel" for="dateFin" class="labelInput">Date de fin</label>
+                <input id="dateFin" name="dateFin" data-toggle="datepicker">
+            </div>
+            <div id="radioBoxDate">
+                <p class="labelInput">Choisir un interval</p>
+                <div id="radioButtonDate">
+                    <div>
+                        <label for="singleDate">Non</label>
+                        <input id="singleDate" name="chooseTypeDate" type="radio" checked>
+                    </div>
+                    <div>
+                        <label for="multiDate">Oui</label>
+                        <input id="multiDate" name="chooseTypeDate" type="radio">
+                    </div>
+                </div>
+            </div>
+            <div class="divSelect">
+                <label for="selectBoxGraph" class="labelInput">Sensory Captor :</label><br>
+                <select id="selectBoxGraph" name="selectBoxGraph"></select>
+            </div>
+            <div class="divSelect">
+                <label for="selectCaptorGraph" class="labelInput">Le capteur :</label><br>
+                <select id="selectCaptorGraph" name="selectCaptorGraph"></select>
+            </div>
+            <button id="closeController" type="button">Fermer</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

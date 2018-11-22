@@ -1,3 +1,8 @@
+:root {
+    --main-color: white;
+    --main-bg-color: #418545;
+}
+
 #intro {
     font-family: "Roboto", sans-serif;
     text-align: center;
@@ -7,12 +12,11 @@
     opacity: 0.90;
 
     background-origin: border-box;
-    background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-
-    background-position: bottom center;
+    //background-image: url("../IMG/kelli-tungay-363192-unsplash_compress.jpg");
+    //background-repeat: no-repeat;
+    //background-attachment: fixed;
+    //background-size: cover;
+    //background-position: bottom center;
 
 }
 
@@ -34,7 +38,7 @@
 }*/
 
 #intro h1 {
-    color: limegreen;
+    color: var(--main-bg-color);
     font-size: 5em;
     margin: 20vh 2vw 0 2vw;
     text-shadow: 1px 0 black;
@@ -43,9 +47,10 @@
 
 #intro a {
     text-decoration: none;
-    color: white;
-    background-color: limegreen;
+    color: var(--main-bg-color);
+    background-color: var(--main-color);;
     padding: 1em;
+    border: 1px solid var(--main-bg-color);
     border-radius: 5px;
 
     position: absolute;
@@ -61,8 +66,8 @@
 
 #intro a:hover {
     text-decoration: none;
-    color: white;
-    background-color: forestgreen;
+    color: var(--main-color);;
+    background-color: var(--main-bg-color);
     padding: 1em;
     border-radius: 5px;
     opacity: 1;
