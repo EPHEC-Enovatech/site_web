@@ -1,0 +1,72 @@
+@media only screen and (max-width: 600px){
+    #document_Main {
+        display: block;
+        -ms-grid-columns: none;
+        grid-template-columns: none;
+        -ms-grid-rows: none;
+        grid-template-rows: none;
+    }
+
+    #graphController {
+        border: none;
+        position: fixed;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 99999;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    #graphZone {
+        height: 100%;
+        -ms-grid-rows: 40vh 40vh 60vh;
+        grid-template-rows: 40vh 40vh 60vh;
+    }
+
+    #formController {
+        margin: auto;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    #closeController, #showSettings {
+        font-family: "Roboto", sans-serif;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        text-transform: uppercase;
+        background: #4CAF50;
+        color: #FFFFFF;
+        padding: 0.8em;
+        display: inline-block;
+        width: 85%;
+        margin: 0;
+        outline: 0;
+        border: 0;
+        font-size: 1em;
+    }
+
+    #showSettings {
+        width: 100%;
+    }
+
+    #graphController #selectCaptorGraph {
+        margin: 0 0 1em;
+    }
+
+    #closeController:hover, #showSettings:hover {
+        background: #43A047;
+    }
+
+
+}

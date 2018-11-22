@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,12 +7,6 @@
     <title>Confirmation de l'adresse mail</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
-
-        :root {
-            --main-color: white;
-            --main-bg-color: #418545;
-        }
-
         /*Fonts*/
         @font-face {
             font-family: 'fall_is_coming';
@@ -44,12 +38,12 @@
         #imageFond{
             filter: blur(3px);
             height: 100vh;
-            background: url("IMG/kelli-tungay-363192-unsplash_compress.jpg") no-repeat fixed bottom center;
             background-origin: border-box;
             background-size: cover;
+            background: url("IMG/kelli-tungay-363192-unsplash_compress.jpg") no-repeat fixed bottom center;
         }
 
-        #merciBox{
+        #MDPoublie{
             border: 1px solid black;
             margin: auto;
             position: fixed;
@@ -67,59 +61,67 @@
             text-align: center;
         }
 
-        #merciBox header {
-            background-color: var(--main-color);
+        #MDPoublie header {
+            background-color: limegreen;
             position: sticky;
             top: 0;
 
             margin: 0;
             padding: 0.5em;
-            color: var(--main-bg-color);
-            border: 1px solid var(--main-bg-color);
+            color: white;
             text-align: center;
             font-family: "fall_is_comingregular", sans-serif;
         }
 
-        #merciBox header h2 {
+        #MDPoublie header h2 {
             font-size: 4vw;
             letter-spacing: 2px;
             margin: 0;
         }
 
-        #merciBox main {
+        #MDPoublie main {
             text-align: center;
             padding: 1em;
         }
 
-        #merciBox footer {
+        #MDPoublie footer {
             margin: 1em;
         }
 
-        #merciBox footer a {
+        #MDPoublie footer a {
             text-decoration: none;
             font-family: "Roboto", sans-serif;
             text-transform: uppercase;
-            border: 1px solid var(--main-bg-color);
-            background: var(--main-color);
-            color: var(--main-bg-color);
+            background: #4CAF50;
+            color: #FFFFFF;
             padding: 0.5em;
             display: inline-block;
         }
 
-        #merciBox footer a:hover {
-            background: var(--main-bg-color);
-            color: var(--main-color);
+        #MDPoublie footer a:hover {
+            background: #43A047;
+        }
+        #email {
+            padding: 1em;
+            background-color: #f2f2f2;
+            border: 0;
+            font-size: 1em;
+            diplay: inline-block;
+            margin: 0.5em 0 1em;
+            width: 90%;
         }
     </style>
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/auth.js"></script>
     <script>
-        function confirmMail(){
-            let mail = getUrlParameter('email');
+        function resetMDP(){
+            //dès que l'api est fait programmer ce qu'il faut
+            console.log('Je dois renvoyer vers la page de changement de mot de passe');
+            /*let mail = getUrlParameter('email');
             let formData = new FormData();
             formData.append("email", mail);
             let endPoint = "confirm";
-            callAPIMethod("PATCH", formData, endPoint, setMessageErrorConfirm);
+            callAPIMethod("PATCH", formData, endPoint, setMessageErrorConfirm);*/
         }
 
         function setMessageErrorConfirm(data){
@@ -131,19 +133,27 @@
                 $('main p').text("Impossible de vérifier votre adresse email, réessayer plus tard...").css("color", "red");
             }
         }
+        
+        function retourPDG(){
+            //retour sur la page de connexion
+            console.log('je dois revenir sur la page de garde');
+        }
+        
     </script>
 </head>
 <body>
     <div id="imageFond"></div>
-    <div id="merciBox">
+    <div id="MDPoublie">
         <header>
-            <h2>Confirmation de l'email</h2>
+            <h2>Réinitialisez votre mot de passe</h2>
         </header>
         <main>
-            <p>Merci d'avoir créé votre compte Sensory Garden !</p>
+            <label for="email">Entrez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe</label><br>
+            <input type="email" neme="email" id="email" placeholder="Adresse mail" required>
         </main>
         <footer>
-            <a href="#" onclick="confirmMail()">Confirmer votre adresse mail</a>
+            <a href="#" onclick="resetMDP()">Envoyer</a>
+            <a href="https://sensorygarden.be/">annuler</a>
         </footer>
     </div>
 </body>
