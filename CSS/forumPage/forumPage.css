@@ -162,6 +162,9 @@ hr {
     display: -ms-flexbox;
     display: flex;
 }
+#goToCreatePost{
+    text-decoration: none;
+}
 #createPost{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -185,6 +188,7 @@ hr {
     background-color: #cacaca;
     -webkit-box-shadow: 0.1vw 0.1vw #e7fae7;
     box-shadow: 0.1vw 0.1vw #e7fae7;
+    cursor: pointer;
 }
 #filterCat {
     width: 75%;
