@@ -47,6 +47,7 @@
     grid-template-columns: 80% 20%;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
+    grid-template-rows: -webkit-max-content;
 
     max-width: 500px;
     margin: auto;
