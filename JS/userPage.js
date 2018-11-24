@@ -58,6 +58,12 @@ function centerLoading() {
     $('#loadingDiv').css("top", hauteur + "px").css("left", largeur + "px");
 }
 
+let dataChange = {
+    "idBox": "",
+    "value": "",
+    "oldValue": "",
+    "action": ""
+};
 let countCall = 0;
 
 /**
@@ -133,27 +139,6 @@ function showUserInfo(response, textStatus) {
     $('#userName').val(response.responseJSON.data.nom);
     $('#userSurname').val(response.responseJSON.data.prenom);
     $('#userMail').val(response.responseJSON.data.email);
-}
-
-//Affiche les box de l'utilisateur dans showBox
-function showBox(response){
-    setLoading();
-    let table = "";
-
-    if (response.responseJSON.status === "SUCCESS") {
-
-        let boxs = response.responseJSON.data;
-        for(item in boxs){
-            console.log(item);
-            table += "<tr><td>";
-            table += boxs[item].deviceName + "</td><td>";
-            table += boxs[item].device_id + "</td></tr>";
-        }
-    } else {
-        table += "<tr><td colspan='2'>Vous n'avez pas ajouté de Sensory Captor</td></tr>"
-    }
-    $('#insertBox').html(table);
-
 }
 
 function getCookie(cname) {

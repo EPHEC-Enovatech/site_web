@@ -18,6 +18,7 @@
     <script src="JS/userPage.js"></script>
     <script src="JS/Chart.bundle.min.js" async defer></script>
     <script src="JS/graphiqueBuilder.js" async defer></script>
+    <script src="JS/accessibility.js"></script>
 </head>
 <body>
 <header id="document_Header" class="push">
@@ -94,4 +95,15 @@
         </footer>
     </div>
 </body>
+<div id="confirmPopUp">
+    <header>
+        <p>Êtes vous sûr de vouloir <span id="detailPopUp"></span> ce Sensory Captor ?</p>
+    </header>
+    <main>
+        <form id="confirmPopUpForm">
+            <button id="confirm" class="submitForm">Confirmer</button>
+            <button id="cancel" class="submitForm">Annuler</button>
+        </form>
+    </main>
+</div>
 </html>

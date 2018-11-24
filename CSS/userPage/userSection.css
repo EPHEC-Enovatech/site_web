@@ -134,7 +134,7 @@
 
 #showBoxDiv table th {
     border: 1px solid black;
-    width: 50%;
+    width: 45%;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     background:  var(--main-bg-color);
@@ -144,9 +144,60 @@
 
 #insertBox td {
     border: 1px solid black;
-    width: 50%;
+    width: 45%;
     background: #f2f2f2;
     padding: 1em;
+}
+
+#insertBox input {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    color: black;
+}
+
+#insertBox .deleteThisBox {
+    width: 10%;
+    padding: 0.9em;
+}
+
+#insertBox .deleteThisBox:hover {
+    background-color: #d9d9d9;
+    cursor: pointer;
+}
+
+#confirmPopUp {
+    display: none;
+
+    position: fixed;
+    text-align: center;
+    background-color: white;
+    width: 40vw;
+    height: auto;
+    border: 1px solid black;
+    z-index: 10001;
+    font-family: "Roboto", sans-serif;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1em;
+}
+
+#confirmPopUp button {
+    font-size: 1em;
+    width: 40%;
+    padding: 0.5em;
+}
+
+#boxError {
+    display: none;
+    padding: 0.5em;
+    margin: 0.5em;
 }
 
 /*---------------------------------------------------------------------------*/

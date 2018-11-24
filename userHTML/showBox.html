@@ -1,6 +1,7 @@
 <div id="showBoxDiv">
     <h1>Gérer mes Sensory Captor</h1>
     <hr>
+    <div id="boxError"></div>
     <p>Retrouvez tous vos Sensory Captor dans ce tableau :</p>
     <table>
         <tr>
@@ -17,5 +18,82 @@
     </table>
     <script>
         callAPI("devices/" + getCookie('user-id'), showBox);
+
+        dataChange = {
+            "idBox": "",
+            "value": "",
+            "oldValue": "",
+            "action": ""
+        };
+
+        $('#confirmPopUp #cancel').on("click", function(){
+            $('#confirmPopUp').hide();
+            $('#' + dataChange["idBox"]).val(dataChange["oldValue"]);
+        });
+
+        $('#confirmPopUp #confirm').on("click", function(){
+            callAPIMethod(dataChange["action"], dataChange["value"], "devices/" + dataChange["idBox"], showMessageAPI);
+            $('#confirmPopUp').hide();
+        });
+
+        //Affiche les box de l'utilisateur dans showBox
+        function showBox(response){
+            setLoading();
+            let table = "";
+
+            if (response.responseJSON.status === "SUCCESS") {
+
+                let boxs = response.responseJSON.data;
+                for(item in boxs){
+                    table += "<tr><td>";
+                    table += "<input type='text' value='" + boxs[item].deviceName + "' id=" + boxs[item].device_id + "></td><td>";
+                    table += boxs[item].device_id + "</td>";
+                    table += '<td class="deleteThisBox" onclick=deleteBox("' + boxs[item].device_id + '")><img alt="Supprimer" src="./IMG/userPage/garbage.svg"></td></tr>';
+                }
+            } else {
+                table += "<tr><td colspan='2'>Vous n'avez pas ajouté de Sensory Captor</td></tr>"
+            }
+            $('#insertBox').html(table);
+            $('#insertBox input').on("change", changeNameBox).on("focus", function(e){
+                dataChange["oldValue"] = e.target.value;
+            });
+
+        }
+
+        function deleteBox(idBox) {
+            dataChange["idBox"] = idBox;
+            dataChange["value"] = "";
+            dataChange["action"] = "delete";
+
+            $('#boxError').hide();
+            $('#detailPopUp').text("supprimer");
+            $('#confirmPopUp').show();
+            trapFocus(confirmPopUpForm);
+        }
+
+        function changeNameBox(sender, confirm=false){
+            dataChange["idBox"] = sender.target.id;
+            let data = new FormData();
+            data.append("deviceName", sender.target.value);
+            dataChange["value"] = data;
+            dataChange["action"] = "patch";
+
+            $('#boxError').hide();
+            $('#detailPopUp').text("modifier");
+            $('#confirmPopUp').show();
+            trapFocus(confirmPopUpForm);
+
+        }
+        
+        function showMessageAPI (response) {
+            callAPI("devices/" + getCookie('user-id'), showBox);
+            let apiResponse = JSON.parse(response.responseText);
+            if(apiResponse.status === "SUCCESS"){
+                $('#boxError').text(apiResponse.message).addClass("success").show();
+            } else if (apiResponse.status === "ERROR"){
+                $('#boxError').text(apiResponse.message).addClass("error").show();
+            }
+        }
+
     </script>
 </div>
