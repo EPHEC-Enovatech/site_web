@@ -33,7 +33,7 @@
             <ul>
                 <li><a href="forumPage.html">Forum</a></li>
                 <li><a href="graph.html" target="_blank" >Mes données</a></li>
-                <li><a id="logout" href="index.html">Se déconnecter</a></li>
+                <li><a class="logout" href="index.html">Se déconnecter</a></li>
             </ul>
         </nav>
     </div>
@@ -64,11 +64,22 @@
                             <a href="https://sensorygarden.be/#map" target="_blank"><li class="sousMenu">Point de vente</li></a>
                         </ul>
                     </li>
+                    <li id="mobile_menu_part">
+                        <p class="underTitle"><b>Plus d'option</b></p>
+                        <ul>
+                            <a href="forumPage.html" target="_blank"><li class="sousMenu">Forum</li></a>
+                            <a href="graph.html" target="_blank"><li class="sousMenu">Mes données</li></a>
+                            <a href="index.html" target="_blank" class="logout"><li class="sousMenu">Se déconnecter</li></a>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
         <div id="contentZone" class="push">
+            <div id="loadingDiv" class="lds-ripple"><div></div><div></div></div>
+            <div id="content">
 
+            </div>
         </div>
     </main>
     <div id="disconnectBox" role="dialog">

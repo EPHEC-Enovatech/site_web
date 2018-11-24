@@ -50,6 +50,8 @@
 
     max-width: 500px;
     margin: auto;
+
+    vertical-align: baseline;
 }
 
 #userPicture {

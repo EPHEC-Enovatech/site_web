@@ -135,6 +135,7 @@ function setLoading(nombre = 0){
     let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if(connection = connection !== undefined ? connection.rtt > 60 : true){
         if(nombre > 0){
+            centerLoading();
             loading.show();
             countCall += nombre;
         } else {

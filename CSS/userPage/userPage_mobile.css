@@ -31,6 +31,10 @@
         opacity: 0.6;
     }
 
+    #sideNav #mobile_menu_part {
+        display: block;
+    }
+
     #sideNav{
         margin: 0;
 

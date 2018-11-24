@@ -9,12 +9,15 @@ function calculateSizeMain(){
 
 function loadHTML(page){
 
-    var contentZone = $('#contentZone');
+    const load = '<div id="loadingDiv" class="lds-ripple"><div></div><div></div></div>';
+    const contentZone = $('#content');
 
     if(page === undefined){
         contentZone.html("<p>Vous allez être redirigé sur notre site</p>");
     } else {
+        setLoading(1);
         contentZone.load("userHTML/" + page + ".html", function( response, status, xhr ) {
+            setLoading();
             if (status === "error") {
                 contentZone.html("<p>Impossible de charger le contenu, vérifier votre connexion internet</p>");
             }
@@ -44,6 +47,42 @@ function toggleSlideMenu(){
     }
 }
 
+/**
+ * Centre le chargement au milieu de la zone de graphique
+ */
+function centerLoading() {
+    let contentZone = $('#contentZone');
+    let largeur = (contentZone.width()/2) - 64/4;
+    let hauteur = contentZone.height()/2;
+
+    $('#loadingDiv').css("top", hauteur + "px").css("left", largeur + "px");
+}
+
+let countCall = 0;
+
+/**
+ * Gère l'affichage du loading
+ * @param nombre si >0 ajoute des loadings dans la file, si <0 supprime des loadings
+ */
+function setLoading(nombre = 0){
+    let loading = $('#loadingDiv');
+
+    //Test la connexion internet
+    let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if(connection = connection !== undefined ? connection.rtt > 60 : true){
+        if(nombre > 0){
+            loading.show();
+            centerLoading();
+            countCall += nombre;
+        } else {
+            if(countCall > 0){
+                countCall -= 1;
+            }
+        }
+    }
+    if (countCall === 0) loading.hide();
+}
+
 $(function(){
 
     moment.locale("fr");
@@ -58,17 +97,25 @@ $(function(){
         }
     });
 
-    $('#contentZone').load('userHTML/userInfo.html');
+    centerLoading();
+
+    //$('#content').load('userHTML/userInfo.html');
+    loadHTML("userInfo");
 
     $(window).on("resize", function(){
         toggleSlideMenu();
+        centerLoading();
     });
 
-    $("#logout").click((e) => {
+    $(".logout").click((e) => {
         e.preventDefault();
         deleteCookie('token');
         deleteCookie('user-id');
-        window.location = e.target.href;
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
     });
 
     callAPI("users/" + getCookie('user-id'), showUserInfo);
@@ -79,6 +126,7 @@ $(function(){
 
 //Affiche les données personnelles de l'utilisateur
 function showUserInfo(response, textStatus) {
+    setLoading();
     let nomUser =  response.responseJSON.data.prenom + " " + response.responseJSON.data.nom;
     $('title').html("Profil " + nomUser);
     $('#userWelcome').html(nomUser);
@@ -89,7 +137,7 @@ function showUserInfo(response, textStatus) {
 
 //Affiche les box de l'utilisateur dans showBox
 function showBox(response){
-
+    setLoading();
     let table = "";
 
     if (response.responseJSON.status === "SUCCESS") {

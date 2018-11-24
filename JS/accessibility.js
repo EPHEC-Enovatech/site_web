@@ -1,5 +1,5 @@
 function trapFocus(element, namespace) {
-    var focusableEls = element.querySelectorAll('a[href], button, textarea, input[type="text"], input[type="email"]'),
+    var focusableEls = element.querySelectorAll('a[href], button, textarea, input[type="text"], input[type="email"], input[type="submit"], input[type="reset"]'),
         firstFocusableEl = focusableEls[0];
         lastFocusableEl = focusableEls[focusableEls.length - 1];
         KEYCODE_TAB = 9;

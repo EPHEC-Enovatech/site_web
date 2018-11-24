@@ -38,6 +38,7 @@
 
     //Affiche les erreurs
     function getErrorAddBox(response) {
+        setLoading();
         let message = JSON.parse(response.responseText);
         let errorAddBox = $('#errorAddBox');
 
