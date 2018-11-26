@@ -7,6 +7,7 @@
     <title>Forum</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <link rel="stylesheet" href="CSS/jPages.css">
     <link rel="stylesheet" href="CSS/navBar.css">
     <link rel="stylesheet" href="CSS/navBar_mobile.css">
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="CSS/userPage/userPage_mobile.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/simplemde.min.js"></script>
     <script src="JS/select2.min.js"></script>
     <script src="JS/jPages.js"></script>
     <script src="JS/bigSlide.min.js"></script>
@@ -46,9 +48,16 @@
             <ul class="listPubli" id="paginationList">
 
             </ul>
+            <ul class="listPubli" id="commentList">
+
+            </ul>
             <div class="holder"></div>
         </div>
     </div>
+    <form name="createComment" id="createComment" action="#">
+        <textarea id="commentEditor"></textarea>
+        <input type="submit" name="envoyerForm" value="Envoyer le commentaire">
+    </form>
 </main>
 </body>
 </html>

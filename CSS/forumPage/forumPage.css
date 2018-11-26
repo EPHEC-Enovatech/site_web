@@ -22,11 +22,11 @@ html, body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
-    overflow: hidden;
 }
 
 #document_Header {
     position: relative;
+    overflow: hidden;
 }
 
 /*SideNav*/
@@ -48,6 +48,7 @@ html, body {
     overflow: hidden;
 
     z-index: 10;
+    overflow: hidden;
 }
 
 #sideNav a {
@@ -318,7 +319,8 @@ hr {
     width: 90%;
     margin: 2% 5%;
     text-align: center;
-
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 #titleEditor {
     width: 100%;
@@ -351,4 +353,40 @@ hr {
 .select2-container{
     margin: 1vw 0;
 
+}
+
+/*----------------------------------------------------------------*/
+/*Affichage publication avec ses commentaires*/
+
+#commentList{
+    width: 85%;
+    float: right;
+}
+.holder {
+    clear: right;
+}
+
+#createComment{
+    margin: 1vw 0;
+    width: 85%;
+    float: right;
+    text-align: center;
+}
+
+#createComment input[type=submit] {
+    border-radius: 0.3vw;
+    margin: 1vw;
+    font-size: 1vw;
+    -webkit-box-shadow: 0.1vw 0.1vw #43A047;
+    box-shadow: 0.1vw 0.1vw #43A047;
+    background-color: #e7fae7;
+    padding: 1vw;
+    text-decoration: none;
+    color: black;
+    width: auto;
+}
+#createComment input[type=submit]:hover {
+    background-color: #cacaca;
+    -webkit-box-shadow: 0.1vw 0.1vw #e7fae7;
+    box-shadow: 0.1vw 0.1vw #e7fae7;
 }
