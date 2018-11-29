@@ -1,0 +1,19 @@
+#adminPage input {
+    width: 90%;
+}
+
+#QRBox {
+    display: none;
+}
+
+#boxImgQR {
+    display: flex;
+}
+
+#downloadQR {
+    margin: auto;
+}
+
+#qrcode {
+    margin: 1em auto 1em auto;
+}

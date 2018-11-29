@@ -90,7 +90,7 @@
     color: var(--main-color);
 }
 
-#mobile_menu_button {
+#mobile_menu_button, #mobile_menu_button_side  {
     display: none;
 }
 

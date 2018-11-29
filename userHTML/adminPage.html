@@ -1,0 +1,50 @@
+<script src="./JS/QRCode/qrcode.min.js"></script>
+<script src="./JS/userPage/admin.js"></script>
+<div id="adminPage">
+    <h1>Page d'administration</h1>
+    <p>Cette page est réservée aux administrateurs.</p>
+
+    <hr>
+    <h2>Générer un code Sensory Captor</h2>
+    <p>Entrez le numéro du Sensory Captor pour générer un code de vérification et un QR code.</p>
+    <form id="adminCreateCheck">
+        <label for="newBox" class="visuallyhidden">Numéro de Sensory Captor :</label>
+        <input id="newBox" class="inputForm" type="text" placeholder="Numéro de box" required><br>
+        <label for="newCheck" class="visuallyhidden">Code de vérification :</label>
+        <input id="newCheck" class="inputForm" type="number" placeholder="Vérification" readonly><br>
+        <input type="submit" class="inputForm submitForm" value="Générer">
+        <div id="QRBox">
+            <p>Cliquer sur le QR code pour le télécharger</p>
+            <div id="boxImgQR" title="Cliquer pour télécharger">
+                <a id="downloadQR" href="#">
+                    <div id="qrcode"></div>
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <h2>Ajouter une catégorie au Forum</h2>
+    <p>Ajouter une catégories, essayer d'ajouter des catégories pertinentes par rapport à celle existante.</p>
+    <form id="addCateg">
+        <div id="errorCateg"></div>
+        <label for="categ" class="visuallyhidden">Catégorie :</label>
+        <input id="categ" class="inputForm" type="text" placeholder="Catégorie" required><br>
+        <input type="submit" class="inputForm submitForm" value="Ajouter">
+    </form>
+
+    <hr>
+    <h2>Ajouter un capteur :</h2>
+    <p>Ajouter un capteur. Attention, seulement ajouté en base de données, il faut gérer le backend manuellement.</p>
+    <form id="addCaptor">
+        <div id="errorCaptor"></div>
+        <label for="captor" class="visuallyhidden">Capteur :</label>
+        <input id="captor" class="inputForm" type="text" placeholder="Capteur" required><br>
+        <input type="submit" class="inputForm submitForm" value="Ajouter">
+    </form>
+
+    <hr>
+    <h2>Promouvoir un utilisateur :</h2>
+    <p>Permet de promouvoir un utilisateur au rang d'administrateur.</p>
+    <p><b>Fonction à venir</b></p>
+</div>

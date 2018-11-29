@@ -105,8 +105,11 @@ $(function(){
 
     centerLoading();
 
-    //$('#content').load('userHTML/userInfo.html');
-    loadHTML("userInfo");
+    if(getUrlParameter("box") === undefined && getUrlParameter("check") === undefined) {
+        loadHTML("userInfo");
+    } else {
+        loadHTML("addBox");
+    }
 
     $(window).on("resize", function(){
         toggleSlideMenu();
@@ -124,14 +127,16 @@ $(function(){
         }
     });
 
-    callAPI("users/" + getCookie('user-id'), showUserInfo);
-
     calculateSizeMain();
     toggleSlideMenu();
 });
 
 //Affiche les données personnelles de l'utilisateur
 function showUserInfo(response, textStatus) {
+    if(response.status === 401){
+        cookiesExpireTime();
+    }
+
     setLoading();
     let nomUser =  response.responseJSON.data.prenom + " " + response.responseJSON.data.nom;
     $('title').html("Profil " + nomUser);
@@ -157,8 +162,6 @@ function getCookie(cname) {
     return "";
 }
 
-//Quand le cookies expire
-function cookiesExpireTime() {
-    $('#disconnectBox').show();
-    $('#document_Main, #document_Header').css('filter', 'blur(3px');
+function cookiesExpireTime(){
+    $("#disconnectDiv").load("lostConnection.html");
 }

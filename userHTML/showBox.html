@@ -26,12 +26,16 @@
             "action": ""
         };
 
-        $('#confirmPopUp #cancel').on("click", function(){
+        $('#confirmPopUp #cancel').on("click", function(e){
+            e.preventDefault();
             $('#confirmPopUp').hide();
-            $('#' + dataChange["idBox"]).val(dataChange["oldValue"]);
+            if(dataChange["oldValue"] !== ""){
+                $('#' + dataChange["idBox"]).val(dataChange["oldValue"]);
+            }
         });
 
-        $('#confirmPopUp #confirm').on("click", function(){
+        $('#confirmPopUp #confirm').on("click", function(e){
+            e.preventDefault();
             callAPIMethod(dataChange["action"], dataChange["value"], "devices/" + dataChange["idBox"], showMessageAPI);
             $('#confirmPopUp').hide();
         });
@@ -64,6 +68,7 @@
             dataChange["idBox"] = idBox;
             dataChange["value"] = "";
             dataChange["action"] = "delete";
+            dataChange["oldValue"] = "";
 
             $('#boxError').hide();
             $('#detailPopUp').text("supprimer");

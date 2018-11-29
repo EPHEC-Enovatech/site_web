@@ -315,6 +315,10 @@
 /*---------------------------------------------------------------------------*/
 /*addBox*/
 
+#content {
+    text-align: center;
+}
+
 #addBoxForm {
     text-align: center;
     max-width: 500px;
@@ -328,6 +332,12 @@
 
 #addBoxForm input {
     width: 50%;
+}
+
+#qrLink {
+    text-decoration: none;
+    margin: 0.5em;
+    display: block;
 }
 
 /*Grands écrans*/
