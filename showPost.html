@@ -7,6 +7,7 @@
     <title>Forum</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <link rel="stylesheet" href="CSS/jPages.css">
     <link rel="stylesheet" href="CSS/navBar.css">
     <link rel="stylesheet" href="CSS/navBar_mobile.css">
@@ -15,6 +16,8 @@
     <link rel="stylesheet" href="CSS/userPage/userPage_mobile.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
+    <script src="JS/simplemde.min.js"></script>
+    <script src="JS/marked.min.js"></script>
     <script src="JS/select2.min.js"></script>
     <script src="JS/jPages.js"></script>
     <script src="JS/bigSlide.min.js"></script>
@@ -42,13 +45,39 @@
 <main class="push">
 
     <div id="publications">
-        <div id="pageHelp">
-            <ul class="listPubli" id="paginationList">
+        <ul class="listPubli" id="showPost">
 
-            </ul>
-            <div class="holder"></div>
-        </div>
+        </ul>
+        <ul class="listPubli" id="commentList">
+
+        </ul>
+        <div class="holder"></div>
     </div>
+    <form name="createComment" id="createComment" action="#">
+        <textarea id="commentEditor"></textarea>
+        <input type="submit" name="envoyerForm" value="Envoyer le commentaire">
+    </form>
 </main>
 </body>
+<div id="confirmPopUp">
+    <header>
+        <p>Êtes vous sûr de vouloir supprimer ce<span class="insertText"></span> ?</p>
+    </header>
+    <main>
+        <form id="confirmPopUpForm">
+            <button id="confirm" class="submitForm">Confirmer</button>
+            <button id="cancel" class="submitForm">Annuler</button>
+        </form>
+    </main>
+</div>
+<div id="validationPopUp">
+    <header>
+        <p id="valText">Ce<span class="insertText"></span> a bien été supprimé !</p>
+    </header>
+    <main>
+        <form id="validationForm">
+            <button id="validationButton" class="submitForm">Ok</button>
+        </form>
+    </main>
+</div>
 </html>
