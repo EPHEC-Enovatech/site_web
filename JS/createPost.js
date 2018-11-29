@@ -2,7 +2,9 @@ var message = "";
 $(document).ready(function () {
     $('.cat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à mettre dans votre publication",
-        width: 'resolve'
+        width: '50vw',
+        dropdownParent: $('#dropdown'),
+        allowClear: true
     });
     message = new SimpleMDE({
         autofocus: true,

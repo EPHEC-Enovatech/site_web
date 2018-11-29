@@ -17,6 +17,7 @@
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
     <script src="JS/simplemde.min.js"></script>
+    <script src="JS/marked.min.js"></script>
     <script src="JS/select2.min.js"></script>
     <script src="JS/jPages.js"></script>
     <script src="JS/bigSlide.min.js"></script>
@@ -44,15 +45,13 @@
 <main class="push">
 
     <div id="publications">
-        <div id="pageHelp">
-            <ul class="listPubli" id="paginationList">
+        <ul class="listPubli" id="showPost">
 
-            </ul>
-            <ul class="listPubli" id="commentList">
+        </ul>
+        <ul class="listPubli" id="commentList">
 
-            </ul>
-            <div class="holder"></div>
-        </div>
+        </ul>
+        <div class="holder"></div>
     </div>
     <form name="createComment" id="createComment" action="#">
         <textarea id="commentEditor"></textarea>
@@ -60,4 +59,25 @@
     </form>
 </main>
 </body>
+<div id="confirmPopUp">
+    <header>
+        <p>Êtes vous sûr de vouloir supprimer ce<span class="insertText"></span> ?</p>
+    </header>
+    <main>
+        <form id="confirmPopUpForm">
+            <button id="confirm" class="submitForm">Confirmer</button>
+            <button id="cancel" class="submitForm">Annuler</button>
+        </form>
+    </main>
+</div>
+<div id="validationPopUp">
+    <header>
+        <p id="valText">Ce<span class="insertText"></span> a bien été supprimé !</p>
+    </header>
+    <main>
+        <form id="validationForm">
+            <button id="validationButton" class="submitForm">Ok</button>
+        </form>
+    </main>
+</div>
 </html>
