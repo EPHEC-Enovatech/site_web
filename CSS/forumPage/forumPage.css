@@ -227,9 +227,10 @@ hr {
     margin: 1vw;
     display: inline;
 }
-.select2-selection--multiple {
-    width: 50vw;
+#header_forum #dropdown .select2-container .select2-dropdown {
+    margin: -1.5vw 0px 0px 1.5vw;
 }
+
 .listPubli .select2-container--default .select2-selection--multiple {
     border: none;
 }
@@ -342,8 +343,13 @@ hr {
     font-size: 1.5vw;
     height: 1.8vw;
 }
-.CodeMirror{
+.CodeMirror {
     text-align: left;
+
+}
+#createComment .CodeMirror{
+    margin-left: -10%;
+    margin-right: 7%;
 }
 #publi_block h2 {
     font-size: 2vw;

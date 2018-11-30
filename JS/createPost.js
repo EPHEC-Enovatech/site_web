@@ -2,7 +2,7 @@ var message = "";
 $(document).ready(function () {
     $('.cat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à mettre dans votre publication",
-        width: '50vw',
+        width: '90vw',
         dropdownParent: $('#dropdown'),
         allowClear: true
     });
