@@ -62,4 +62,7 @@ main a {
     background:  var(--main-bg-color);
     color:  var(--main-color);
     cursor: pointer;
+
+    -webkit-appearance: none;
+    border-radius: 0;
 }

@@ -35,6 +35,11 @@
     overflow: hidden;
 }
 
+button {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
 /*-----------------------------------------------------------------------------*/
 
 html, body {

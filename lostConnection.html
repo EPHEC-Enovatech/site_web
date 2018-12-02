@@ -103,4 +103,11 @@
     $('#overlayUserPage').show();
     trapFocus(disconnectBox);
     $('#document_Main, #document_Header').css('filter', 'blur(3px');
+
+    $(function(){
+        if(getUrlParameter("box") !== undefined){
+            $('#disconnectBox header h2').text("Erreur de connexion");
+            $('#disconnectBox main p').text("Vous devez vous connecter ou vous inscrire avant de scanner un QRCode");
+        }
+    });
 </script>

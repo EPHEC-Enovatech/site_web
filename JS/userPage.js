@@ -104,12 +104,6 @@ $(function(){
 
     centerLoading();
 
-    if(getUrlParameter("box") === undefined && getUrlParameter("check") === undefined) {
-        loadHTML("userInfo");
-    } else {
-        loadHTML("addBox");
-    }
-
     $(window).on("resize", function(){
         toggleSlideMenu();
         centerLoading();
@@ -132,6 +126,12 @@ $(function(){
 
     calculateSizeMain();
     toggleSlideMenu();
+
+    if(getUrlParameter("box") === undefined && getUrlParameter("check") === undefined) {
+        loadHTML("userInfo");
+    } else {
+        loadHTML("addBox");
+    }
 });
 
 //Affiche les données personnelles de l'utilisateur

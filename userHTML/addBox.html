@@ -40,9 +40,12 @@
         formData.append("deviceName", evt.target.nomCaptor.value);
         formData.append("checksum", evt.target.verification.value);
 
-        let endpoint = "devices/" + getCookie('user-id');
-
-        callAPIMethod("POST", formData, endpoint, getErrorAddBox);
+        if(getCookie('user-id') === ""){
+            cookiesExpireTime();
+        } else {
+            let endpoint = "devices/" + getCookie('user-id');
+            callAPIMethod("POST", formData, endpoint, getErrorAddBox);
+        }
     }
 
     //Affiche les erreurs
