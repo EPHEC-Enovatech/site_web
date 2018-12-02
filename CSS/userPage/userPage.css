@@ -225,6 +225,10 @@ hr {
     display: inline-block;
 }
 
+#sideNav ul #adminPage {
+    display: none;
+}
+
 /*----------------------------------------------------------------*/
 /*Affichage erreur*/
 

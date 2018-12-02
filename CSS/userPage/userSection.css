@@ -27,6 +27,7 @@
     text-transform: uppercase;
     background:  var(--main-bg-color);
     color:  var(--main-color);
+    cursor: pointer;
 }
 
 .submitForm:hover{
@@ -336,8 +337,9 @@
 
 #qrLink {
     text-decoration: none;
-    margin: 0.5em;
+    margin: 0.5em auto 0.5em auto;
     display: block;
+    max-width: 500px;
 }
 
 /*Grands écrans*/

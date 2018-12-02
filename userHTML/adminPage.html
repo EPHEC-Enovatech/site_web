@@ -16,7 +16,7 @@
         <div id="QRBox">
             <p>Cliquer sur le QR code pour le télécharger</p>
             <div id="boxImgQR" title="Cliquer pour télécharger">
-                <a id="downloadQR" href="#">
+                <a id="downloadQR" onclick="return updateLinkDownload();" href="#">
                     <div id="qrcode"></div>
                 </a>
             </div>
@@ -29,8 +29,20 @@
     <form id="addCateg">
         <div id="errorCateg"></div>
         <label for="categ" class="visuallyhidden">Catégorie :</label>
-        <input id="categ" class="inputForm" type="text" placeholder="Catégorie" required><br>
+        <input id="categ" name="categ" class="inputForm" type="text" placeholder="Catégorie" required><br>
         <input type="submit" class="inputForm submitForm" value="Ajouter">
+    </form>
+
+    <hr>
+    <h2>Supprimer une catégorie du Forum</h2>
+    <p>Attention, la catégories sera supprimée ainsi que tous les posts associés !</p>
+    <form id="delCateg">
+        <div id="errorDelCateg"></div>
+        <div id="divDelCateg">
+            <label for="selectDelCateg" class="visuallyhidden">Catégorie :</label>
+            <select id="selectDelCateg" name="selectDelCateg"></select>
+            <input type="submit" class="inputForm submitForm" value="Supprimer">
+        </div>
     </form>
 
     <hr>
@@ -39,12 +51,33 @@
     <form id="addCaptor">
         <div id="errorCaptor"></div>
         <label for="captor" class="visuallyhidden">Capteur :</label>
-        <input id="captor" class="inputForm" type="text" placeholder="Capteur" required><br>
+        <input id="captor" name="captor" class="inputForm" type="text" placeholder="Capteur" required><br>
+        <label for="unite" class="visuallyhidden">L'unité de messure :</label>
+        <input id="unite" name="unite" class="inputForm" type="text" placeholder="Unité" required><br>
         <input type="submit" class="inputForm submitForm" value="Ajouter">
+    </form>
+
+    <hr>
+    <h2>Supprimer un capteur :</h2>
+    <p>Supprimer un capteur. Attention, les données relatives au capteur seront également supprimées !</p>
+    <form id="delCaptor">
+        <div id="errorDelCaptor"></div>
+        <div id="divDelCaptor">
+            <label for="selectDelCaptor" class="visuallyhidden">Capteurs :</label>
+            <select id="selectDelCaptor" name="selectDelCaptor"></select>
+            <input type="submit" class="inputForm submitForm" value="Supprimer">
+        </div>
     </form>
 
     <hr>
     <h2>Promouvoir un utilisateur :</h2>
     <p>Permet de promouvoir un utilisateur au rang d'administrateur.</p>
-    <p><b>Fonction à venir</b></p>
+    <form id="promoteForm">
+        <div id="errorPromote"></div>
+        <div id="divPromote">
+            <label for="allUsersSelect" class="visuallyhidden">Utiisateur non-admin :</label>
+            <select id="allUsersSelect" name="allUsersSelect"></select>
+            <input id="promoteButton" type="submit" class="inputForm submitForm" value="Promouvoir">
+        </div>
+    </form>
 </div>

@@ -8,7 +8,6 @@ function calculateSizeMain(){
 }
 
 function loadHTML(page){
-
     const load = '<div id="loadingDiv" class="lds-ripple"><div></div><div></div></div>';
     const contentZone = $('#content');
 
@@ -126,6 +125,10 @@ $(function(){
             window.location = "index.html";
         }
     });
+
+    if((parseJWT(getCookie("token"))).admin){
+        $('#adminPage').show();
+    }
 
     calculateSizeMain();
     toggleSlideMenu();
