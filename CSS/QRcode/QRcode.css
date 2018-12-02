@@ -31,8 +31,8 @@ main {
 }
 
 #preview {
-    width: 65vw;
-    height: 65vw;
+    width: 95vw;
+    height: 95vw;
 }
 
 #overlay {
@@ -41,13 +41,25 @@ main {
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
-    width: 65vw;
-    height: 65vw;
+    width: 95vw;
+    height: 95vw;
 }
 
 #targetQR {
     border: 1px solid black;
-    height: 23vw;
-    width: 23vw;
+    height: 45vw;
+    width: 45vw;
     margin: auto;
+}
+
+main a {
+    text-decoration: none;
+    outline: 0;
+    padding: 1em;
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
+    cursor: pointer;
 }
