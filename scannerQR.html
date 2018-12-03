@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scanner votre box</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="CSS/navBar.css">
+    <link rel="stylesheet" href="CSS/navBar_mobile.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="JS/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="CSS/QRcode/QRcode.css">
+</head>
+<body>
+<header id="document_Header">
+    <div id="headers_menu">
+        <div id="menu_left">
+            <img id="mobile_menu_button_side" class="menu-link" src="IMG/menu.svg" alt="Menu">
+            <div>
+                <img id="logo" src="IMG/logo.svg" alt="Logo Sensory Garden">
+                <h1 id="logo_title">Sensory Garden</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div>
+        <p id="errorQR">Cibler le QR Code de manière à ce qu'il remplisse le carré noir.</p>
+    </div>
+    <div>
+        <div id="overlay">
+            <div id="targetQR"></div>
+        </div>
+        <video muted autoplay playsinline id="preview"></video>
+    </div>
+    <a href="userPage.html">Retour</a>
+    <p>SensoryGarden ne récupère pas et ne stocke pas le données vidéos de votre caméra.</p>
+</main>
+</body>
+<script>
+    $(function(){
+        $(window).on("resize", function(){
+            setOverlay();
+        });
+    });
+
+    function setOverlay() {
+        let preview = $('#preview');
+        let widthVideo = preview.css("width");
+        let heightVideo = preview.css("height");
+
+        $('#overlay').css("width", widthVideo).css("height", heightVideo);
+    }
+</script>
+<script type="module">
+    import QrScanner from "./JS/QRCode/qr-scanner.min.js";
+    const video = document.getElementById('preview');
+    function checkQR(result) {
+        if(result.includes("sensorygarden.be/")){
+            $('#errorQR').text("Code trouvé ! Redirection...");
+            window.location.href = result;
+        } else {
+            $('#errorQR').text("Ce n'est pas un code Sensory Garden");
+        }
+    }
+    const scanner = new QrScanner(video, result => checkQR(result));
+    scanner.start();
+</script>
+</html>

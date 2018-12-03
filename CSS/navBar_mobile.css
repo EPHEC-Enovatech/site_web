@@ -22,6 +22,10 @@
 /*Mobile design*/
 @media only screen and (max-width: 600px) {
 
+    #document_Header, #headers_menu {
+        background-color: var(--main-color);
+    }
+
     html {
         overflow-x: hidden;
     }

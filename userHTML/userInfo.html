@@ -1,5 +1,5 @@
 <div id="userTitle">
-    <h1 id="userWelcome">Bienvenue TrucMachin !</h1>
+    <h1 id="userWelcome">Chargement des données</h1>
     <img id="userPicture" src="./IMG/avatar.png">
 </div>
 <hr>
@@ -42,6 +42,7 @@
     }
 
     function getErrorUserInfo(response){
+        setLoading();
         let message = JSON.parse(response.responseText);
         let errorUserInfo = $('#errorUserInfo');
 
