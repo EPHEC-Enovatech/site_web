@@ -2,16 +2,27 @@ var message = "";
 $(document).ready(function () {
     $('.cat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à mettre dans votre publication",
-        width: '50vw',
+        width: '90vw',
         dropdownParent: $('#dropdown'),
         allowClear: true
     });
-    message = new SimpleMDE({
-        autofocus: true,
-        element: $("#textEditor")[0],
-        placeholder: "Décrivez ce que vous avez à dire, soyez le plus précis possible...",
-        status: false,
-        toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "guide"],
+    message = $("#textEditor").tailWriter({
+        // Width/height of the markdown editor
+        "width":     "100%",
+        // Customize toolbar
+        "toolbar": ["bold", "italic", "headers", "|", "quote", "list:unordered", "list:ordered", "|", "link", "image", "|", "preview"],
+        // Where to position the tooltbar
+        "toolbar_pos":    "top",
+        // Enable / disable the indent
+        "indent_tab":   true,
+        // True to use "======", False to use a single "#".
+        "action_header1": true,
+        // True to use "------", False to use "##".
+        "action_header2": true,
+        // Enable / disable the tooltips
+        "tooltip_show":   true,
+        // Enable / disable the status bar
+        "statusbar": false,
     });
     callAPI('categories', selectCategorie);
     $('#createPubli').on("submit", createPubli);
@@ -42,7 +53,7 @@ function createPubli(evt) {
         categories.push(cat[item].id);
     }
     formData.append("postTitle", evt.target.titleEditor.value);
-    formData.append("postText", message.value());
+    formData.append("postText", evt.target.textEditor.value);
     formData.append("user_id", getCookie('user-id'));
     for (var i = 0; i < categories.length; i++) {
         formData.append('categories[]', categories[i]);

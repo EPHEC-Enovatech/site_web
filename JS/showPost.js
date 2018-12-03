@@ -6,13 +6,23 @@ $(document).ready(function() {
         placeholder: "Choisissez une ou plusieurs catégories à filtrer",
         width: "20em",
     });
-    comment = new SimpleMDE({
-        autofocus: false,
-        element: $("#commentCreation")[0],
-        placeholder: "Donner votre avis sur cette publication ! Soyez le plus complet possible...",
-        status: false,
-        toolbar: false,
-        autosaved: false,
+    comment = $("#commentEditor").tailWriter({
+        // Width/height of the markdown editor
+        "width":     "100%",
+        // Customize toolbar
+        "toolbar": false,
+        // Where to position the tooltbar
+        "toolbar_pos":    "top",
+        // Enable / disable the indent
+        "indent_tab":   true,
+        // True to use "======", False to use a single "#".
+        "action_header1": true,
+        // True to use "------", False to use "##".
+        "action_header2": true,
+        // Enable / disable the tooltips
+        "tooltip_show":   false,
+        // Enable / disable the status bar
+        "statusbar": false,
     });
     $('#createComment').on("submit", createComment);
 
@@ -37,7 +47,7 @@ $(document).ready(function() {
 });
 function publication(response) {
     let publi = '';
-    let publication
+    let publication;
     if (response.responseJSON.status === "SUCCESS") {
         publication = response.responseJSON.data;
         let garbage = (parseJWT(getCookie("token")).admin)?"<a href='#' id='deletePost"+publication.id+"' class='deletePosts'><img src='IMG/userPage/garbage.svg' class='deletePost' alt='Corbeille de suppression de post'></a>":"";
@@ -89,14 +99,12 @@ function listComment(comments) {
     if(comments = undefined) list += "<li>Il n'y a pas de commentaire dans cette publication</li>";
     $('#commentList').html(list);
     $(function(){
-
         $("div.holder").jPages({
             containerID : "commentList",
             perPage: 5,
             previous: "◄",
             next: "►"
         });
-
     });
     $('.deletePosts').on("click", function(){
         $('#confirmPopUp').show();
