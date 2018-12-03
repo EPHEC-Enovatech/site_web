@@ -7,7 +7,7 @@
  |  @copyright  Copyright © 2015 - 2018 SamBrishes, pytesNET <pytes@gmx.net>
  */
 
- /* @start TOOLBAR ICONS */
+/* @start TOOLBAR ICONS */
 .tail-writer-object button[class*="icon-"],
 .tail-writer-object span[class*="icon-"]{
     background-repeat: no-repeat;
@@ -322,6 +322,7 @@
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+    -o-transition: border 142ms linear;
     transition: border 142ms linear;
     -moz-transition: border 142ms linear;
     -webkit-transition: border 142ms linear;
