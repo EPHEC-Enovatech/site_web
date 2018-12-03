@@ -3,6 +3,8 @@ $(document).ready(function() {
     var select2 = $('#filterCat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à filtrer",
         width: 'resolve',
+        allowClear: true,
+        dropdownParent: $('#dropdown')
     });
     callAPI("categories", selectCategorie);
     callAPI("posts", listPublication);
@@ -57,7 +59,7 @@ function listPublication(response) {
         for(item in publication){
             let arrCategories = publication[item].categories;
 
-            list += "<li id='"+publication[item].id+"'><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + "" + "</bdi></h3>";
+            list += "<li id='"+publication[item].id+"'><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user["prenom"] + "</bdi></h3>";
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
             list += "<div class=\"publication\"> <h3 class=\"object\">" + publication[item].postTitle + "</h3>";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";

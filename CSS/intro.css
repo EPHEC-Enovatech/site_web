@@ -10,7 +10,9 @@
     display: table-row;
 
     opacity: 0.90;
+}
 
+body {
     background-origin: border-box;
     background-image: url("../IMG/fond_big2.jpg");
     background-repeat: no-repeat;
@@ -18,7 +20,6 @@
     background-size: cover;
 
     background-position: bottom center;
-
 }
 
 /*#intro::before {
@@ -96,4 +97,8 @@
 
 #startPageHeader {
     display: table-row;
+}
+
+#document_Header {
+    background-color: rgba(255, 255, 255, 0.7);
 }
