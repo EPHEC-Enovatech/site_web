@@ -7,6 +7,8 @@
 }
 
 #boxImgQR {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -33,8 +35,11 @@
 #divPromote, #divDelCaptor, #divDelCateg {
     width: 90%;
     margin: auto;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 50% 50%;
     grid-template-columns: 50% 50%;
+    -ms-grid-rows: auto;
     grid-template-rows: auto;
 }
 
@@ -59,6 +64,7 @@
 
 #errorCateg, #errorCaptor, #errorPromote, #errorDelCateg, #errorDelCaptor {
     display: none;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 90%;
     margin: auto auto 1em auto;
