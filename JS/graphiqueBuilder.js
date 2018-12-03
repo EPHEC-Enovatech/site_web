@@ -25,6 +25,7 @@ function buildSimpleGraph(response, actionGraph, idCanvasDiv, idCanvas, titleGra
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
+            $("#disconnectDiv").load("lostConnection.html");
             console.log("Vous n'êtes pas connecté");
             break;
         case 200:
@@ -92,6 +93,7 @@ function buildAverageGraphWeek(response, actionGraph, idCanvasDiv, idCanvas, tit
             resetCanvas(idCanvasDiv, idCanvas, titleGraph);
             break;
         case 401:
+            $("#disconnectDiv").load("lostConnection.html");
             console.log("Vous n'êtes pas connecté");
             break;
         case 200:
@@ -194,6 +196,7 @@ function buildTableRecap(response, actionGraph, idCanvasDiv, idCanvas, titleGrap
             $('#' + idError).show();
             break;
         case 401:
+            $("#disconnectDiv").load("lostConnection.html");
             console.log("Vous n'êtes pas connecté");
             break;
         case 200:

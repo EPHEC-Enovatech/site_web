@@ -144,6 +144,7 @@ function parseJWT(token) {
  * @param func la function à executer à la fin de la requète (pour traitement, premier argument = donnée reçues)
  */
 function callAPI(arg, func){
+    setLoading(1);
     $.ajax({
         url: "https://api.sensorygarden.be/" + arg,
         type: "GET",
@@ -153,13 +154,14 @@ function callAPI(arg, func){
 }
 
 /**
- * Permet d'appeler l'API en OST, PATCH, DELETE
+ * Permet d'appeler l'API en POST, PATCH, DELETE
  * @param method POST, PATCH, DELETE
  * @param data les données a envoyer
  * @param endpoint l'endpoint
  * @param func la function à executer à la fin de la requète (pour traitement, premier argument = donnée reçues)
  */
 function callAPIMethod(method, data, endpoint, func){
+    setLoading(1);
     var settings = {
         "beforeSend": function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('token'));},
         "async": true,

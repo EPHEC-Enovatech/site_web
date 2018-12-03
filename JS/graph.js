@@ -188,6 +188,10 @@ function fillSelectData(response){
 
     let select = "";
 
+    if(response.status === 401){
+        $("#disconnectDiv").load("lostConnection.html");
+    }
+
     if (response.responseJSON.status === "SUCCESS") {
 
         let boxs = response.responseJSON.data;

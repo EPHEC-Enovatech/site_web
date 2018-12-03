@@ -2,7 +2,8 @@ var categories = "";
 $(document).ready(function() {
     var select2 = $('#filterCat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à filtrer",
-        width: 'resolve',
+
+        width: '49vw',
         allowClear: true,
         dropdownParent: $('#dropdown')
     });

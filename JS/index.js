@@ -24,14 +24,13 @@ function goToByScroll(id){
 
 //Gère la surbrillance de la barre de navigation
 function change($div){
-    if($div === -1){
+    if($div === -1 && window.innerWidth >= 600){
         $('#document_Header').css("animation-name", "changeColorToWhite");
-    } else if ($div === -2){
+    } else if ($div === -2 && window.innerWidth >= 600){
         $('#document_Header').css("animation-name", "changeColorToTransparent");
     } else {
         $('#menu ul li a').removeClass('current');
         $('.target-div'+$div).addClass('current');
-        console.log($div);
     }
 }
 
@@ -125,6 +124,7 @@ function toggleRegisterLogIn(mode) {
 //Gère l'envoi de mail de contact
 function sendMailContact(evt){
     evt.preventDefault();
+    $('#formContact').trigger("reset");
 
     let formData = new FormData();
     formData.append("nom", evt.target.formName.value);
@@ -163,6 +163,10 @@ $(function(){
     copyHeightNavBar();
 
     $('#document_Header').css("background-color", 'rgba(255, 255, 255, 0.7)');
+
+    if(getCookie("token") !== ""){
+        $('.target-div5').prop("onclick", null).attr("href", "userPage.html").text("Mon profil");
+    }
 
     $('#errorContactForm').hide();
     $('#formContact').on("submit", sendMailContact);
@@ -233,6 +237,7 @@ $(function(){
 
     $('#forgotMDP').on("click", function(){
         $('#MDPoublie').show();
+        trapFocus(formMDPoublie);
         $('#connexion').hide();
     });
 

@@ -8,13 +8,15 @@ function calculateSizeMain(){
 }
 
 function loadHTML(page){
-
-    var contentZone = $('#contentZone');
+    const load = '<div id="loadingDiv" class="lds-ripple"><div></div><div></div></div>';
+    const contentZone = $('#content');
 
     if(page === undefined){
         contentZone.html("<p>Vous allez être redirigé sur notre site</p>");
     } else {
+        setLoading(1);
         contentZone.load("userHTML/" + page + ".html", function( response, status, xhr ) {
+            setLoading();
             if (status === "error") {
                 contentZone.html("<p>Impossible de charger le contenu, vérifier votre connexion internet</p>");
             }
@@ -44,6 +46,48 @@ function toggleSlideMenu(){
     }
 }
 
+/**
+ * Centre le chargement au milieu de la zone de graphique
+ */
+function centerLoading() {
+    let contentZone = $('#contentZone');
+    let largeur = (contentZone.width()/2) - 64/4;
+    let hauteur = contentZone.height()/2;
+
+    $('#loadingDiv').css("top", hauteur + "px").css("left", largeur + "px");
+}
+
+let dataChange = {
+    "idBox": "",
+    "value": "",
+    "oldValue": "",
+    "action": ""
+};
+let countCall = 0;
+
+/**
+ * Gère l'affichage du loading
+ * @param nombre si >0 ajoute des loadings dans la file, si <0 supprime des loadings
+ */
+function setLoading(nombre = 0){
+    let loading = $('#loadingDiv');
+
+    //Test la connexion internet
+    let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if(connection = connection !== undefined ? connection.rtt > 60 : true){
+        if(nombre > 0){
+            loading.show();
+            centerLoading();
+            countCall += nombre;
+        } else {
+            if(countCall > 0){
+                countCall -= 1;
+            }
+        }
+    }
+    if (countCall === 0) loading.hide();
+}
+
 $(function(){
 
     moment.locale("fr");
@@ -58,54 +102,51 @@ $(function(){
         }
     });
 
-    $('#contentZone').load('userHTML/userInfo.html');
+    centerLoading();
 
     $(window).on("resize", function(){
         toggleSlideMenu();
+        centerLoading();
     });
 
-    $("#logout").click((e) => {
+    $(".logout").click((e) => {
         e.preventDefault();
         deleteCookie('token');
         deleteCookie('user-id');
-        window.location = e.target.href;
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
     });
 
-    callAPI("users/" + getCookie('user-id'), showUserInfo);
+    if((parseJWT(getCookie("token"))).admin){
+        $('#adminPage').show();
+    }
 
     calculateSizeMain();
     toggleSlideMenu();
+
+    if(getUrlParameter("box") === undefined && getUrlParameter("check") === undefined) {
+        loadHTML("userInfo");
+    } else {
+        loadHTML("addBox");
+    }
 });
 
 //Affiche les données personnelles de l'utilisateur
 function showUserInfo(response, textStatus) {
+    if(response.status === 401){
+        cookiesExpireTime();
+    }
+
+    setLoading();
     let nomUser =  response.responseJSON.data.prenom + " " + response.responseJSON.data.nom;
     $('title').html("Profil " + nomUser);
     $('#userWelcome').html(nomUser);
     $('#userName').val(response.responseJSON.data.nom);
     $('#userSurname').val(response.responseJSON.data.prenom);
     $('#userMail').val(response.responseJSON.data.email);
-}
-
-//Affiche les box de l'utilisateur dans showBox
-function showBox(response){
-
-    let table = "";
-
-    if (response.responseJSON.status === "SUCCESS") {
-
-        let boxs = response.responseJSON.data;
-        for(item in boxs){
-            console.log(item);
-            table += "<tr><td>";
-            table += boxs[item].deviceName + "</td><td>";
-            table += boxs[item].device_id + "</td></tr>";
-        }
-    } else {
-        table += "<tr><td colspan='2'>Vous n'avez pas ajouté de Sensory Captor</td></tr>"
-    }
-    $('#insertBox').html(table);
-
 }
 
 function getCookie(cname) {
@@ -124,8 +165,6 @@ function getCookie(cname) {
     return "";
 }
 
-//Quand le cookies expire
-function cookiesExpireTime() {
-    $('#disconnectBox').show();
-    $('#document_Main, #document_Header').css('filter', 'blur(3px');
+function cookiesExpireTime(){
+    $("#disconnectDiv").load("lostConnection.html");
 }

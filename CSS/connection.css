@@ -90,8 +90,6 @@
 #formConnexion header {
     display: -ms-grid;
     display: grid;
-    /*-webkit-box-pack: space-evenly;
-    -ms-flex-pack: space-evenly;*/
     -webkit-box-pack: space-evenly;
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
@@ -107,6 +105,7 @@
     grid-template-columns: 33.33% 33.33% 33.33%;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
+    grid-template-rows: -webkit-max-content;
     background-color: var(--main-color);
 
     border-bottom: 1px solid var(--main-bg-color);
