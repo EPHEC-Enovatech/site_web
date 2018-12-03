@@ -78,7 +78,7 @@
     color: #b3b3b3;
     font-size: 0.8em;
 }
-#formConnexion p a {
+#formConnexion p a, #legalDiv a {
     color: var(--main-bg-color);
     text-decoration: none;
 }

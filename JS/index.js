@@ -103,7 +103,8 @@ function connexionPopUp() {
 function toggleRegisterLogIn(mode) {
     $('#subError').hide();
     if(mode === "logIn"){
-        $('#subName, #subSurname, #confirmPassword').hide();
+        $('#subName, #subSurname, #confirmPassword').prop('required',false).hide();
+        $('#legalDiv').hide();
         $('#forgotMDP').show();
         $('#register').html("Pas encore inscrit ? <a href='#' onclick=toggleRegisterLogIn('register')>S'inscrire</a>");
         $('#buttonRegister').attr("value", "Se connecter");
@@ -111,7 +112,8 @@ function toggleRegisterLogIn(mode) {
         $('#formConnexion').off('submit').submit(authenticate);
         trapFocus(register);
     } else if (mode === "register"){
-        $('#subName, #subSurname, #confirmPassword').show();
+        $('#subName, #subSurname, #confirmPassword').prop('required',true).show();
+        $('#legalDiv').show();
         $('#forgotMDP').hide();
         $('#register').html("Déjà inscrit ? <a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>");
         $('#buttonRegister').attr("value","S'inscrire");
@@ -184,7 +186,7 @@ $(function(){
     });
 
     //Désactive le comportement standard du lien découvrir
-    $('#intro a, #formConnexion a').on("click", function (e) {
+    $('#intro a, #formConnexion #register a').on("click", function (e) {
         e.preventDefault();
     });
 
@@ -212,7 +214,7 @@ $(function(){
     if(getCookie("cookies_enabled") === ""){
         $('#dialCookies button').on("click", function(){
             $('#dialCookies').hide();
-            setCookie("cookies_enabled", "Les cookies ont été accepté", 1);
+            setCookie("cookies_enabled", "Les cookies ont été accepté", 30);
         });
         $('#dialCookies').show();
     }

@@ -45,56 +45,61 @@ function setCookie(name, value, exp_day) {
  */
 function signin(evt) {
     evt.preventDefault();
-    let data = {
-        nom: evt.target.subName.value,
-        prenom: evt.target.subSurname.value,
-        email: evt.target.subMail.value,
-        password: evt.target.password.value,
-        password_confirmation: evt.target.confirmPassword.value
-    };
-    fetch('https://api.sensorygarden.be/users/', {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => response.json())
-    .then(json => {
-        if (json.status === "SUCCESS") {
-            toggleRegisterLogIn("logIn");
-            $('#subError').removeClass().addClass("success").html(json.message).show();
-        } else {
-            let msgError = "Impossible de terminer <wbr>l'inscription :<br />";
-            for(let item in json.data){
-                switch (item) {
-                    case "password_confirmation":
-                        msgError += '- Le mot de passe doit être identique dans les 2 champs<br />';
-                        break;
-                    case "password":
-                        msgError += "- Le mot de passe ne doit pas être vide<br />";
-                        break;
-                    case "prenom":
-                        msgError += "- Le prénom ne doit pas être vide<br />";
-                        break;
-                    case "nom":
-                        msgError += "- Le nom ne doit pas être vide<br />";
-                        break;
-                    case "email":
-                        if(json.data[item][0] === "has already been taken"){
-                            msgError += "- Cette adresse mail existe déjà (<a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>)<br />"
-                        } else {
-                            msgError += "- Le mail ne doit pas être vide<br />";
-                        }
-                        break;
-                    default:
-                        msgError += "- Vérifier les champs<br />"
-                }
+    if (!$('#confirmLegal').is(':checked')){
+        let msgError = '- Vous devez accepter les conditions d\'utilisation<br />';
+        $('#subError').removeClass().addClass("error").html(msgError).show();
+    } else {
+        let data = {
+            nom: evt.target.subName.value,
+            prenom: evt.target.subSurname.value,
+            email: evt.target.subMail.value,
+            password: evt.target.password.value,
+            password_confirmation: evt.target.confirmPassword.value
+        };
+        fetch('https://api.sensorygarden.be/users/', {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
             }
-            $('#subError').removeClass().addClass("error").html(msgError).show();
-        }
-    })
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.status === "SUCCESS") {
+                    toggleRegisterLogIn("logIn");
+                    $('#subError').removeClass().addClass("success").html(json.message).show();
+                } else {
+                    let msgError = "Impossible de terminer <wbr>l'inscription :<br />";
+                    for(let item in json.data){
+                        switch (item) {
+                            case "password_confirmation":
+                                msgError += '- Le mot de passe doit être identique dans les 2 champs<br />';
+                                break;
+                            case "password":
+                                msgError += "- Le mot de passe ne doit pas être vide<br />";
+                                break;
+                            case "prenom":
+                                msgError += "- Le prénom ne doit pas être vide<br />";
+                                break;
+                            case "nom":
+                                msgError += "- Le nom ne doit pas être vide<br />";
+                                break;
+                            case "email":
+                                if(json.data[item][0] === "has already been taken"){
+                                    msgError += "- Cette adresse mail existe déjà (<a href='#' onclick=toggleRegisterLogIn('logIn')>Se connecter</a>)<br />"
+                                } else {
+                                    msgError += "- Le mail ne doit pas être vide<br />";
+                                }
+                                break;
+                            default:
+                                msgError += "- Vérifier les champs<br />"
+                        }
+                    }
+                    $('#subError').removeClass().addClass("error").html(msgError).show();
+                }
+            })
+    }
 }
 
 /**
