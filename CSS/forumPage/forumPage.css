@@ -347,10 +347,6 @@ hr {
     text-align: left;
 
 }
-#createComment .CodeMirror{
-    margin-left: -10%;
-    margin-right: 7%;
-}
 #publi_block h2 {
     font-size: 2vw;
 }
@@ -397,9 +393,10 @@ hr {
 }
 
 #createComment{
-    margin: 1vw 0;
-    width: 85%;
-    float: right;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 75% 25%;
+    margin: 1vw 1vw;
     text-align: center;
 }
 .deletePosts:hover {
@@ -428,15 +425,22 @@ hr {
 
 #createComment input[type=submit] {
     border-radius: 0.3vw;
-    margin: 1vw;
+    grid-column: 1;
+    grid-row: 2;
+    margin: 2% 40%;
     font-size: 1vw;
     -webkit-box-shadow: 0.1vw 0.1vw #43A047;
     box-shadow: 0.1vw 0.1vw #43A047;
     background-color: #e7fae7;
     padding: 1vw;
+    padding-bottom: 2vw;
     text-decoration: none;
     color: black;
-    width: auto;
+    width: 20%;
+}
+#commentEditor {
+    grid-column: 1;
+    grid-row: 1;
 }
 #createComment input[type=submit]:hover {
     background-color: #cacaca;
