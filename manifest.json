@@ -1,0 +1,16 @@
+{
+  "name": "Site web pour la société SensoryGarden",
+  "short_name": "SensoryGarden",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ccc",
+  "theme_color": "#5FAAE5",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
