@@ -1129,6 +1129,14 @@ body {
         padding: 0.5em;
     }
 
+    #linkLegal {
+        display: block;
+        margin: auto;
+        width: 100%;
+        text-align: right;
+        color: var(--main-bg-color);
+    }
+
     /*-------------------------------------------------------------------*/
     /*PopUp MDP oublié*/
 
