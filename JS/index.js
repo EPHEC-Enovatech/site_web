@@ -307,6 +307,14 @@ $(function(){
         e.preventDefault()
     });
 
+    //Change la couleur de la barre quand on clic sur la navigation
+    $('#menu ul li a:not(.target-div1), #intro a').on("click", function(){
+        $('#document_Header').css("animation-name", "changeColorToWhite");
+    });
+    $('.target-div1').on("click", function(){
+        $('#document_Header').css("animation-name", "changeColorToTransparent");
+    });
+
     //Easter Egg - private joke
     // noinspection JSUnusedLocalSymbols
     var egg = new Egg("c,o,o,k,i,e,s", function() {

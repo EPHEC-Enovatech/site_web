@@ -31,13 +31,18 @@
     text-decoration: none;
 }
 
+#menu_left a {
+    display: flex;
+}
+
 #logo {
-    height: 4vw;/*3.5em*/
+    height: 4.5vw;/*3.5em*/
     width: auto;
     display: inline-block;
     background-color: white;
     border-radius: 50%;
     margin: auto 1em;
+    align-self: baseline;
 
     position: relative;
 }
