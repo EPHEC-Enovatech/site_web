@@ -35,6 +35,10 @@
     display: flex;
 }
 
+#menu_left div {
+    display: flex;
+}
+
 #logo {
     height: 4.5vw;/*3.5em*/
     width: auto;

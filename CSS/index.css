@@ -165,6 +165,14 @@ hr {
     display: inline-block;
 }
 
+#document_Footer #linkLegal {
+    display: block;
+    margin: auto;
+    width: 100%;
+    text-align: right;
+    color: var(--main-bg-color);
+}
+
 /*----------------------------------------------------------------------------------------------------------------*/
 /*Dialogue cookies*/
 
@@ -1123,18 +1131,7 @@ body {
     /*-------------------------------------------------------------------*/
     /*Footer*/
     #document_Footer p {
-        -ms-grid-column: 2;
-        -ms-grid-column-span: 3;
-        grid-column: 2 / span 3;
         padding: 0.5em;
-    }
-
-    #linkLegal {
-        display: block;
-        margin: auto;
-        width: 100%;
-        text-align: right;
-        color: var(--main-bg-color);
     }
 
     /*-------------------------------------------------------------------*/
