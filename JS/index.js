@@ -1,8 +1,18 @@
+jQuery.easing['jswing'] = jQuery.easing['swing'];
+
+jQuery.extend( jQuery.easing,
+    {
+        easeInOutCubic: function (x, t, b, c, d) {
+            if ((t/=d/2) < 1) return c/2*t*t*t + b;
+            return c/2*((t-=2)*t*t + 2) + b;
+        },
+    });
+
 let register = document.getElementById('connexion');
 
 //Copie la hauteur de la barre de navigation et l'injecte dans #startPageHeader
 function copyHeightNavBar(){
-    var taille = $('#menu_left').css('height');
+    let taille = $('#menu_left').css('height');
     $('#startPageHeader').css('height', taille);
     $('#presentation, #gridBox').css("min-height", "calc(100vh - " + taille + ")");
     //console.log("taille : " + taille);
@@ -14,8 +24,8 @@ function goToByScroll(id){
 
     Waypoint.disableAll();
 
-    var size_bar = $('#menu_left').css('height');
-    var size_bar_split = size_bar.split("px");
+    let size_bar = $('#menu_left').css('height');
+    let size_bar_split = size_bar.split("px");
 
     $('html,body').animate({scrollTop:$("#"+id).offset().top-size_bar_split[0]},'slow','easeInOutCubic', function () {
         Waypoint.enableAll();
@@ -41,11 +51,11 @@ function deleteCurrent(){
     })
 }
 
-var scrollWaypoint = [];
+let scrollWaypoint = [];
 
 //Création des waypoints de scroll pour animation
 function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
-    var waypoint = new Waypoint({
+    let waypoint = new Waypoint({
         element: document.getElementById(id),
         handler: function(direction) {
             if (direction === directionScroll) {
@@ -60,8 +70,8 @@ function createWaypointScroll(id, directionScroll, offsetScroll, changeCall){
 //https://www.coordonnees-gps.fr/
 //Initialise la carte
 function initMap() {
-    var ephec = {lat: 50.665859, lng: 4.61213900000007};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    let ephec = {lat: 50.665859, lng: 4.61213900000007};
+    let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
         center: ephec,
         scrollwheel: false
@@ -156,6 +166,39 @@ function MDPoublie(response) {
         $('#resetMDPoublie').val("Retour");
     }
 
+}
+
+//-----------------------------------------------------------------------------
+//Accessibilité
+
+function trapFocus(element, namespace) {
+    var focusableEls = element.querySelectorAll('a[href], button, textarea, input[type="text"], input[type="email"], input[type="submit"], input[type="reset"]'),
+        firstFocusableEl = focusableEls[0];
+    lastFocusableEl = focusableEls[focusableEls.length - 1];
+    KEYCODE_TAB = 9;
+
+    firstFocusableEl.focus();
+
+    element.addEventListener('keydown', function(e) {
+        var isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        if ( e.shiftKey ) /* shift + tab */ {
+            if (document.activeElement === firstFocusableEl) {
+                lastFocusableEl.focus();
+                e.preventDefault();
+            }
+        } else /* tab */ {
+            if (document.activeElement === lastFocusableEl) {
+                firstFocusableEl.focus();
+                e.preventDefault();
+            }
+        }
+
+    });
 }
 
 //-----------------------------------------------------------------------------
@@ -321,7 +364,7 @@ $(function(){
         console.log("COOKIES !");
         $('#logo').attr("src", "IMG/icon/cookies.svg").css("background-color", "transparent");
         $('#logo_title').text("COOKIES HUB");
-        $('#intro h1').html('CookiesHub, le cookie <span id=\"js-rotating\">connecté, accessible à tous, trop Cool</span>');
+        $('#intro h1').html('CookiesHub, le cookie trop Cool');
         $("#js-rotating").Morphext({
             animation: "bounceIn",
             separator: ",",

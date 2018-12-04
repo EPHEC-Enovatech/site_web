@@ -15,6 +15,11 @@
     font-style: normal;
 }
 
+:root {
+    --main-color: white;
+    --main-bg-color: #418545;
+}
+
 /*Accessibilité*/
 
 .visuallyhidden:not(:focus):not(:active) {
@@ -310,5 +315,574 @@ hr {
         width: 58px;
         height: 58px;
         opacity: 0;
+    }
+}
+
+/*----------------------------------------------------------------*/
+/*Section*/
+
+.labelForm{
+    text-transform: uppercase;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
+    padding: 1em;
+    display: inline-block;
+}
+
+.inputForm{
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.submitForm{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+.submitForm:hover{
+    background: #43A047;
+}
+
+/*---------------------------------------------------------------------------*/
+/*userInfo*/
+
+#userTitle h1 {
+    text-align: initial;
+}
+
+#userTitle {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 80% 20%;
+    grid-template-columns: 80% 20%;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    grid-template-rows: -webkit-max-content;
+
+    max-width: 500px;
+    margin: auto;
+
+    vertical-align: baseline;
+}
+
+#userPicture {
+    height: 4em;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#userInfoZone p {
+    display: inline-block;
+}
+
+#userInfoZone footer {
+    text-align: center;
+}
+
+#userInfoForm input {
+    width: 70%;
+}
+
+#userInfoForm label {
+    width: 20%;
+}
+
+#userInfoForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#errorUserInfo {
+    display: block;
+    width: 80%;
+    margin: 0 auto 1em auto;
+}
+
+/*---------------------------------------------------------------------------*/
+/*changeMDP*/
+
+#formChangeMDPUser {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#formChangeMDPUser input {
+    width: 90%;
+}
+
+#formChangeMDPUser h1 {
+    text-align: center;
+}
+
+#errorMDPchangeUser {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1em;
+    width: 90%;
+    margin: auto auto 1em auto;
+}
+
+/*---------------------------------------------------------------------------*/
+/*showBox*/
+
+#showBoxDiv {
+    text-align: center;
+}
+
+#showBoxDiv table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#showBoxDiv table th {
+    border: 1px solid black;
+    width: 45%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background:  var(--main-bg-color);
+    color:  var(--main-color);
+    padding: 1em;
+}
+
+#insertBox td {
+    border: 1px solid black;
+    width: 45%;
+    background: #f2f2f2;
+    padding: 1em;
+}
+
+#insertBox input {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    color: black;
+}
+
+#insertBox .deleteThisBox {
+    width: 10%;
+    padding: 0.9em;
+}
+
+#insertBox .deleteThisBox:hover {
+    background-color: #d9d9d9;
+    cursor: pointer;
+}
+
+#confirmPopUp {
+    display: none;
+
+    position: fixed;
+    text-align: center;
+    background-color: white;
+    width: 40vw;
+    height: auto;
+    border: 1px solid black;
+    z-index: 10001;
+    font-family: "Roboto", sans-serif;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1em;
+}
+
+#confirmPopUp button {
+    font-size: 1em;
+    width: 40%;
+    padding: 0.5em;
+}
+
+#boxError {
+    display: none;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+/*---------------------------------------------------------------------------*/
+/*showData*/
+
+#dataBox {
+    text-align: center;
+}
+
+.errorData {
+    color: red;
+    font-weight: bold;
+}
+
+#selectZone {
+    text-align: center;
+    margin: auto;
+}
+
+#showDataBox {
+    text-align: center;
+    margin: auto;
+}
+
+#canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo {
+    position: relative;
+    margin: auto;
+    height: 40vh;
+    max-width: 100vw;
+}
+
+.lineData {
+    margin: 1em 0 1em 0;
+}
+
+.errorTitle{
+    font-weight: bold;
+    color: black;
+}
+
+.errorCanvasDiv {
+    color: red;
+}
+
+.allGraphInfo {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+}
+
+.textGraphInfo {
+    font-size: 0.8em;
+    padding: 1em;
+}
+
+#showDataBox hr {
+    opacity: 0.2;
+}
+
+.centerTextBlock {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+/*Inverse graph du centre*/
+.invertText {
+    -ms-grid-column: 1;
+    grid-column: 1;
+    -ms-grid-row: 1;
+    grid-row: 1;
+}
+
+.invertGraph {
+    -ms-grid-column: 2;
+    grid-column: 2;
+    -ms-grid-row: 1;
+    grid-row: 1;
+}
+
+#tableDemo {
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 0.9em;
+}
+#tableDemo th{
+    border: 1px solid rgb(100, 199, 32);
+    padding: 0.35em 0.8em;
+}
+#tableDemo td{
+    border: 1px solid rgb(100, 199, 32);
+    padding: 0.35em 0.8em;
+}
+
+#canvasRecapDemo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/*addBox*/
+
+#content {
+    text-align: center;
+}
+
+#addBoxForm {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+
+}
+
+#addBoxForm label {
+    width: 40%;
+}
+
+#addBoxForm input {
+    width: 50%;
+}
+
+#qrLink {
+    text-decoration: none;
+    margin: 0.5em auto 0.5em auto;
+    display: block;
+    max-width: 500px;
+}
+
+/*Grands écrans*/
+@media only screen and (min-width: 750px) {
+    #showDataBox, #selectZone {
+        max-width: 800px;
+    }
+
+    #canvasHumiditeDemo, #canvasHumiditeDemoSemaine, #canvasRecapDemo {
+        height: 30vh;
+    }
+}
+
+/*----------------------)------------------------------------------------*/
+/*Admin*/
+
+#adminPage input {
+    width: 90%;
+}
+
+#QRBox {
+    display: none;
+}
+
+#boxImgQR {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+#downloadQR {
+    margin: auto;
+}
+
+#qrcode {
+    margin: 1em auto 1em auto;
+}
+
+#adminPage > *:not(hr) {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#adminPage :not(hr){
+    max-width: 500px;
+}
+
+/*------------------------------------------------------------------------------*/
+/*Promotion d'utilisateur*/
+
+#divPromote, #divDelCaptor, #divDelCateg {
+    width: 90%;
+    margin: auto;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+}
+
+#divPromote input, #divDelCaptor input, #divDelCateg input{
+    width: 100%;
+}
+
+#adminPage select {
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 0.8em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
+    -webkit-appearance: none;
+}
+
+/*------------------------------------------------------------------------------*/
+/*Message de retout*/
+
+#errorCateg, #errorCaptor, #errorPromote, #errorDelCateg, #errorDelCaptor {
+    display: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 90%;
+    margin: auto auto 1em auto;
+    padding: 1em;
+}
+
+/*---------------------------------------------------------------------------*/
+/*Affichage mobile*/
+
+@media only screen and (max-width: 600px){
+
+    #document_Main {
+        -ms-grid-columns: 100%;
+        grid-template-columns: 100%;
+    }
+
+    #menuUser {
+        display: none;
+    }
+
+    #contentZone {
+        border-radius: 10px;
+    }
+
+    #menuUser {
+        position: absolute;
+    }
+
+    #mobile_menu_button_side {
+        display: inline-block;
+        height: 8vw;
+        width: auto;
+        margin: auto auto auto 1em;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+    }
+
+    #mobile_menu_button_side:hover {
+        opacity: 0.6;
+    }
+
+    #sideNav #mobile_menu_part {
+        display: block;
+    }
+
+    #sideNav{
+        margin: 0;
+
+        border: 0;
+        border-radius: 0;
+        border-right: 1px solid black;
+
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+
+        padding: 1em 0.5em 1em 0.5em;
+
+        background-color: rgb(231 250 231);
+
+        font-family: "Roboto", sans-serif;
+
+        overflow: auto;
+
+        -webkit-box-sizing: border-box;
+
+        box-sizing: border-box;
+    }
+
+    .labelForm {
+        padding: 0.7em;
+    }
+
+    .inputForm {
+        padding: 0.7em;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*userInfo*/
+
+    #userInfoForm label {
+        width: 33%;
+    }
+
+    #userInfoForm input {
+        width: 55%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*changeMdp*/
+
+    #formChangeMDP input {
+        width: 100%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*addBox*/
+
+    #addBoxForm label {
+        width: 38%;
+    }
+
+    #addBoxForm input {
+        width: 50%;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*showBox*/
+
+    #insertBox td {
+        padding: 0.5em;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*showData*/
+
+    .allGraphInfo {
+        display: block;
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*Footer*/
+    #document_Footer p {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 3;
+        grid-column: 2 / span 3;
+        padding: 0.5em;
+    }
+}
+
+/*Grand écran*/
+@media screen and (min-width: 1400px) {
+    /*Footer*/
+
+    #document_Footer {
+        font-size: 1.3em;
+    }
+
+    #linkGitHub, #linkTrello {
+        text-indent: -0.5em;
     }
 }
