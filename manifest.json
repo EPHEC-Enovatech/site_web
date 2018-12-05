@@ -1,0 +1,16 @@
+{
+  "name": "Feel the senses of your garden",
+  "short_name": "Sensory",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#418545",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
