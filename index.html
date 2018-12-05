@@ -14,25 +14,13 @@
 
     <link href="CSS/index.css" rel="stylesheet" >
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/presentation.css">
-    <link rel="stylesheet" href="CSS/intro.css">
-    <link rel="stylesheet" href="CSS/team.css">
+    <link href="CSS/index.css" rel="stylesheet" >
     <link rel="stylesheet" href="CSS/navBar.css">
-    <link rel="stylesheet" href="CSS/contact.css">
-    <link rel="stylesheet" href="CSS/connection.css">
-
-    <link rel="stylesheet" href="CSS/navBar_mobile.css">
-    <link rel="stylesheet" href="CSS/mobile_Section.css">
-    <link rel="stylesheet" href="CSS/big_screen.css">
-
-    <link rel="stylesheet" href="CSS/animate.css">
+    <link rel="icon" href="IMG/favicon.png">
 
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/jquery.waypoints.min.js"></script>
-    <script src="JS/morphext.min.js"></script>
-    <script src="JS/easing.js"></script>
-    <script src="JS/cookie_hub.js" defer></script>
-    <script src="JS/accessibility.js"></script>
+    <script src="JS/cookie_hub.js" async defer></script>
     <script src="JS/auth.js" defer></script>
     <script src="JS/index.js" defer></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
@@ -232,6 +220,11 @@
                 <label for="confirmPassword" class="visuallyhidden">Confirmer le mot de passe</label>
                 <input id="confirmPassword" name="confirmPassword" type="password" hidden placeholder="Confirmer le mot de passe">
                 <br>
+                <div id="legalDiv" hidden>
+                    <label for="confirmLegal">J'accepte les <a target="_blank" href="condition.html">conditions d'utilisation</a> : </label>
+                    <input id="confirmLegal" name="confirmLegal" type="checkbox">
+                </div>
+                <br>
             </main>
             <footer>
                 <input id="buttonRegister" type="submit" value="Se connecter">
@@ -283,6 +276,7 @@
             </ul>
         </div>
         <p>EPHEC Projet Enovatech : Sensory Garden</p>
+        <a id="linkLegal" href="condition.html" target="_blank">Mention légales</a>
     </footer>
 </body>
 </html>
