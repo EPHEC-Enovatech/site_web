@@ -38,7 +38,15 @@ function trackInstalling(worker) {
 }
 
 function updateReady(worker) {
-    if (confirm("Une nouvelle version du site est disponnible, voulez vous en profiter ?")) {
-        worker.postMessage({action: 'skipWaiting'})
-    }
+
+    $('#dialWebApp').show();
+    $('#okCache').click(event => {
+        event.preventDefault();
+        worker.postMessage({action: 'skipWaiting'});
+        $('#dialWebApp').hide();
+    });
+    $('#aterCache').click(event => {
+        event.preventDefault();
+        $('#dialWebApp').hide();
+    });
 }
