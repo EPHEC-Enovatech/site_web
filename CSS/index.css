@@ -70,6 +70,7 @@ html, body {
 #startPageHeader {
     margin: 0;
     padding: 0;
+    display: table-row;
 }
 
 hr {
@@ -314,6 +315,8 @@ hr {
     animation-duration: 0.4s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 @-webkit-keyframes changeColorToWhite {
@@ -425,14 +428,6 @@ body {
     height: 100vh;
     width: 100%;
     display: table;
-}
-
-#startPageHeader {
-    display: table-row;
-}
-
-#document_Header {
-    background-color: rgba(255, 255, 255, 0.7);
 }
 
 /*--------------------------------------------------------------------------------*/
@@ -961,14 +956,6 @@ body {
         /*margin: 0 0 25vh 0;*/
     }
 
-    #intro {
-        /*padding: 5vh 0 5vh 0;*/
-    }
-
-    #intro a {
-        /*bottom: 20vh;*/
-    }
-
     /*-------------------------------------------------------------------*/
     /*Section presentation*/
     #gridBox {
@@ -1236,7 +1223,4 @@ body {
         font-size: 3vw;
     }
 }
-
-/*----------------------------------------------------------------------------*/
-/*Easing CSS*/
 
