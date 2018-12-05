@@ -109,27 +109,31 @@ self.addEventListener('fetch', function(event) {
 })
 
 function serveRecordsData(request) {
-    return caches.open(dataCache).then(cache => {
-        return cache.match(request).then(response => {
-            if (response) return response;
-
-            return fetch(request).then(networkResponse => {
-                cache.put(request.url, networkResponse.clone());
-                return networkResponse;
-            })
+    return fetch(request).then(networkResponse => {
+        return caches.open(dataCache).then(cache => {
+            cache.put(request.url, networkResponse.clone())
+            return networkResponse;
         })
+    }).catch(error => {
+        if (error.message === "Failed to fetch") {
+            return caches.open(dataCache).then(cache => {
+                return cache.match(request.url)
+            })
+        }
     })
 }
 
 function serveUserData(request) {
-    return caches.open(userCache).then(cache => {
-        return cache.match(request.url).then(response => {
-            if (response) return response
-
-            return fetch(request).then(networkResponse => {
-                cache.put(request.url, networkResponse.clone());
-                return networkResponse;
-            })
+    return fetch(request).then(networkResponse => {
+        return caches.open(userCache).then(cache => {
+            cache.put(request.url, networkResponse.clone())
+            return networkResponse;
         })
+    }).catch(error => {
+        if (error.message === "Failed to fetch") {
+            return caches.open(userCache).then(cache => {
+                return cache.match(request.url)
+            })
+        }
     })
 }
