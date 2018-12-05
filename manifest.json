@@ -1,15 +1,15 @@
 {
-  "name": "Site web pour la société SensoryGarden",
-  "short_name": "SensoryGarden",
+  "name": "Feel the senses of your garden",
+  "short_name": "Sensory",
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ccc",
-  "theme_color": "#5FAAE5",
+  "background_color": "#ffffff",
+  "theme_color": "#418545",
   "icons": [
     {
       "src": "logo.png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "type": "image/png"
     }
   ]

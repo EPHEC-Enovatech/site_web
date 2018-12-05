@@ -1,5 +1,5 @@
 
-var cache = "sensory-static-v2";
+var cache = "sensory-static-v1";
 
 self.addEventListener('install', function(event) {
     event.waitUntil(
@@ -11,22 +11,10 @@ self.addEventListener('install', function(event) {
                 '/adrien/JS/index.js',
                 '/adrien/JS/jquery-3.3.1.min.js',
                 '/adrien/JS/jquery.waypoints.min.js',
-                '/adrien/JS/morphext.min.js',
                 '/adrien/JS/cookie_hub.js',
-                '/adrien/JS/easing.js',
                 '/adrien/JS/auth.js',
-                '/adrien/JS/accessibility.js',
                 '/adrien/CSS/index.css',
                 '/adrien/CSS/navBar.css',
-                '/adrien/CSS/presentation.css',
-                '/adrien/CSS/intro.css',
-                '/adrien/CSS/team.css',
-                '/adrien/CSS/contact.css',
-                '/adrien/CSS/connection.css',
-                '/adrien/CSS/navBar_mobile.css',
-                '/adrien/CSS/mobile_Section.css',
-                '/adrien/CSS/big_screen.css',
-                '/adrien/CSS/animate.css',
                 "/adrien/IMG/logo.svg",
                 '/adrien/IMG/menu.svg',
                 '/adrien/IMG/icon/soil.svg',
