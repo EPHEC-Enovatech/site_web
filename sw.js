@@ -88,13 +88,16 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
     if (event.request.url.includes('api.sensorygarden.be/records/')) {
-        event.respondWith(
+        event.respondWith(fetch(event.request))
+        /* event.respondWith(
             serveRecordsData(event.request)
-        );
+        );*/
         return;
     } else if (event.request.url.includes('api.sensorygarden.be/')) {
+        fetch()
         event.respondWith(
-            serveUserData(event.request)
+            fetch(event.request)
+            //serveUserData(event.request)
         )
         return;
     }
