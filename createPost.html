@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
-    <meta name="theme-color" content="#32cd32">
+    <meta name="theme-color" content="#418545">
+
     <title>Forum</title>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link rel="stylesheet" href="CSS/forumPage/tail.writer.min.css">
     <link rel="stylesheet" href="CSS/navBar.css">
-    <link rel="stylesheet" href="CSS/navBar_mobile.css">
-    <link rel="stylesheet" href="CSS/forumPage/forumPage.css">
-    <link rel="stylesheet" href="CSS/userPage/userSection.css">
-    <link rel="stylesheet" href="CSS/userPage/userPage_mobile.css">
+    <link rel="stylesheet" href="CSS/forumPage/forumPage.min.css">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
-    <script src="JS/simplemde.min.js"></script>
+    <script src="JS/tail.writer.min.js"></script>
     <script src="JS/select2.min.js"></script>
     <script src="JS/bigSlide.min.js"></script>
     <script src="JS/auth.js"></script>
     <!--<script src="../JS/userPage.js"></script>-->
-    <script src="JS/createPost.js"></script>
+    <script src="JS/createPost.min.js"></script>
 </head>
 <body>
 <header id="document_Header" class="push">
@@ -45,7 +44,8 @@
     <form name="createPubli" id="createPubli" action="#">
         <textarea placeholder="Mettez le titre de votre publication" name="titleEditor" id="titleEditor"></textarea>
         <select class="cat" id="selectCat" name="states[]" multiple="multiple" style="width: 100%"></select>
-        <textarea id="textEditor"></textarea>
+        <span id="dropdown"></span>
+        <textarea id="textEditor" name="textEditor"></textarea>
         <input type="submit" name="envoyerForm" value="Envoyer la publication">
         <div id="addTest">
 

@@ -42,6 +42,7 @@
      * @param response la réponse de l'API
      */
     function changeMDPUser(response) {
+        setLoading();
         let data = JSON.parse(response.responseText);
         if(data.status === "ERROR"){
             $('#errorMDPchangeUser').removeClass().addClass("error").html(data.message).show();
