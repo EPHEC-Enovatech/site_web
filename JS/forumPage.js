@@ -18,8 +18,11 @@ $(document).ready(function() {
         toggleSlideMenu()
     });
     calculateSizeMain();
-    toggleSlideMenu()
+    toggleSlideMenu();
 });
+function setLoading(n) {
+
+}
 
 function selectCategorie(response) {
     let select = '';
