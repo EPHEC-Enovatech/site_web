@@ -13,13 +13,22 @@
         <label for="nomCaptor" class="labelForm">Nom</label>
         <input type="text" name="nomCaptor" id="nomCaptor" class="inputForm" required><br>
         <input type="submit" value="Enregistrer" class="submitForm inputForm">
-        </form>
+    </form>
+    <!--<hr><br>
+    <a id="qrLink" class="submitForm inputForm" href="../scannerQR.html">Ajouter un Sensory Captor avec le QR Code</a>-->
 </div>
 <script>
 
     $(function(){
         $('#addBoxForm').on("submit", addSensoryCaptor);
         $('#errorAddBox').hide();
+
+        let boxNumber = getUrlParameter("box");
+        let checkNumber = getUrlParameter("check");
+        if(boxNumber !== undefined && checkNumber !== undefined) {
+            $('#numCaptor').val(boxNumber);
+            $('#verification').val(checkNumber);
+        }
     });
 
     //Ajoute un Sensory Captor
@@ -31,13 +40,17 @@
         formData.append("deviceName", evt.target.nomCaptor.value);
         formData.append("checksum", evt.target.verification.value);
 
-        let endpoint = "devices/" + getCookie('user-id');
-
-        callAPIMethod("POST", formData, endpoint, getErrorAddBox);
+        if(getCookie('user-id') === ""){
+            cookiesExpireTime();
+        } else {
+            let endpoint = "devices/" + getCookie('user-id');
+            callAPIMethod("POST", formData, endpoint, getErrorAddBox);
+        }
     }
 
     //Affiche les erreurs
     function getErrorAddBox(response) {
+        setLoading();
         let message = JSON.parse(response.responseText);
         let errorAddBox = $('#errorAddBox');
 
