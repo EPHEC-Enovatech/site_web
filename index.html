@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="SensoryGarden proprose d'allier jardinage et technologie. Nous proposons également une aide précieuse grâce au forum">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,height=device-height">
-    <meta name="theme-color" content="#32cd32">
+    <meta name="theme-color" content="#418545">
 
     <title>SensoryGarden</title>
+
+    <link rel="manifest" href="manifest.json">
+
+
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="CSS/index.css" rel="stylesheet" >
     <link rel="stylesheet" href="CSS/navBar.css">
@@ -16,6 +21,7 @@
     <script src="JS/cookie_hub.js" async defer></script>
     <script src="JS/auth.js" defer></script>
     <script src="JS/index.js" defer></script>
+    <script src="JS/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr6G5Rd6OOvx0_9SUFoYgrciriAgEvFgc&callback=initMap"></script>
 </head>
 <body>
@@ -35,7 +41,7 @@
                     <li><a class="target-div2" href="#presentation" onclick="goToByScroll('presentation');">Présentation</a></li>
                     <li><a class="target-div3" href="#team" onclick="goToByScroll('team');">Notre équipe</a></li>
                     <li><a class="target-div4" href="#presentation" onclick="goToByScroll('contact');">Contact</a></li>
-                    <li><a class="target-div5" href="#connexion" onclick="connexionPopUp();toggleRegisterLogIn('logIn')">Connexion</a></li>
+                    <li><a class="target-div5" href="#connexion">Connexion</a></li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +53,7 @@
             <div id="startPageHeader"></div>
             <div id="intro" class="div1">
                 <!--<h1>SensoryGarden, le potager <span id="js-rotating">connecté, accessible à tous, trop Cool</span></h1>-->
-                <h1>Feel the sense of your garden</h1>
+                <h1>Feel the senses of your garden</h1>
                 <a href="#presentation" onclick="goToByScroll('presentation');change(2)">Découvrir Sensory Garden</a>
             </div>
         </section>
@@ -147,7 +153,7 @@
 
         <section id="contact" class="div4">
             <header>
-                <h2 id="contactTitle">Une question ou suggestion ? <wbr> Envoyer nous une lettre !</h2>
+                <h2 id="contactTitle">Une question ou suggestion ? <wbr> Envoyez nous une lettre !</h2>
             </header>
             <form id="formContact" action="#">
                 <p id="errorContactForm"></p>
