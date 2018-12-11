@@ -93,7 +93,6 @@ self.addEventListener('fetch', function(event) {
         );
         return;
     } else if (event.request.url.includes('api.sensorygarden.be/')) {
-        fetch()
         event.respondWith(
             serveUserData(event.request)
         )
