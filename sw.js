@@ -1,7 +1,7 @@
 
-var cache = "sensory-static-v2";
-var userCache = 'sensory-static-userdata-v2';
-var dataCache = "sensory-static-records-v2";
+var cache = "sensory-static-v3";
+var userCache = 'sensory-static-userdata-v3';
+var dataCache = "sensory-static-records-v3";
 
 var cachePages = [
     '/staging/',
@@ -93,7 +93,6 @@ self.addEventListener('fetch', function(event) {
         );
         return;
     } else if (event.request.url.includes('api.sensorygarden.be/')) {
-        fetch()
         event.respondWith(
             serveUserData(event.request)
         )
