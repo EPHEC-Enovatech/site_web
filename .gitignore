@@ -3,3 +3,15 @@
 IMG/.DS_Store
 IMG/.DS_Store
 IMG/.DS_Store
+CSS/big_screen.css
+CSS/graph/graph.big.css
+CSS/index.big.css
+CSS/navBar.big.css
+CSS/userPage/userPage.big.css
+JS/auth.big.js
+JS/cookie_hub.big.js
+JS/graphiqueBuilder.big.js
+JS/index.big.js
+JS/graph.big.js
+JS/userPage.big.js
+JS/userPage/admin.big.js
