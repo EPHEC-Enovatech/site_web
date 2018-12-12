@@ -82,9 +82,9 @@
                 <label id="multiDateLabel" for="dateFin" class="labelInput">Date de fin</label>
                 <input id="dateFin" name="dateFin" data-toggle="datepicker">
             </div>
-            <div id="radioBoxDate">
+            <div class="radioBoxDate">
                 <p class="labelInput">Choisir un interval</p>
-                <div id="radioButtonDate">
+                <div class="radioButtonDate">
                     <div>
                         <label for="singleDate">Non</label>
                         <input id="singleDate" name="chooseTypeDate" type="radio" checked>
@@ -95,13 +95,38 @@
                     </div>
                 </div>
             </div>
+
+            <div class="divSelect">
+                <label for="selectTypePlant" class="labelInput">Types de plante :</label><br>
+                <select id="selectTypePlant" name="selectTypePlant">
+                    <option value="legume">Légumes</option>
+                    <option value="fruit">Fruit</option>
+                    <option value="fleur">Fleur</option>
+                </select>
+            </div>
+
             <div class="divSelect">
                 <label for="selectBoxGraph" class="labelInput">Sensory Captor :</label><br>
                 <select id="selectBoxGraph" name="selectBoxGraph"></select>
             </div>
+
             <div class="divSelect">
                 <label for="selectCaptorGraph" class="labelInput">Le capteur :</label><br>
                 <select id="selectCaptorGraph" name="selectCaptorGraph"></select>
+            </div>
+
+            <div class="radioBoxDate">
+                <p class="labelInput">Mode daltonien</p>
+                <div class="radioButtonDate lastInput">
+                    <div>
+                        <label for="daltNo">Non</label>
+                        <input id="daltNo" name="chooseTypeDalt" type="radio" checked>
+                    </div>
+                    <div>
+                        <label for="daltYes">Oui</label>
+                        <input id="daltYes" name="chooseTypeDalt" type="radio">
+                    </div>
+                </div>
             </div>
             <button id="closeController" type="button">Fermer</button>
         </form>
