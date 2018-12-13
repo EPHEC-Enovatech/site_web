@@ -19,6 +19,17 @@ $(document).ready(function() {
     });
     calculateSizeMain();
     toggleSlideMenu();
+    $(".logout").click(function(e) {
+        e.preventDefault();
+        deleteCookie('token');
+        deleteCookie('user-id');
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
+    });
+    $("body").css("overflow", "hidden");
 });
 function setLoading(n) {
 
@@ -81,15 +92,18 @@ function listPublication(response) {
     $(function() {
         $("div.holder").jPages({
             containerID: "paginationList",
-            perPage: 2,
+            perPage: 3,
+            minHeight: false,
             previous: "◄",
-            next: "►"
+            next: "►",
         })
     });
-    $('.catPubli').select2();
+    $('.catPubli').select2({
+        width: '49vw',
+    });
     $('.listPubli > li').on('click', function() {
         window.location.href = "showPost.html?post_id=" + $(this).attr('id')
-    })
+    }).css("display", "grid");
 }
 
 function toggleSlideMenu() {

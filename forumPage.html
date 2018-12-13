@@ -11,8 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="CSS/forumPage/jPages.min.css">
     <link rel="stylesheet" href="CSS/navBar.css">
-    <link rel="stylesheet" href="CSS/forumPage/forumPage.min.css">
-    <link rel="stylesheet" href="CSS/userPage/userSection.css">
+    <link rel="stylesheet" href="CSS/forumPage/forumPage.css">
     <link rel="icon" href="IMG/favicon.png">
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/moment-with-locales.min.js"></script>
@@ -20,7 +19,7 @@
     <script src="JS/jPages.min.js"></script>
     <script src="JS/bigSlide.min.js"></script>
     <script src="JS/auth.js"></script>
-    <script src="JS/forumPage.min.js"></script>
+    <script src="JS/forumPage.js"></script>
 </head>
 <body>
 <header id="document_Header" class="push">
@@ -35,7 +34,7 @@
         <nav id="menu">
             <ul>
                 <li><a href="userPage.html">Profil</a></li>
-                <li><a id="logout" href="index.html">Se déconnecter</a></li>
+                <a href="index.html" target="_blank" class="logout"><li class="sousMenu">Se déconnecter</li></a>
             </ul>
         </nav>
     </div>
@@ -51,6 +50,13 @@
                     <li class="sousMenu"><a href="https://sensorygarden.be/#map" target="_blank">Point de vente</a></li>
 
                 </ul>
+                <li id="mobile_menu_part">
+                    <p class="underTitle"><b>Plus d'option</b></p>
+                    <ul>
+                        <a href="userPage.html" target="_blank"><li class="sousMenu">Profil</li></a>
+                        <a href="index.html" target="_blank" class="logout"><li class="sousMenu">Se déconnecter</li></a>
+                    </ul>
+                </li>
             </nav>
         </div>
 
