@@ -13,10 +13,13 @@
                 <li>Toutes vos données seront <span class="warning">perdues</span></li>
             </ul>
             <div id="errorDeleteAccount" class="error" hidden></div>
-            <input name="deleteMDP" type="password" required placeholder="Mot de passe" class="inputForm">
-            <input name="deleteMDPCheck" type="password" required placeholder="Confirmer le mot de passe" class="inputForm">
+            <label for="deleteMDP" class="visuallyhidden">Mot de passe :</label>
+            <input name="deleteMDP" id="deleteMDP" type="password" required placeholder="Mot de passe" class="inputForm">
+            <label for="deleteMDPCheck" class="visuallyhidden">Vérification du mot de passe :</label>
+            <input name="deleteMDPCheck" id="deleteMDPCheck" type="password" required placeholder="Confirmer le mot de passe" class="inputForm">
         </main>
         <footer>
+            <label for="submitChangeMDPUser" class="visuallyhidden">Supprimer définitivement</label>
             <input id="submitChangeMDPUser" type="submit" value="Supprimer définitivement" class="inputForm submitForm">
         </footer>
     </form>
