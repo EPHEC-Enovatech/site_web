@@ -326,7 +326,7 @@ hr {
 
 #commentList {
     width: 85%;
-    float: right
+    margin-left: 10%
 }
 
 #showPost li:hover,
