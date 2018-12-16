@@ -82,7 +82,7 @@ function listPublication(response) {
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
             list += "<div class=\"publication\">";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";
-            list += "<select class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
+            list += "<select aria-label='Liste des catégories' class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
             for (cat in categories) {
                 for (i in arrCategories) {
                     if (arrCategories[i].id == categories[cat].id) {
