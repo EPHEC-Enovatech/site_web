@@ -23,7 +23,7 @@ $(document).ready(function() {
         $(".logout").hide();
 
         $('#commentEditor').attr("disabled", true).val("Vous devez être connecté pour créer un commentaire !").css({
-            "font-size": (window.matchMedia("(max-width: 600px)").matches)?"1em":"2em",
+            "font-size": (window.matchMedia("(max-width: 600px)").matches)?"1em":"1.5em",
             "font-weight": "bolder"
         });
         $('#createComment input').attr("disabled", true);
