@@ -3,7 +3,7 @@ $(document).ready(function() {
     var select2 = $('#filterCat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à filtrer",
 
-        width: '49vw',
+        width: '100%',
         allowClear: !0,
         dropdownParent: $('#dropdown')
     }).on('change', function(e) {
@@ -11,14 +11,10 @@ $(document).ready(function() {
     });
     callAPI("categories", selectCategorie);
     callAPI("posts", listPublication);
-    $(window).on("resize", function() {
-        toggleSlideMenu()
-    });
+    moment.locale("fr");
     $('#mobile_menu_button_side').on("click", function() {
-        toggleSlideMenu()
+        window.location = "index.html";
     });
-    calculateSizeMain();
-    toggleSlideMenu();
     $(".logout").click(function(e) {
         e.preventDefault();
         deleteCookie('token');
@@ -28,6 +24,21 @@ $(document).ready(function() {
         } else {
             window.location = "index.html";
         }
+    });
+    if (getCookie("token")=="") {
+        $(".logout").hide();
+        $('a[href="userPage.html"]').attr("href", "index.html").html("Accueil");
+        $('#goToCreatePost').on("click", function (e) {
+            e.preventDefault();
+            $('#validationPopUp').show();
+        });
+    }
+    $('#validationButton').on('click', function(e) {
+        e.preventDefault();
+        $('#validationPopUp').hide()
+    }).on("blur", function(e) {
+        e.preventDefault();
+        $('#validationPopUp').hide()
     });
     $("body").css("overflow", "hidden");
 });
@@ -67,9 +78,9 @@ function listPublication(response) {
         }
         for (item in publication) {
             let arrCategories = publication[item].categories;
-            list += "<li id='" + publication[item].id + "'><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
+            list += "<li id='" + publication[item].id + "'><div class=\"object\"><h3>" + publication[item].postTitle + "</h3></div><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
-            list += "<div class=\"publication\"> <h3 class=\"object\">" + publication[item].postTitle + "</h3>";
+            list += "<div class=\"publication\">";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";
             list += "<select class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
             for (cat in categories) {

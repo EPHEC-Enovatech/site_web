@@ -16,6 +16,20 @@ $(document).ready(function() {
         "tooltip_show": !1,
         "statusbar": !1,
     });
+    $('#mobile_menu_button_side').on("click", function() {
+        window.location = "forumPage.html";
+    });
+    if(getCookie("token")==""){
+        $(".logout").hide();
+
+        $('#commentEditor').attr("disabled", true).val("Vous devez être connecté pour créer un commentaire !").css({
+            "font-size": (window.matchMedia("(max-width: 600px)").matches)?"1em":"2em",
+            "font-weight": "bolder"
+        });
+        $('#createComment input').attr("disabled", true);
+
+    }
+    moment.locale("fr");
     $('#createComment').on("submit", createComment);
     $('#confirmPopUp #cancel').on("click", function(e) {
         $('#confirmPopUp').hide();
@@ -32,6 +46,16 @@ $(document).ready(function() {
         $('#confirmPopUp').hide();
         $('#validationPopUp').show()
     });
+    $(".logout").click(function(e) {
+        e.preventDefault();
+        deleteCookie('token');
+        deleteCookie('user-id');
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
+    });
 });
 function setLoading(n) {
 
@@ -42,11 +66,11 @@ function publication(response) {
     let publication;
     if (response.responseJSON.status === "SUCCESS") {
         publication = response.responseJSON.data;
-        let garbage = (parseJWT(getCookie("token")).admin) ? "<a href='#' id='deletePost" + publication.id + "' class='deletePosts'><img src='IMG/userPage/garbage.svg' class='deletePost' alt='Corbeille de suppression de post'></a>" : "";
+        let garbage = (getCookie("token")!="" && parseJWT(getCookie("token")).admin) ? "<a href='#' id='deletePost" + publication.id + "' class='deletePosts'><img src='IMG/userPage/garbage.svg' class='deletePost' alt='Corbeille de suppression de post'></a>" : "";
         let arrCategories = publication.categories;
-        publi += "<li><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication.user.prenom + "</bdi></h3>";
+        publi += "<li><div class=\"object\"><h3>" + publication.postTitle + "</h3>"+garbage+"</div><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication.user.prenom + "</bdi></h3>";
         publi += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
-        publi += "<div class=\"publication\"><div class='headerPost'> <h3 class=\"object\">" + publication.postTitle + "</h3>" + garbage + "</div>";
+        publi += "<div class=\"publication\">";
         publi += "<p class=\"message\"><pre>" + marked(publication.postText) + "</pre></p>";
         publi += "<select class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
         for (cat in arrCategories) {
@@ -72,10 +96,10 @@ function listComment(comments) {
     console.log(comments);
     if (comments != []) {
         for (item in comments) {
-            let garbage = (parseJWT(getCookie("token")).admin) ? "<a href='#' id='deleteComment" + comments[item].id + "' class='deletePosts'><img src='IMG/userPage/garbage.svg' class='deletePost' alt='Corbeille de suppression de post'></a>" : "";
-            list += "<li><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + comments[item].user.prenom + "</bdi></h3>";
-            list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
-            list += "<div class=\"publication\">" + garbage + "<p class=\"message\"><pre>" + marked(comments[item].commentText) + "</pre></p>";
+            let garbage = (getCookie("token")!="" &&parseJWT(getCookie("token")).admin) ? "<a href='#' id='deleteComment" + comments[item].id + "' class='deletePosts'><img src='IMG/userPage/garbage.svg' class='deletePost' alt='Corbeille de suppression de post'></a>" : "";
+            list += "<li><div class='object'><img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\">";
+            list += "<h3 class=\"name\"><bdi>" + comments[item].user.prenom + "</bdi></h3>" + garbage + "</div>";
+            list += "<div class=\"publication\"><p class=\"message\"><pre>" + marked(comments[item].commentText) + "</pre></p>";
             let date = moment(new Date(comments[item].commentDate)).format("LLL");
             list += "<p class=\"date\">" + date + "</p>";
             list += "</div></li>"

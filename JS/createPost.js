@@ -1,5 +1,8 @@
 var message = "";
 $(document).ready(function() {
+    if(getCookie("token")== ""){
+        window.location = "forumPage.html";
+    }
     $('.cat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à mettre dans votre publication",
         width: '90vw',
@@ -16,8 +19,21 @@ $(document).ready(function() {
         "tooltip_show": !0,
         "statusbar": !1,
     });
+    $('#mobile_menu_button_side').on("click", function() {
+        window.location = "forumPage.html";
+    });
     callAPI('categories', selectCategorie);
     $('#createPubli').on("submit", createPubli);
+    $(".logout").click(function(e) {
+        e.preventDefault();
+        deleteCookie('token');
+        deleteCookie('user-id');
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
+    });
 });
 function setLoading(n) {
 
