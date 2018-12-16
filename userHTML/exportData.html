@@ -1,0 +1,129 @@
+<div id="exportData">
+    <h1>Exporter mes données</h1>
+    <hr>
+    <form id="formExportData" action="#">
+        <header>
+            <h2>Exporter les données de mes Sensory Captor</h2>
+        </header>
+        <main>
+            <p>Sélectionner le Sensory Captor :</p>
+            <div id="errorExportData" class="error" hidden></div>
+            <label for="selectCaptorExport" class="visuallyhidden"></label>
+            <select id="selectCaptorExport" name="selectCaptorExport"></select>
+        </main>
+        <footer>
+            <label for="submitExportData" class="visuallyhidden">Exporter</label>
+            <input id="submitExportData" type="submit" value="Exporter" class="inputForm submitForm">
+        </footer>
+    </form>
+</div>
+<script>
+    $(function(){
+
+        callAPI("devices/" + getCookie('user-id'), function(response){
+            let select = "";
+            if (response.responseJSON.status === "SUCCESS") {
+                let boxs = response.responseJSON.data;
+                select += "<option value='ALL'>Tous les Sensory Captor</option>"
+                for(item in boxs){
+                    select += "<option value='" + boxs[item].device_id + "'>";
+                    select += boxs[item].deviceName;
+                    select += "</option>";
+                }
+            } else {
+                select = "<option value='undefined'>Aucun Sensory Captor</option>"
+            }
+            $('#selectCaptorExport').html(select);
+        });
+
+        $('#formExportData').on("submit", function(evt){
+            evt.preventDefault();
+            let selectedCaptor = $('#selectCaptorExport').val();
+            let endPoint = selectedCaptor === 'ALL' ? "" : selectedCaptor;
+            callAPI("records/" + endPoint, function(response){
+                let data = response.responseJSON.data;
+                if(data === undefined){
+                    $('#errorExportData').removeClass().addClass("error").html("Aucune données associées").show();
+                } else {
+                    let nameFile = ($( "#selectCaptorExport option:selected").text()).replace(" ", "_");
+                    let today = new Date();
+                    let date = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
+                    JSONToCSVConvertor(data, date, true, nameFile);
+                }
+            });
+        });
+    });
+
+    function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel, name) {
+        //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+        let arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+
+        let CSV = '';
+        //Set Report title in first row or line
+
+        CSV += ReportTitle + '\r\n\n';
+
+        //This condition will generate the Label/Header
+        if (ShowLabel) {
+            let row = "";
+
+            //This loop will extract the label from 1st index of on array
+            for (let index in arrData[0]) {
+
+                //Now convert each value to string and comma-seprated
+                row += index + '\t';
+            }
+
+            row = row.slice(0, -1);
+
+            //append Label row with line break
+            CSV += row + '\r\n';
+        }
+
+        //1st loop is to extract each row
+        for (let i = 0; i < arrData.length; i++) {
+            let row = "";
+
+            //2nd loop will extract each column and convert it in string comma-seprated
+            for (let index in arrData[i]) {
+                row += '"' + arrData[i][index] + '"\t';
+            }
+
+            row.slice(0, row.length - 1);
+
+            //add a line break after each row
+            CSV += row + '\r\n';
+        }
+
+        if (CSV === '') {
+            $('#errorExportData').removeClass().addClass("error").html("Données invalides").show();
+            return;
+        }
+
+        //Generate a file name
+        let fileName = name + "_";
+        //this will remove the blank-spaces from the title and replace it with an underscore
+        fileName += ReportTitle.replace(/ /g,"_");
+
+        //Initialize file format you want csv or xls
+        let uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+        // Now the little tricky part.
+        // you can use either>> window.open(uri);
+        // but this will not work in some browsers
+        // or you will not get the correct file extension
+
+        //this trick will generate a temp <a /> tag
+        let link = document.createElement("a");
+        link.href = uri;
+
+        //set the visibility hidden so it will not effect on your web-layout
+        link.style = "visibility:hidden";
+        link.download = fileName + ".csv";
+
+        //this part will append the anchor tag and remove it after automatic click
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
