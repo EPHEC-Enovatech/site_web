@@ -72,7 +72,7 @@ function publication(response) {
         publi += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
         publi += "<div class=\"publication\">";
         publi += "<p class=\"message\"><pre>" + marked(publication.postText) + "</pre></p>";
-        publi += "<select class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
+        publi += "<select aria-label='Liste des catégories' class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
         for (cat in arrCategories) {
             publi += "<option value=\"" + arrCategories[cat].id + "\" selected>" + arrCategories[cat].categoryName + "</option>"
         }
