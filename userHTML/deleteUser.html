@@ -1,0 +1,66 @@
+<div id="deleteUserDiv">
+    <h1>Suppression du compte</h1>
+    <hr>
+    <form id="formDeleteUser" action="#">
+        <header>
+            <h2>Êtes vous sûr de vouloir <span class="warning">supprimer ce compte</span> ?</h2>
+        </header>
+        <main>
+            <p>Attention, cette action est <span class="warning">irréversible</span> !</p>
+            <ul>
+                <li>Votre compte sera <span class="warning">supprimé</span></li>
+                <li>Vos capteurs seront <span class="warning">supprimés</span></li>
+                <li>Toutes vos données seront <span class="warning">perdues</span></li>
+            </ul>
+            <div id="errorDeleteAccount" class="error" hidden></div>
+            <input name="deleteMDP" type="password" required placeholder="Mot de passe" class="inputForm">
+            <input name="deleteMDPCheck" type="password" required placeholder="Confirmer le mot de passe" class="inputForm">
+        </main>
+        <footer>
+            <input id="submitChangeMDPUser" type="submit" value="Supprimer définitivement" class="inputForm submitForm">
+        </footer>
+    </form>
+</div>
+<script>
+    $('#formDeleteUser').on("submit", function(evt) {
+        evt.preventDefault();
+        let MDP = evt.target.deleteMDP.value;
+        let MDPCheck = evt.target.deleteMDPCheck.value;
+
+        if(MDP === MDPCheck){
+            let formData = new FormData();
+            formData.append("password", MDP);
+            let endPoint = "users/" + getCookie('user-id');
+            callAPIMethod("DELETE", formData, endPoint, displayError);
+        } else {
+            $('#errorDeleteAccount').removeClass().addClass("error").html("Erreur, les mots de passes ne sont pas identiques").show();
+        }
+    });
+
+    /**
+     * Affiche le message de retour de l'API
+     * @param response le message de retour
+     */
+    function displayError(response){
+        setLoading();
+        let data = JSON.parse(response.responseText);
+        if(data.status === "ERROR"){
+            $('#errorDeleteAccount').removeClass().addClass("error").html(data.message).show();
+        } else {
+            $('#errorDeleteAccount').removeClass().addClass("success").html(data.message).show();
+            $('#formDeleteUser').trigger("reset");
+            deleteAccountSuccess();
+        }
+    }
+
+    /**
+     * Affiche le message de suppression de compte
+     */
+    function deleteAccountSuccess(){
+        deleteCookie("token");
+        deleteCookie("user-id");
+        cookiesExpireTime();
+        $('#disconnectBox header h2').text("Le compte n'existe plus");
+        $('#disconnectBox main p').text("Ce compte a été supprimé");
+    }
+</script>
