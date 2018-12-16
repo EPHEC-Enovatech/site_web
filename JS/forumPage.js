@@ -40,7 +40,6 @@ $(document).ready(function() {
         e.preventDefault();
         $('#validationPopUp').hide()
     });
-    $("body").css("overflow", "hidden");
 });
 function setLoading(n) {
 
