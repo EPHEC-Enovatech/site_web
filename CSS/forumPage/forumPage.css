@@ -82,26 +82,45 @@ hr {
     text-align: center;
     font-size: 1.5em;
     border-right: 1px solid lightgray;
+    -ms-grid-row: 2;
     grid-row: 2;
 }
 
 .publication {
     font-size: 1em;
+    -ms-grid-row: 2;
     grid-row: 2;
 }
 
 .object {
     font-size: 1.5em;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
     grid-column: 1 / span 2;
+    -ms-grid-row: 1;
     grid-row: 1;
     padding: 0 2%;
     margin: 0;
     background-color: #41854580;
     border-radius: 10px 10px 0 0;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 80% 20%;
     grid-template-columns: 80% 20%;
+    -ms-grid-rows: auto;
     grid-template-rows: auto;
+}
+
+.object > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}
+
+.object > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
 }
 
 
@@ -119,10 +138,23 @@ hr {
 }
 
 #header_forum {
+    display: -ms-grid;
     display: grid;
     padding: 1% 0 5% 0;
+    -ms-grid-columns: 100%;
     grid-template-columns: 100%;
+    -ms-grid-rows: 70% 30%;
     grid-template-rows: 70% 30%;
+}
+
+#header_forum > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}
+
+#header_forum > *:nth-child(2) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
 }
 
 #goToCreatePost {
@@ -275,9 +307,17 @@ hr {
 }
 
 #createPubli {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 100%;
     grid-template-columns: 100%;
+    -ms-grid-rows: auto;
     grid-template-rows: auto
+}
+
+#createPubli > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1
 }
 
 #titleEditor {
@@ -438,8 +478,12 @@ hr {
 }
 
 .deletePosts {
+    -ms-grid-row: 1;
     grid-row: 1;
+    -ms-grid-column: 2;
     grid-column: 2;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -448,23 +492,31 @@ hr {
 }
 
 #commentList li .object {
+    -ms-grid-columns: 20% 60% 20%;
     grid-template-columns: 20% 60% 20%;
 }
 
 #commentList li .object .avatar {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 35%;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -ms-flex-item-align: center;
     align-self: center;
 }
 
 #commentList .publication {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
     grid-column: 1 / span 2;
 }
 
 #commentList li .object .deletePosts {
+    -ms-grid-column: 3;
     grid-column: 3;
+    -ms-grid-row: 1;
     grid-row: 1;
 }
 
