@@ -27,6 +27,7 @@ $(document).ready(function() {
     });
     if (getCookie("token")=="") {
         $(".logout").hide();
+        $('a[href="graph.html"]').hide();
         $('a[href="userPage.html"]').attr("href", "index.html").html("Accueil");
         $('#goToCreatePost').on("click", function (e) {
             e.preventDefault();
