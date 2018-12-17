@@ -20,53 +20,6 @@ body {
 
 #document_Header {
     position: relative;
-    overflow: hidden;
-}
-
-#sideNav {
-    border: 1px solid black;
-    border-radius: 10px 0 0 10px;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    margin: 1em;
-    padding: 1em .5em 1em .5em;
-    background-color: rgb(231 250 231);
-    font-family: "Roboto", sans-serif;
-    overflow: hidden;
-    z-index: 10;
-    overflow: hidden
-}
-
-#sideNav a {
-    text-decoration: none;
-    color: black
-}
-
-#sideNav ul {
-    list-style: none;
-    margin: auto;
-    padding: 0
-}
-
-#sideNav ul li {
-    display: block;
-    padding-left: .7em
-}
-
-#sideNav ul p {
-    margin: 0;
-    padding: 0
-}
-
-#sideNav .underTitle {
-    margin-top: 2em
-}
-
-#sideNav .sousMenu {
-    margin-top: .7em;
-    padding: .5em;
-    border: 1px solid transparent
 }
 
 hr {
@@ -74,52 +27,37 @@ hr {
     padding: 0
 }
 
-#sideNav .sousMenu:hover,
-#sideNav .currentUserMenu {
-    background-color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid black
-}
-
-#menuUser {
-    overflow: auto
-}
-
 #document_Main {
-    display: -ms-grid;
-    display: grid;
     position: relative;
-    -ms-grid-rows: auto;
-    grid-template-rows: auto;
-    -ms-grid-columns: 30% 70%;
-    grid-template-columns: 30% 70%
+    overflow: auto;
+    padding: 0 10%;
 }
 
-#publications {
-    overflow: auto
-}
 
 .listPubli {
     font-family: sans-serif;
     margin: 0;
-    padding: 20px 0 0
 }
 
 .listPubli>li {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 15vw 50vw;
-    grid-template-columns: 15vw 50vw;
-    -ms-grid-rows: auto;
-    grid-template-rows: auto;
-    background-color: #eee;
-    padding: 1vw;
+    -ms-grid-columns: 20% 80%;
+    grid-template-columns: 20% 80%;
+    -ms-grid-rows: auto auto;
+    grid-template-rows: auto auto;
     text-decoration: none;
-    margin: 1vw;
-    -webkit-box-shadow: inset 0 1px 0 #fff;
-    box-shadow: inset 0 1px 0 #fff;
-    border-radius: 1vw
+    margin: 2% 0;
+    background-color: #4185450f;
+    border-radius: 10px 10px 0 0;
+    border-left: 1px solid #EEEE;
+    border-right: 1px solid #EEEE;
+    border-bottom: 1px solid #EEEE;
+
+}
+
+.listPubli li:first-child {
+    margin-top: 0;
 }
 
 .listPubli>li:hover {
@@ -127,12 +65,11 @@ hr {
 }
 
 #commentList>li {
-    -ms-grid-columns: 15vw 65vw;
-    grid-template-columns: 15vw 65vw
+    -ms-grid-columns: 20% 80%;
+    grid-template-columns: 20% 80%;
 }
 
-.listPubli>li>div {
-    height: 100%;
+.auteur, .publication {
     padding: 1vw
 }
 
@@ -143,23 +80,55 @@ hr {
 
 .auteur {
     text-align: center;
-    font-size: 2vw
+    font-size: 1.5em;
+    border-right: 1px solid lightgray;
+    -ms-grid-row: 2;
+    grid-row: 2;
 }
 
 .publication {
-    border-left: solid 2px white;
-    font-size: 1.5vw
+    font-size: 1em;
+    -ms-grid-row: 2;
+    grid-row: 2;
 }
 
-.publication h3 {
-    font-size: 2vw
+.object {
+    font-size: 1.5em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+    -ms-grid-row: 1;
+    grid-row: 1;
+    padding: 0 2%;
+    margin: 0;
+    background-color: #41854580;
+    border-radius: 10px 10px 0 0;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 80% 20%;
+    grid-template-columns: 80% 20%;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
 }
+
+.object > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}
+
+.object > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+}
+
+
 
 .avatar {
     border-radius: 50%;
-    height: 5vw;
-    width: 5vw;
-    margin: 0 25%
+    width: 50%;
+    margin: 0 25%;
 }
 
 .date {
@@ -169,40 +138,48 @@ hr {
 }
 
 #header_forum {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex
+    display: -ms-grid;
+    display: grid;
+    padding: 1% 0 5% 0;
+    -ms-grid-columns: 100%;
+    grid-template-columns: 100%;
+    -ms-grid-rows: 70% 30%;
+    grid-template-rows: 70% 30%;
+}
+
+#header_forum > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+}
+
+#header_forum > *:nth-child(2) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
 }
 
 #goToCreatePost {
-    text-decoration: none
+    text-decoration: none;
+    width: 20%;
+    margin: auto;
 }
 
 #createPost {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    border-radius: .3vw;
-    margin: 1vw;
-    font-size: 1.5vw;
-    -webkit-box-shadow: .1vw .1vw #43A047;
-    box-shadow: .1vw .1vw #43A047;
-    background-color: #e7fae7;
-    padding: .5vw;
-    text-decoration: none;
-    color: black;
-    height: auto;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: var(--main-bg-color);
+    color: var(--main-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 1%;
+    margin: 1% auto;
 }
 
 #createPost:hover {
-    background-color: #cacaca;
-    -webkit-box-shadow: .1vw .1vw #e7fae7;
-    box-shadow: .1vw .1vw #e7fae7;
-    cursor: pointer
+    color: var(--main-bg-color);
+    background: var(--main-color);
+    cursor: pointer;
 }
 
 #filterCat {
@@ -218,9 +195,13 @@ hr {
 }
 
 #header_forum .select2-container {
-    padding: .5vw 0vw 0vw 2vw;
-    margin: 1vw;
+    padding: 0;
+    margin: 0 -5% 0 0;
     display: inline
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+    background-color: #41854500;
 }
 
 #header_forum #dropdown .select2-container .select2-dropdown {
@@ -323,17 +304,24 @@ hr {
     margin: 2% 5%;
     text-align: center;
     overflow-x: hidden;
-    overflow-y: auto
 }
 
 #createPubli {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 100%;
     grid-template-columns: 100%;
+    -ms-grid-rows: auto;
     grid-template-rows: auto
 }
 
+#createPubli > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1
+}
+
 #titleEditor {
-    width: 99%;
+    width: auto;
     -ms-grid-row: 1;
     grid-row: 1;
     font-size: 1.5vw;
@@ -346,29 +334,28 @@ hr {
 
 #publi_block .tail-writer-object {
     grid-row: 4;
-    -ms-grid-row: 4
+    -ms-grid-row: 4;
 }
 
 #publi_block input[type=submit] {
-    border-radius: .3vw;
-    grid-row: 5;
-    -ms-grid-row: 5;
-    margin: 1vw;
-    font-size: 1vw;
-    -webkit-box-shadow: .1vw .1vw #43A047;
-    box-shadow: .1vw .1vw #43A047;
-    background-color: #e7fae7;
-    padding: 1vw;
-    text-decoration: none;
-    color: black;
-    width: auto
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: var(--main-bg-color);
+    color: var(--main-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: 25%;
+    padding: 1%;
+    margin: 1% auto;
 }
 
 #publi_block input[type=submit]:hover {
-    background-color: #cacaca;
-    -webkit-box-shadow: .1vw .1vw #e7fae7;
-    box-shadow: .1vw .1vw #e7fae7
+    color: var(--main-bg-color);
+    background: var(--main-color);
+    cursor: pointer;
 }
+
 .select2-container{
     margin: 1vw 0;
 }
@@ -379,7 +366,7 @@ hr {
 
 #commentList {
     width: 85%;
-    float: right
+    margin-left: 10%
 }
 
 #showPost li:hover,
@@ -387,8 +374,8 @@ hr {
     cursor: default
 }
 
-.holder {
-    clear: right
+.holder a {
+    font-size: 1em;
 }
 
 #createComment {
@@ -396,8 +383,8 @@ hr {
     display: grid;
     -ms-grid-columns: auto;
     grid-template-columns: auto;
-    -ms-grid-rows: 75% 25%;
-    grid-template-rows: 75% 25%;
+    -ms-grid-rows: 95% 5%;
+    grid-template-rows: 95% 5%;
     margin: 1vw 1vw;
     text-align: center
 }
@@ -427,23 +414,34 @@ hr {
     -ms-flex-align: center;
     align-items: center
 }
+#pageMain {
+    padding: 2% 10% 0;
+}
 
 #createComment input[type=submit] {
-    border-radius: .3vw;
     -ms-grid-column: 1;
     grid-column: 1;
     -ms-grid-row: 2;
     grid-row: 2;
-    margin: 2% 40%;
-    font-size: 1vw;
-    -webkit-box-shadow: .1vw .1vw #43A047;
-    box-shadow: .1vw .1vw #43A047;
-    background-color: #e7fae7;
-    padding: 1vw;
-    padding-bottom: 2vw;
+    font-size: 0.6em;
+    padding: 1em;
+    padding-bottom: 1.7em;
     text-decoration: none;
-    color: black;
-    width: 20%
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: var(--main-bg-color);
+    color: var(--main-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: auto;
+    margin: 1% auto;
+}
+
+#createComment input[type=submit]:hover {
+    color: var(--main-bg-color);
+    background: var(--main-color);
+    cursor: pointer;
 }
 
 #commentEditor {
@@ -451,12 +449,6 @@ hr {
     grid-column: 1;
     -ms-grid-row: 1;
     grid-row: 1
-}
-
-#createComment input[type=submit]:hover {
-    background-color: #cacaca;
-    -webkit-box-shadow: .1vw .1vw #e7fae7;
-    box-shadow: .1vw .1vw #e7fae7
 }
 
 #confirmPopUp {
@@ -475,7 +467,6 @@ hr {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-height: 90vh;
-    overflow-y: auto;
     overflow-x: hidden;
     padding: 1em
 }
@@ -487,7 +478,46 @@ hr {
 }
 
 .deletePosts {
-    margin-left: 80%
+    -ms-grid-row: 1;
+    grid-row: 1;
+    -ms-grid-column: 2;
+    grid-column: 2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+#commentList li .object {
+    -ms-grid-columns: 20% 60% 20%;
+    grid-template-columns: 20% 60% 20%;
+}
+
+#commentList li .object .avatar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 35%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
+
+#commentList .publication {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / span 2;
+}
+
+#commentList li .object .deletePosts {
+    -ms-grid-column: 3;
+    grid-column: 3;
+    -ms-grid-row: 1;
+    grid-row: 1;
 }
 
 #commentList li .publication a {
@@ -501,9 +531,11 @@ hr {
 }
 
 #showPost>li {
-    -ms-grid-columns: 23vw 72vw;
-    grid-template-columns: 23vw 72vw
+    -ms-grid-columns: 20% 80%;
+    grid-template-columns: 20% 80%;
 }
+
+
 
 #validationPopUp {
     display: none;
@@ -521,7 +553,6 @@ hr {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-height: 90vh;
-    overflow-y: auto;
     overflow-x: hidden;
     padding: 1em
 }
@@ -531,12 +562,35 @@ hr {
     width: 40%;
     padding: .5em
 }
+#mobile_menu_button_right{
+    display: none;
+}
 @media only screen and (max-width: 600px) {
     #document_Main {
         -ms-grid-columns: 100%;
         grid-template-columns: 100%;
+        padding: 0 2%;
     }
-    #mobile_menu_button_side {
+    #header_forum {
+        padding-bottom: 10%;
+    }
+    #publi_block .tail-writer-toolbar {
+        left: 0;
+        right: 0;
+    }
+    #publi_block input[type=submit]{
+        width: 50%;
+    }
+    #publi_block h2 {
+        font-size: 1em;
+    }
+    .auteur, .object{
+        font-size: 0.8em;
+    }
+    #pageMain {
+        padding: 2% 2% 0;
+    }
+    #mobile_menu_button_side, #mobile_menu_button_right {
         display: inline-block;
         height: 8vw;
         width: auto;
@@ -545,26 +599,12 @@ hr {
         left: 0;
         cursor: pointer;
     }
-    #mobile_menu_button_side:hover {
+    #mobile_menu_button_right{
+        margin: auto 1em auto auto;
+        right: 0;
+    }
+    #mobile_menu_button_side:hover, #mobile_menu_button_right:hover {
         opacity: 0.6;
-    }
-    #sideNav #mobile_menu_part {
-        display: block;
-    }
-    #sideNav {
-        margin: 0;
-        border: 0;
-        border-radius: 0;
-        border-right: 1px solid black;
-        height: -webkit-fit-content;
-        height: -moz-fit-content;
-        height: fit-content;
-        padding: 1em 0.5em 1em 0.5em;
-        background-color: rgb(231 250 231);
-        font-family: "Roboto", sans-serif;
-        overflow: auto;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
     }
     #document_Footer p {
         -ms-grid-column: 2;

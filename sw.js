@@ -1,4 +1,3 @@
-
 var cache = "sensory-static-v7";
 var userCache = 'sensory-static-userdata-v7';
 var dataCache = "sensory-static-records-v7";
