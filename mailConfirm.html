@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#418545">
     <title>Confirmation de l'adresse mail</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="icon" href="IMG/favicon.png">
     <style>
 
         :root {
@@ -44,7 +45,7 @@
         #imageFond{
             filter: blur(3px);
             height: 100vh;
-            background: url("IMG/kelli-tungay-363192-unsplash_compress.jpg") no-repeat fixed bottom center;
+            background: url("IMG/fond_big2.jpg") no-repeat fixed bottom center;
             background-origin: border-box;
             background-size: cover;
         }
@@ -114,6 +115,24 @@
     <script src="JS/jquery-3.3.1.min.js"></script>
     <script src="JS/auth.js"></script>
     <script>
+        let countCall = 0;
+
+        function setLoading(nombre = 0){
+            let loading = $('#loadingDiv');
+
+            //Test la connexion internet
+            let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if(connection !== undefined ? connection.rtt > 60 : true){
+                if(nombre > 0){
+                    loading.show();
+                    countCall += nombre;
+                } else {
+                    countCall -= 1;
+                }
+            }
+            if (countCall === 0) loading.hide();
+        }
+
         function confirmMail(){
             let token = getUrlParameter('token');
             let formData = new FormData();
