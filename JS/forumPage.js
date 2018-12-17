@@ -3,7 +3,7 @@ $(document).ready(function() {
     var select2 = $('#filterCat').select2({
         placeholder: "Choisissez une ou plusieurs catégories à filtrer",
 
-        width: '49vw',
+        width: '100%',
         allowClear: !0,
         dropdownParent: $('#dropdown')
     }).on('change', function(e) {
@@ -11,14 +11,35 @@ $(document).ready(function() {
     });
     callAPI("categories", selectCategorie);
     callAPI("posts", listPublication);
-    $(window).on("resize", function() {
-        toggleSlideMenu()
-    });
+    moment.locale("fr");
     $('#mobile_menu_button_side').on("click", function() {
-        toggleSlideMenu()
+        window.location = "index.html";
     });
-    calculateSizeMain();
-    toggleSlideMenu();
+    $(".logout").click(function(e) {
+        e.preventDefault();
+        deleteCookie('token');
+        deleteCookie('user-id');
+        if(e.target.href !== undefined){
+            window.location = e.target.href;
+        } else {
+            window.location = "index.html";
+        }
+    });
+    if (getCookie("token")=="") {
+        $(".logout").hide();
+        $('a[href="userPage.html"]').attr("href", "index.html").html("Accueil");
+        $('#goToCreatePost').on("click", function (e) {
+            e.preventDefault();
+            $('#validationPopUp').show();
+        });
+    }
+    $('#validationButton').on('click', function(e) {
+        e.preventDefault();
+        $('#validationPopUp').hide()
+    }).on("blur", function(e) {
+        e.preventDefault();
+        $('#validationPopUp').hide()
+    });
 });
 function setLoading(n) {
 
@@ -56,11 +77,11 @@ function listPublication(response) {
         }
         for (item in publication) {
             let arrCategories = publication[item].categories;
-            list += "<li id='" + publication[item].id + "'><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
+            list += "<li id='" + publication[item].id + "'><div class=\"object\"><h3>" + publication[item].postTitle + "</h3></div><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
-            list += "<div class=\"publication\"> <h3 class=\"object\">" + publication[item].postTitle + "</h3>";
+            list += "<div class=\"publication\">";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";
-            list += "<select class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
+            list += "<select aria-label='Liste des catégories' class=\"cat catPubli\" name=\"states[]\" multiple=\"multiple\" disabled>";
             for (cat in categories) {
                 for (i in arrCategories) {
                     if (arrCategories[i].id == categories[cat].id) {
@@ -81,15 +102,18 @@ function listPublication(response) {
     $(function() {
         $("div.holder").jPages({
             containerID: "paginationList",
-            perPage: 2,
+            perPage: 3,
+            minHeight: false,
             previous: "◄",
-            next: "►"
+            next: "►",
         })
     });
-    $('.catPubli').select2();
+    $('.catPubli').select2({
+        width: '49vw',
+    });
     $('.listPubli > li').on('click', function() {
         window.location.href = "showPost.html?post_id=" + $(this).attr('id')
-    })
+    }).css("display", "grid");
 }
 
 function toggleSlideMenu() {
