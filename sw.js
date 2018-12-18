@@ -1,7 +1,7 @@
 
-var cache = "sensory-static-v11";
-var userCache = 'sensory-static-userdata-v11';
-var dataCache = "sensory-static-records-v11";
+var cache = "sensory-static-v12";
+var userCache = 'sensory-static-userdata-v12';
+var dataCache = "sensory-static-records-v12";
 
 var cachePages = [
     '/',
