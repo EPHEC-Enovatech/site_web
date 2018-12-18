@@ -78,7 +78,7 @@ function listPublication(response) {
         }
         for (item in publication) {
             let arrCategories = publication[item].categories;
-            list += "<li id='" + publication[item].id + "'><div class=\"object\"><h3>" + publication[item].postTitle + "</h3></div><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
+            list += "<li id='" + publication[item].id + "' tabindex="0"><div class=\"object\"><h3>" + publication[item].postTitle + "</h3></div><div class=\"auteur\"> <h3 class=\"name\"><bdi>" + publication[item].user.prenom + "</bdi></h3>";
             list += "<img src=\"IMG/avatar.png\" alt=\"avatar image\" class=\"avatar\"></div>";
             list += "<div class=\"publication\">";
             list += "<p class=\"message\">" + publication[item].postText.substring(0, 200) + "...</p>";
