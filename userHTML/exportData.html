@@ -22,6 +22,7 @@
 
         callAPI("devices/" + getCookie('user-id'), function(response){
             let select = "";
+            setLoading();
             if (response.responseJSON.status === "SUCCESS") {
                 let boxs = response.responseJSON.data;
                 select += "<option value='ALL'>Tous les Sensory Captor</option>"
