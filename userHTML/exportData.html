@@ -42,6 +42,7 @@
             let selectedCaptor = $('#selectCaptorExport').val();
             let endPoint = selectedCaptor === 'ALL' ? "" : selectedCaptor;
             callAPI("records/" + endPoint, function(response){
+                setLoading();
                 let data = response.responseJSON.data;
                 if(data === undefined){
                     $('#errorExportData').removeClass().addClass("error").html("Aucune données associées").show();
